@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -11,6 +9,7 @@ using Reservation.Presentation;
 
 namespace Reservation.Controllers
 {
+    [SessionTimeout]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
