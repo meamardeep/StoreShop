@@ -41,6 +41,7 @@ namespace Reservation.Presentation.Controllers
 
         }
 
+        [SessionTimeout]
         public IActionResult Logout()
         {
             HttpContext.Session.Clear(); //clear all the value from session object but does nor delete object from server.

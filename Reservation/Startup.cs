@@ -36,7 +36,6 @@ namespace Reservation.Presentation
 
             services.AddMvc().AddRazorRuntimeCompilation();
                     
-
             //The Distributed Memory Cache (AddDistributedMemoryCache) is a framework-provided implementation 
             //of IDistributedCache that stores items in memory. Cached items are stored by the app instance on the server 
             //where the app is running.
@@ -75,6 +74,7 @@ namespace Reservation.Presentation
             app.UseStaticFiles();
 
             app.UseRouting();
+           
 
             app.UseCors();
             app.UseAuthorization();
