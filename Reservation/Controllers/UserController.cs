@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Reservation.Presentation.Controllers
 {
-    [Route("amardeep")]
+    [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
         private readonly IUserManagement _userManagement;
@@ -17,12 +17,19 @@ namespace Reservation.Presentation.Controllers
 
         //[ReesultfilterAttribute]
         //[ActionName("amardeep")]
+        [Route("")]
         public IActionResult GetUser()
         {
             
             List<UserModel> userModel = _userManagement.GetUsers();
             
             return View("~/Views/User/Index.cshtml", userModel);
+        }
+
+        [Route("/Display")]
+        public ActionResult DisplayUser()
+        {
+            return Json(new { Name = "amardeep", dateOfBirth = "19/12/1995" });
         }
     }
 }

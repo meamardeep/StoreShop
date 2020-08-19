@@ -6,6 +6,10 @@
     <title>@ViewData["Title"] - Reservation</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    
 </head>
 <body>
     <header>
@@ -40,13 +44,13 @@
         </nav>
     </header>
     <div class="container">
-        <div class="row">
-            <div class="col bg-dark">
-                @*left navigation*@
+        <div class="row" style="justify-content: center">
+            @*<div class="col bg-dark">
+                
                 <p class="text-white">Left navigation</p>
                 
-            </div>
-            <div class="col border-left-0">
+            </div>*@
+            <div class="col border-left-0" style="max-width:30rem">
                 <main role="main" class="pb-3">
                     @RenderBody()
                 </main>

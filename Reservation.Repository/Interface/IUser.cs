@@ -8,5 +8,8 @@ namespace Reservation.Repository
     {
         IEnumerable<User> GetUsers();
         User GetUser(string userName, string password);
+        User GetUser(long cellNo, int userOTP);
+        User GetUser(long cellNo);
+        void UpdateUserDetail(User user);
     }
 }

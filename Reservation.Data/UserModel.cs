@@ -13,6 +13,7 @@ namespace Reservation.Data
 
         public string LastName { get;  set; }
 
+        public long CellNo { get; set; }
          
     }
 }
