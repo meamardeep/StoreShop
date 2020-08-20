@@ -12,5 +12,8 @@ namespace Reservation.DataAccess
         public string LastName { get; set; }
         public string Password { get; set; }
         public bool IsActive { get; set; }
+        public long CellNo { get; set; }
+        public int? OTP { get; set; }
+        public bool LoginAttemptCounter { get; set; }
     }
 }

@@ -8,8 +8,12 @@ namespace Reservation.BusinessLogic
     public interface IUserManagement
     {
         List<UserModel> GetUsers();
-
+        UserModel GetUser();
         UserModel GetUser(string userName, string password);
+        UserModel GetUser(long cellNo, int userOTP);
+        bool ValidateCellNo(long cellNo);
+        void UpdateUserDetail(long cellNo, int oTP);
+
         //default inteface method new featire in c#8.0
         UserModel GetUsers(int customerId)
         {
@@ -18,6 +22,6 @@ namespace Reservation.BusinessLogic
             return new UserModel();
         }
 
-        
+        string SendSMS(long cellNo, int oTP);
     }
 }

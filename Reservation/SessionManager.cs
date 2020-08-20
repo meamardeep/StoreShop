@@ -51,16 +51,16 @@ namespace Reservation.Presentation
             set => Current.Session.SetInSession<string>(SESSION_USER_NAME_Key, value);
         }
 
-        public static string FirstName 
+        public static string FirstName
         { get => Current.Session.GetFromSession<string>(SESSION_FIRST_NAME_KEY);
-             set => Current.Session.SetInSession<string>(SESSION_FIRST_NAME_KEY, value); 
+            set => Current.Session.SetInSession<string>(SESSION_FIRST_NAME_KEY, value);
         }
-        public static string LastName 
+        public static string LastName
         {
             get => Current.Session.GetFromSession<string>(SESSION_LAST_NAME_KEY);
             set => Current.Session.SetInSession<string>(SESSION_LAST_NAME_KEY, value);
         }
-        public static int UserId 
+        public static int UserId
         {
             get => Current.Session.GetFromSession<int>(SESSION_USER_ID_KEY);
             set => Current.Session.SetInSession<int>(SESSION_USER_ID_KEY, value);
@@ -73,7 +73,7 @@ namespace Reservation.Presentation
                 //bool sessionAlive = Current.Session.GetFromSession<object>("UserName") != null && Current.Session.GetFromSession<object>("UserName").ToString() != "" ? true : false;
                 return sessionAlive;
             }
-        }      
+        }
     }
 
     public static class SessionExtensions
@@ -90,8 +90,12 @@ namespace Reservation.Presentation
         }
     }
 
+    /// <summary>
+    /// Check for session before executing any action method
+    /// </summary>
     public class SessionTimeoutAttribute : ActionFilterAttribute
     {
+        
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             if (!SessionManager.IsSessionAlive)
@@ -101,6 +105,12 @@ namespace Reservation.Presentation
             }
             base.OnActionExecuting(filterContext);
         }
+    }
+
+    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Field)]
+    public class ReesultfilterAttribute: ActionFilterAttribute
+    {
+
     }
 
 }

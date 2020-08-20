@@ -1,7 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Reservation.BusinessLogic;
 using Reservation.Data;
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Net;
+using System.Text;
+using System.Web;
 
 namespace Reservation.Presentation.Controllers
 {
@@ -20,25 +25,121 @@ namespace Reservation.Presentation.Controllers
 
         public IActionResult LogOn(LogOnModel logOnModel)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View("~/Views/Account/Login.cshtml");
             }
             UserModel userModel = _userManagement.GetUser(logOnModel.UserName, logOnModel.Password);
 
-            InitSession(userModel);
-            
-            return View("~/Views/DashBoard/Index.cshtml");
+            if (userModel.UserId > 0)
+            {
+                InitSession(userModel);
+                return View("~/Views/DashBoard/Index.cshtml");
+            }
+            else
+            {
+                return View("~/Views/Account/Login.cshtml");
+            }
         }
 
         public void InitSession(UserModel userModel)
         {
-            
+
             SessionManager.UserName = userModel.UserName;
             SessionManager.FirstName = userModel.FirstName;
             SessionManager.LastName = userModel.LastName;
             SessionManager.UserId = userModel.UserId;
 
+        }
+
+        public IActionResult OTPLoginPage()
+        {
+            return View("~/Views/Account/OTPLogin.cshtml");
+        }
+
+        public ActionResult GetOTP(long cellNo)
+        {
+            bool isCellNoExist = _userManagement.ValidateCellNo(cellNo);
+            if (isCellNoExist)
+            {
+                bool response = GenerateOTP(cellNo);
+
+                if (response)
+                {
+                    return Json(new { message = "OTP sent successfully.", sent = true });
+                }
+                return Json(new { message = "Validation code can not be send at this time.", sent = false });
+            }
+            return Json(new { message = "Mobile number is not registered.", sent = false });
+        }
+
+        public bool GenerateOTP(long cellNo)
+        {
+            Random _random = new Random();
+            int OTP = _random.Next(1000, 9999);
+
+            try
+            {
+                var response = _userManagement.SendSMS(cellNo, OTP);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            _userManagement.UpdateUserDetail(cellNo, OTP);
+
+            return true;
+        }
+
+        public string SendSMS(long cellNo, int OTP)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(91.ToString());
+            sb.Append(cellNo.ToString());
+
+            String message = HttpUtility.UrlEncode("Your verification code for reservation is : " + OTP);
+            using (var wb = new WebClient())
+            {
+                byte[] response = wb.UploadValues("https://api.textlocal.in/send/", new NameValueCollection()
+                {
+                {"apikey" , "MLrSb+hVVXA-6wN7LnB88GDPNMKWTR62eYftKfoB6R"},
+                {"numbers" , sb.ToString()},
+                {"message" , message},
+                {"sender" , "TXTLCL"}
+                });
+                string result = System.Text.Encoding.UTF8.GetString(response);
+                return result;
+            }
+        }
+
+        public IActionResult LogOnWithOTP(OTPLogOnModel OTPModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("~/Views/Account/OTPLogin.cshtml");
+            }
+            UserModel userModel = _userManagement.GetUser(OTPModel.CellNo, OTPModel.OTP);
+
+            if (userModel.UserId > 0)
+            {
+                InitSession(userModel);
+                return View("~/Views/DashBoard/Index.cshtml");
+            }
+            else
+                return View("~/Views/Account/OTPLogin.cshtml");
+
+        }
+
+        public ActionResult ShowSignUpPage()
+        {
+            UserModel model = new UserModel();
+            model.CountryCodes = new List<int>() { }; 
+            return View("~/Views/Account/SignUp.cshtml",model);
+        }
+
+        public ActionResult Signup(UserModel model)
+        {
+            return Json(true);
         }
 
         public IActionResult Logout()
@@ -48,6 +149,6 @@ namespace Reservation.Presentation.Controllers
 
             return View("~/Views/Account/Login.cshtml");
         }
-        
+
     }
 }

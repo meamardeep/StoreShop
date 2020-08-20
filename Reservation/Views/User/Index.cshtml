@@ -1,4 +1,4 @@
-﻿@model Reservation.Data.UserModel
+﻿@model List<Reservation.Data.UserModel>
 
     <table border="1" class="box-shadow"> 
         <tr>
@@ -8,10 +8,16 @@
             <th>Last name</th>
         </tr>
         <tr>
-            <td>@Model.UserId</td>
-            <td>@Model.UserName</td>
-            <td>@Model.FirstName</td>
-            <td>@Model.LastName</td>
+            @{
+                foreach (var item in Model)
+                {
+                    <td>@item.UserId</td>
+                    <td>@item.UserName</td>
+                    <td>@item.FirstName</td>
+                    <td>@item.LastName</td>
+                }
+            }
+
 
         </tr>
     </table>
