@@ -14,5 +14,6 @@ namespace Reservation.DataAccess
         public bool IsActive { get; set; }
         public long CellNo { get; set; }
         public int? OTP { get; set; }
+        public bool LoginAttemptCounter { get; set; }
     }
 }

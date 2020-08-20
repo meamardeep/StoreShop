@@ -2,7 +2,12 @@
 using Reservation.Data;
 using Reservation.DataAccess;
 using Reservation.Repository;
+using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Net;
+using System.Text;
+using System.Web;
 
 namespace Reservation.BusinessLogic
 {
@@ -48,6 +53,7 @@ namespace Reservation.BusinessLogic
         {
             User user = _userRepo.GetUser(cellNo);
             user.OTP = oTP;
+            user.LoginAttemptCounter = false;
             _userRepo.UpdateUserDetail(user);
         }
 
@@ -55,6 +61,27 @@ namespace Reservation.BusinessLogic
         {
             User user = _userRepo.GetUser(cellNo);
             return user != null ? true : false;
+        }
+
+        public string SendSMS(long cellNo, int OTP)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(91.ToString());
+            sb.Append(cellNo.ToString());
+
+            String message = HttpUtility.UrlEncode("Your verification code for reservation is : " + OTP);
+            using (var wb = new WebClient())
+            {
+                byte[] response = wb.UploadValues("https://api.textlocal.in/send/", new NameValueCollection()
+                {
+                {"apikey" , "MLrSb+hVVXA-6wN7LnB88GDPNMKWTR62eYftKfoB6R"},
+                {"numbers" , sb.ToString()},
+                {"message" , message},
+                {"sender" , "TXTLCL"}
+                });
+                string result = System.Text.Encoding.UTF8.GetString(response);
+                return result;
+            }
         }
     }
 }

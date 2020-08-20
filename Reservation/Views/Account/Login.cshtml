@@ -16,7 +16,7 @@
 
 
         <div class="form-group pl-5 pr-5">            
-                <span><a class="float-right" asp-action="showForgotPassword" asp-controller="account">Forgot password?</a></span>
+                <span><a class="float-right text-decoration-none" asp-action="showForgotPassword" asp-controller="account">Forgot password?</a></span>
                 @Html.PasswordFor(m => m.Password, new { @class = "form-control", @required = "true", @placeholder = "Password" })
                 <span style="color:red">@Html.ValidationMessageFor(m => m.Password)</span>          
         </div>

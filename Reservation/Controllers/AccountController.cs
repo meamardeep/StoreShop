@@ -2,8 +2,8 @@
 using Reservation.BusinessLogic;
 using Reservation.Data;
 using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Web;
@@ -66,28 +66,28 @@ namespace Reservation.Presentation.Controllers
 
                 if (response)
                 {
-                    return Json(true);
+                    return Json(new { message = "OTP sent successfully.", sent = true });
                 }
-                return Json(new { message = "Validation code can not be send at this time"});
+                return Json(new { message = "Validation code can not be send at this time.", sent = false });
             }
-            return Json(new { message = "Please enter valid mobile number." });
+            return Json(new { message = "Mobile number is not registered.", sent = false });
         }
 
         public bool GenerateOTP(long cellNo)
-        {            
+        {
             Random _random = new Random();
-            int OTP =  _random.Next(1000, 9999);
+            int OTP = _random.Next(1000, 9999);
 
             try
             {
-                var response = SendSMS(cellNo, OTP);
+                var response = _userManagement.SendSMS(cellNo, OTP);
             }
             catch (Exception)
             {
                 return false;
             }
             _userManagement.UpdateUserDetail(cellNo, OTP);
-            
+
             return true;
         }
 
@@ -97,9 +97,7 @@ namespace Reservation.Presentation.Controllers
             sb.Append(91.ToString());
             sb.Append(cellNo.ToString());
 
-            //cellNo = Convert.ToInt64(sb);
-
-            String message = HttpUtility.UrlEncode("Your verification code for reservation is : " +OTP);
+            String message = HttpUtility.UrlEncode("Your verification code for reservation is : " + OTP);
             using (var wb = new WebClient())
             {
                 byte[] response = wb.UploadValues("https://api.textlocal.in/send/", new NameValueCollection()
@@ -132,6 +130,17 @@ namespace Reservation.Presentation.Controllers
 
         }
 
+        public ActionResult ShowSignUpPage()
+        {
+            UserModel model = new UserModel();
+            model.CountryCodes = new List<int>() { }; 
+            return View("~/Views/Account/SignUp.cshtml",model);
+        }
+
+        public ActionResult Signup(UserModel model)
+        {
+            return Json(true);
+        }
 
         public IActionResult Logout()
         {

@@ -1,28 +1,32 @@
 ﻿@model Reservation.Data.OTPLogOnModel
 @*@{
-    Layout = "_LogOnLayout";
+        Layout = "_LogOnLayout";
 
-}*@
+    }*@
 <script>
     $(function () {
         $("#requestOTPId").on("click", getVerificationCode);
     })
 
     function getVerificationCode() {
-        
+        $("#spanCellNo").html("");
+        $("#OTPSuccessMessage").html("");
+
         var cellNo = $("#CellNo").val();
-        
-        if (cellNo == 0) {
-            $("#spanCellNo").html("Please enter Mobile number");            
+
+        if (cellNo == 0 || cellNo.length<10) {
+            $("#spanCellNo").html("Please enter valid Mobile number");
             return false;
         }
-        
+        else {
+            $("#spanCellNo").html("");
+        }
+
         var url = "/account/getOTP";
         $.post(url, { cellNo: cellNo }, function (data) {
-            
-            if (data) {
-                //$("#OTPSuccessMessage").removeClass("hide");
-                $("#requestOTPId").html("Resend code");
+            $("#OTPSuccessMessage").html(data.message);
+            if (data.sent) {
+                $("#requestOTPId").html("Resend OTP");
             }
         });
     }
@@ -40,18 +44,22 @@
             <div>
                 @Html.TextBoxFor(m => m.CellNo, new { @class = "form-control", @required = "true", @placeholder = "Mobile number" })
                 <span id="spanCellNo" style="color:red"> @Html.ValidationMessageFor(m => m.CellNo)</span>
+                <span class="text-danger" id="OTPSuccessMessage"></span>
+
             </div>
         </div>
 
 
         <div class="form-group pl-5 pr-5">
             <div>
+
                 @Html.TextBoxFor(m => m.OTP, new { @class = "form-control", @required = "true", @placeholder = "Enter OTP" })
                 <span style="color:red">@Html.ValidationMessageFor(m => m.OTP)</span>
-                <div><span class="hide" id="OTPSuccessMessage">OTP send successfully</span>
-                <a id="requestOTPId" href="javascript:void(0)" style="text-decoration : none">Get verification code</a></div>
+                <div>
+                    <a id="requestOTPId" href="javascript:void(0)" style="text-decoration : none">Get verification code</a>
+                </div>
             </div>
-        </div>        
+        </div>
 
         <div class="form-group pl-5 pr-5">
             <div>

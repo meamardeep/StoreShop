@@ -22,6 +22,6 @@ namespace Reservation.BusinessLogic
             return new UserModel();
         }
 
-        
+        string SendSMS(long cellNo, int oTP);
     }
 }
