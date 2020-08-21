@@ -1,7 +1,7 @@
 # StoreShop.NETCORE3.1
 Project is developed in .NET CORE 3.1 MVC.
 
-Idea of this project is to provide a better experience to end user while bookiing a ticket.
+Idea of this project is to provide a better product  selling experience at store.
 
 Following technology have been used while developing this project:
 
