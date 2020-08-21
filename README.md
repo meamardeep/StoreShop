@@ -1,4 +1,4 @@
-# Reservation.NETCORE3.1
+# StoreShop.NETCORE3.1
 Project is developed in .NET CORE 3.1 MVC.
 
 Idea of this project is to provide a better experience to end user while bookiing a ticket.
