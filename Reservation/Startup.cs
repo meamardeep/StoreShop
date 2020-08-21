@@ -6,12 +6,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Reservation.Data;
-using Reservation.DataAccess;
-using Reservation.Repository;
+using StoreShop.Data;
+using StoreShop.DataAccess;
+using StoreShop.Repository;
 using System;
 
-namespace Reservation.Presentation
+namespace StoreShop.Presentation
 {
     public class Startup
     {
@@ -29,7 +29,7 @@ namespace Reservation.Presentation
 
             //Register context service using dependancy injection and this context service will read 
             //connection string using opstion builder in dbcontext constructor 
-            services.AddDbContext<ReservationDataContext>(options =>
+            services.AddDbContext<StoreShopDataContext>(options =>
         options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddMvc().AddRazorRuntimeCompilation();
@@ -42,7 +42,7 @@ namespace Reservation.Presentation
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             #region Dependancy Injection
-            services.AddScoped<Reservation.BusinessLogic.IUserManagement, Reservation.BusinessLogic.UserManagement>();
+            services.AddScoped<StoreShop.BusinessLogic.IUserManagement, StoreShop.BusinessLogic.UserManagement>();
             services.AddScoped<IUser, UserRepo>();
             #endregion
 
@@ -75,7 +75,6 @@ namespace Reservation.Presentation
             app.UseStaticFiles();
 
             app.UseRouting();
-
 
             app.UseCors();
             app.UseAuthorization();

@@ -12,9 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Reservation.DataAccess\Reservation.DataAccess.csproj" />
-    <ProjectReference Include="..\Reservation.Data\Reservation.Data.csproj" />
-    <ProjectReference Include="..\Reservation.Repository\Reservation.Repository.csproj" />
+    <ProjectReference Include="..\Reservation.DataAccess\StoreShop.DataAccess.csproj" />
+    <ProjectReference Include="..\Reservation.Data\StoreShop.Data.csproj" />
+    <ProjectReference Include="..\Reservation.Repository\StoreShop.Repository.csproj" />
   </ItemGroup>
 
 </Project>

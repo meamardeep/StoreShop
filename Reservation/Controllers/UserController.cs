@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
-using Reservation.BusinessLogic;
-using Reservation.Data;
+using StoreShop.BusinessLogic;
+using StoreShop.Data;
 using System.Collections.Generic;
 
-namespace Reservation.Presentation.Controllers
+namespace StoreShop.Presentation.Controllers
 {
     [Route("api/[controller]")]
     public class UserController : ControllerBase

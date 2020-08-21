@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Reservation.BusinessLogic;
-using Reservation.Data;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using StoreShop.BusinessLogic;
+using StoreShop.Data;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -8,7 +9,7 @@ using System.Net;
 using System.Text;
 using System.Web;
 
-namespace Reservation.Presentation.Controllers
+namespace StoreShop.Presentation.Controllers
 {
     public class AccountController : Controller
     {
@@ -135,6 +136,7 @@ namespace Reservation.Presentation.Controllers
             UserModel model = new UserModel();
             model.CountryCodes = new List<int>() { }; 
             return View("~/Views/Account/SignUp.cshtml",model);
+            
         }
 
         public ActionResult Signup(UserModel model)

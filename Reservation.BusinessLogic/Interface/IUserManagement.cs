@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Reservation.Data;
+using StoreShop.Data;
 
-namespace Reservation.BusinessLogic
+namespace StoreShop.BusinessLogic
 {
     public interface IUserManagement
     {

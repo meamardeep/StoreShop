@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Reservation.DataAccess\Reservation.DataAccess.csproj" />
+    <ProjectReference Include="..\Reservation.DataAccess\StoreShop.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace Reservation.Data
+﻿namespace StoreShop.Data
 {
     public class AccountModel
     {

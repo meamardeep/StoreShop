@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Reservation.Presentation.Views.DashBoard
+namespace StoreShop.Presentation.Views.DashBoard
 {
     public class Index1Model : PageModel
     {

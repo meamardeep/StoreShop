@@ -1,8 +1,8 @@
-﻿using Reservation.DataAccess;
+﻿using StoreShop.DataAccess;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Reservation.Repository
+namespace StoreShop.Repository
 {
     public interface IUser
     {
