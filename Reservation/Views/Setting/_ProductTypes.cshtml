@@ -1,0 +1,22 @@
+﻿@model List<StoreShop.Data.ProductTypeModel>
+
+    <div class="overflow-auto " style="max-height:200px;">
+
+        <table class="table table-bordered table-striped" style="max-height: 200px;">
+            <tr>
+                <th>Product Type name</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            @{
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.ProductTypeName</td>
+                        <td><i class="fa fa-edit"></i>Edit</td>
+                        <td><i class="fa fa-trash-alt"></i>Delete</td>
+                    </tr>
+                }
+            }
+        </table>
+        </div>

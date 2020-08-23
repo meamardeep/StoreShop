@@ -1,12 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace Reservation.DataAccess
+namespace StoreShop.DataAccess
 {
-    public class ReservationDataContext : DbContext
+    public class StoreShopDataContext :  IdentityDbContext //DbContext//, IdentityDbContext<IdentityUser>
     {
         public IConfiguration _configuration { get; set; }
-        public ReservationDataContext(IConfiguration configuration)
+        public StoreShopDataContext(IConfiguration configuration)
         {
             _configuration = configuration;
         }

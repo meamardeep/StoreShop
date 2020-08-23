@@ -1,4 +1,7 @@
-﻿namespace Reservation.Data
+﻿using Microsoft.AspNetCore.Authentication;
+using System.Collections.Generic;
+
+namespace StoreShop.Data
 {
     public class AccountModel
     {
@@ -9,6 +12,8 @@
     {
         public string UserName { get; set; }
         public string Password { get; set; }
+
+        public IList<AuthenticationScheme> ExternalLogins { get; set; }
     }
 
     public class OTPLogOnModel

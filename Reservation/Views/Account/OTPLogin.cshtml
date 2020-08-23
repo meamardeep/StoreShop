@@ -1,8 +1,8 @@
-﻿@model Reservation.Data.OTPLogOnModel
-@*@{
-        Layout = "_LogOnLayout";
+﻿@model StoreShop.Data.OTPLogOnModel
+@{
+        Layout = "_LogonLayout";
 
-    }*@
+    }
 <script>
     $(function () {
         $("#requestOTPId").on("click", getVerificationCode);
@@ -14,7 +14,7 @@
 
         var cellNo = $("#CellNo").val();
 
-        if (cellNo == 0 || cellNo.length<10) {
+        if (cellNo == 0 || cellNo.length < 10) {
             $("#spanCellNo").html("Please enter valid Mobile number");
             return false;
         }

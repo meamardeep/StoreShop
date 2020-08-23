@@ -2,16 +2,17 @@ using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Reservation.Data;
-using Reservation.DataAccess;
-using Reservation.Repository;
+using StoreShop.Data;
+using StoreShop.DataAccess;
+using StoreShop.Repository;
 using System;
 
-namespace Reservation.Presentation
+namespace StoreShop.Presentation
 {
     public class Startup
     {
@@ -29,7 +30,7 @@ namespace Reservation.Presentation
 
             //Register context service using dependancy injection and this context service will read 
             //connection string using opstion builder in dbcontext constructor 
-            services.AddDbContext<ReservationDataContext>(options =>
+            services.AddDbContext<StoreShopDataContext>(options =>
         options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddMvc().AddRazorRuntimeCompilation();
@@ -42,7 +43,7 @@ namespace Reservation.Presentation
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             #region Dependancy Injection
-            services.AddScoped<Reservation.BusinessLogic.IUserManagement, Reservation.BusinessLogic.UserManagement>();
+            services.AddScoped<StoreShop.BusinessLogic.IUserManagement, StoreShop.BusinessLogic.UserManagement>();
             services.AddScoped<IUser, UserRepo>();
             #endregion
 
@@ -56,6 +57,18 @@ namespace Reservation.Presentation
 
             //typeOf(Startup) is added as parameter because ambigous call error was comming but need to explore this cause
             services.AddAutoMapper(typeof(Startup));
+
+            services.AddAuthentication()
+                .AddGoogle(Options =>
+                {
+                    Options.ClientId = Configuration.GetSection("GoogleAuthetication").GetSection("ClientId").Value;
+                    Options.ClientSecret = Configuration.GetSection("GoogleAuthetication:ClientSecret").Value;
+                });
+            
+
+            //Bult-in identity service     
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<StoreShopDataContext>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -76,9 +89,9 @@ namespace Reservation.Presentation
 
             app.UseRouting();
 
-
             app.UseCors();
-            app.UseAuthorization();
+            app.UseAuthorization();// for identity service
+            app.UseAuthentication();
 
             //The order of middleware is important. Call UseSession() after UseRouting and before UseEndpoints.
             app.UseSession();

@@ -4,10 +4,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Reservation.Models;
-using Reservation.Presentation;
+using StoreShop.Models;
+using StoreShop.Presentation;
 
-namespace Reservation.Controllers
+namespace StoreShop.Controllers
 {
     [SessionTimeout]
     public class HomeController : Controller

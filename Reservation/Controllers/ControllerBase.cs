@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Reservation.Presentation.Controllers
+namespace StoreShop.Presentation.Controllers
 {
     [SessionTimeout]
     public class ControllerBase : Controller

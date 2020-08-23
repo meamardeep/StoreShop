@@ -1,5 +1,5 @@
 ﻿
-using Reservation.DataAccess;
+using StoreShop.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,12 +7,12 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore;
 
-namespace Reservation.Repository
+namespace StoreShop.Repository
 {
     public class UserRepo : IUser
     {
-        private readonly ReservationDataContext _database;
-        public UserRepo(ReservationDataContext reservationDataContext )
+        private readonly StoreShopDataContext _database;
+        public UserRepo(StoreShopDataContext reservationDataContext )
         {
             _database = reservationDataContext;
         }

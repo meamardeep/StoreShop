@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using Reservation.Data;
-using Reservation.DataAccess;
-using Reservation.Repository;
+using StoreShop.Data;
+using StoreShop.DataAccess;
+using StoreShop.Repository;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -9,7 +9,7 @@ using System.Net;
 using System.Text;
 using System.Web;
 
-namespace Reservation.BusinessLogic
+namespace StoreShop.BusinessLogic
 {
     public class UserManagement : IUserManagement
     {

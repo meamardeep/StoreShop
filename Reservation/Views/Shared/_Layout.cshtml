@@ -3,19 +3,28 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Reservation</title>
+    <title>@ViewData["Title"] - StoreShop</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.js"></script>
-    
+
+    <environment include="Development">
+
+        <link rel="stylesheet" href="~/lib/font-awesome/css/fontawesome.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/lib/font-awesome/css/fontawesome.min.css" />
+
+        </environment>
+
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-primary border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand text-white " asp-area="" asp-controller="Home" asp-action="Index">Reservation</a>
+                <a class="navbar-brand text-white " asp-area="" asp-controller="Home" asp-action="Index">StoreShop</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -43,24 +52,15 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <div class="row" style="justify-content: center">
-            @*<div class="col bg-dark">
-                
-                <p class="text-white">Left navigation</p>
-                
-            </div>*@
-            <div class="col border-left-0" style="max-width:30rem">
-                <main role="main" class="pb-3">
-                    @RenderBody()
-                </main>
-            </div>
-        </div>
+    <div class="container">                    
+         <main role="main" class="">
+               @RenderBody()
+         </main>      
     </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020 - Reservation - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2020 - StoreShop - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

@@ -1,22 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Reservation.Data
+﻿namespace StoreShop.Data
 {
     public class CustomerModel
     {
         public int CustomerId { get; set; }
         public string CustomerName { get; set; }
+        public bool IsActive { get; set; }
+
         public int AddressId { get; set; }
         public AddressModel AddressModel { get; set; }
     }
 
+    public class StoreModel
+    {
+        public int StoreId { get; set; }
+        public string StoreName { get; set; }
+        public bool IsActive { get; set; }
+        public int AddressId { get; set; }
+        public AddressModel Address { get; set; }
+        public int CustomerId { get; set; }
+        public CustomerModel CustomerModel { get; set; }
+    }
+
+
+
     public class AddressModel
     {
         public int AddressId { get; set; }
-        public string Address { get; set; }
-        
+        public string AddressText { get; set; }
+
         public int CountryId { get; set; }
         public int StateId { get; set; }
         public int CityId { get; set; }

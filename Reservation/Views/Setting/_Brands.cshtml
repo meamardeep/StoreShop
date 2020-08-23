@@ -1,0 +1,24 @@
+﻿@model List<StoreShop.Data.BrandModel>
+
+    <div class="overflow-auto " style="max-height:200px;">
+
+        <table class="table table-bordered table-striped" style="max-height:200px;">
+            <tr>
+                <th>Brand Name</th>
+                <th>Store Location</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            @{
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.BrandName</td>
+                        <td> </td>
+                        <td><i class="fas fa-edit"></i>Edit</td>
+                        <td><i class="fas fa-trash-alt"></i>Delete</td>
+                    </tr>
+                }
+            }
+        </table>
+        </div>

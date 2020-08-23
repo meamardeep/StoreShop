@@ -6,7 +6,7 @@ using System.Text.Json;
 //using Newtonsoft.Json;
 
 
-namespace Reservation.Presentation
+namespace StoreShop.Presentation
 {
     public static class SessionManager
     {

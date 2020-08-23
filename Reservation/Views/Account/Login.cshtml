@@ -1,45 +1,50 @@
-﻿@model Reservation.Data.LogOnModel
+﻿@model StoreShop.Data.LogOnModel
+@{
+    Layout = "_LogonLayout";
 
+}
 <div class="border shadow rounded-lg container  align-items-center mt-5">
 
-    
+
     @using (Html.BeginForm("LogOn", "Account", FormMethod.Post))
     {
         <div class="form-group pl-5">
             <h4>Login</h4>
         </div>
 
-        <div class="form-group pl-5 pr-5 ">          
-                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @required = "true", @placeholder = "User name/ Email" })
-                <span style="color:red"> @Html.ValidationMessageFor(m => m.UserName)</span>           
+        <div class="form-group pl-5 pr-5 ">
+            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @required = "true", @placeholder = "User name/ Email" })
+            <span style="color:red"> @Html.ValidationMessageFor(m => m.UserName)</span>
         </div>
 
 
-        <div class="form-group pl-5 pr-5">            
-                <span><a class="float-right text-decoration-none" asp-action="showForgotPassword" asp-controller="account">Forgot password?</a></span>
-                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @required = "true", @placeholder = "Password" })
-                <span style="color:red">@Html.ValidationMessageFor(m => m.Password)</span>          
+        <div class="form-group pl-5 pr-5">
+            <span><a class="float-right text-decoration-none" asp-action="showForgotPassword" asp-controller="account">Forgot password?</a></span>
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @required = "true", @placeholder = "Password" })
+            <span style="color:red">@Html.ValidationMessageFor(m => m.Password)</span>
+            @Html.CheckBox("checkBoxId")
+            <span>Remember me</span>
         </div>
 
 
         <div class="form-group pl-5 pr-5">
             <button type="submit" id="btnLogIn" class="btn btn-primary form-control" style="width:100%;">Login</button>
-            @*@Html.CheckBoxFor(m => m.RememberMe)*@
-            <span>Remember me</span>
+            
+            <div class="form-inline"><hr  class=""/> or<hr /> </div>
+            
             <div class="text-center">
-                <a id="" asp-action="OTPLoginPage" asp-controller="account" style="text-decoration : none">Sign with verification code</a>
+                <a id="" asp-action="OTPLoginPage" asp-controller="account" style="text-decoration : none">Log in with verification code</a>
             </div>
         </div>
-       
+
 
     }
 </div>
 
 <div class="justify-content-center text-center mt-2">
-    <span>Do not have an account? <a asp-action="ShowSignUpPage" asp-controller="account" style="text-decoration:none">Sign Up</a> </span>
+    <span>Do not have an account? <a asp-action="showSignUpOptions" asp-controller="account" style="text-decoration:none">Sign Up</a> </span>
 
 </div>
 
 
 
- 
