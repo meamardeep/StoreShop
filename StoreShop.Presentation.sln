@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30330.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreShop.Presentation", "Reservation\StoreShop.Presentation.csproj", "{B7FAE078-D0C5-4DE6-B100-3B75D4196DEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreShop.Presentation", "StoreShop\StoreShop.Presentation.csproj", "{B7FAE078-D0C5-4DE6-B100-3B75D4196DEA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreShop.Data", "Reservation.Data\StoreShop.Data.csproj", "{DBE19230-9CEB-44B6-8A1A-5F8589D3D7DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreShop.Data", "StoreShop.Data\StoreShop.Data.csproj", "{DBE19230-9CEB-44B6-8A1A-5F8589D3D7DA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreShop.DataAccess", "Reservation.DataAccess\StoreShop.DataAccess.csproj", "{D9DC391D-1241-4120-8C41-E063CF6B7539}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreShop.DataAccess", "StoreShop.DataAccess\StoreShop.DataAccess.csproj", "{D9DC391D-1241-4120-8C41-E063CF6B7539}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreShop.BusinessLogic", "Reservation.BusinessLogic\StoreShop.BusinessLogic.csproj", "{F7DD5A9E-0E7C-4081-912D-C015785B640D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreShop.BusinessLogic", "StoreShop.BusinessLogic\StoreShop.BusinessLogic.csproj", "{F7DD5A9E-0E7C-4081-912D-C015785B640D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreShop.Repository", "Reservation.Repository\StoreShop.Repository.csproj", "{14BA6BCD-A64E-45C2-B5EE-597A3C55861B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreShop.Repository", "StoreShop.Repository\StoreShop.Repository.csproj", "{14BA6BCD-A64E-45C2-B5EE-597A3C55861B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

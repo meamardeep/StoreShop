@@ -69,7 +69,7 @@ namespace StoreShop.BusinessLogic
             sb.Append(91.ToString());
             sb.Append(cellNo.ToString());
 
-            String message = HttpUtility.UrlEncode("Your verification code for reservation is : " + OTP);
+            String message = HttpUtility.UrlEncode("Your verification code for storeshop is : " + OTP);
             using (var wb = new WebClient())
             {
                 byte[] response = wb.UploadValues("https://api.textlocal.in/send/", new NameValueCollection()

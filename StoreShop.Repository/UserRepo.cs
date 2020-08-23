@@ -12,9 +12,9 @@ namespace StoreShop.Repository
     public class UserRepo : IUser
     {
         private readonly StoreShopDataContext _database;
-        public UserRepo(StoreShopDataContext reservationDataContext )
+        public UserRepo(StoreShopDataContext storeshopDataContext )
         {
-            _database = reservationDataContext;
+            _database = storeshopDataContext;
         }
 
 
