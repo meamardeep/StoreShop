@@ -13,9 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Reservation.DataAccess\StoreShop.DataAccess.csproj" />
-    <ProjectReference Include="..\Reservation.Data\StoreShop.Data.csproj" />
-    <ProjectReference Include="..\Reservation.Repository\StoreShop.Repository.csproj" />
+    <ProjectReference Include="..\StoreShop.DataAccess\StoreShop.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>
