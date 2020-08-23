@@ -2,6 +2,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -56,6 +57,18 @@ namespace StoreShop.Presentation
 
             //typeOf(Startup) is added as parameter because ambigous call error was comming but need to explore this cause
             services.AddAutoMapper(typeof(Startup));
+
+            services.AddAuthentication()
+                .AddGoogle(Options =>
+                {
+                    Options.ClientId = Configuration.GetSection("GoogleAuthetication").GetSection("ClientId").Value;
+                    Options.ClientSecret = Configuration.GetSection("GoogleAuthetication:ClientSecret").Value;
+                });
+            
+
+            //Bult-in identity service     
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<StoreShopDataContext>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -77,7 +90,8 @@ namespace StoreShop.Presentation
             app.UseRouting();
 
             app.UseCors();
-            app.UseAuthorization();
+            app.UseAuthorization();// for identity service
+            app.UseAuthentication();
 
             //The order of middleware is important. Call UseSession() after UseRouting and before UseEndpoints.
             app.UseSession();

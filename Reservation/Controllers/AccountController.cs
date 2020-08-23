@@ -1,12 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using StoreShop.BusinessLogic;
 using StoreShop.Data;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Linq;
 using System.Net;
+using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace StoreShop.Presentation.Controllers
@@ -14,9 +18,12 @@ namespace StoreShop.Presentation.Controllers
     public class AccountController : Controller
     {
         private readonly IUserManagement _userManagement;
-        public AccountController(IUserManagement userManagement)
+        private readonly SignInManager<IdentityUser> _signInManager;
+
+        public AccountController(IUserManagement userManagement, SignInManager<IdentityUser> signInManager)
         {
             _userManagement = userManagement;
+            _signInManager = signInManager;
         }
 
         public IActionResult Index()
@@ -45,12 +52,10 @@ namespace StoreShop.Presentation.Controllers
 
         public void InitSession(UserModel userModel)
         {
-
             SessionManager.UserName = userModel.UserName;
             SessionManager.FirstName = userModel.FirstName;
             SessionManager.LastName = userModel.LastName;
             SessionManager.UserId = userModel.UserId;
-
         }
 
         public IActionResult OTPLoginPage()
@@ -137,7 +142,7 @@ namespace StoreShop.Presentation.Controllers
             model.CountryCodes = new List<int>() { }; 
             return View("~/Views/Account/SignUp.cshtml",model);
             
-        }
+        }        
 
         public ActionResult Signup(UserModel model)
         {
@@ -151,6 +156,47 @@ namespace StoreShop.Presentation.Controllers
 
             return View("~/Views/Account/Login.cshtml");
         }
+
+        #region Google authentication
+        public async Task<ActionResult> ShowSignUpOptions()
+        {
+            LogOnModel model = new LogOnModel();
+            model.ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            return View("~/Views/Account/SignupOptions.cshtml", model);
+        }
+
+        public IActionResult ShowGoogleLoginPage(string provider = "Google")
+        {
+            string returnUrl = Url.Content("https://localhost:44302/Home");
+            var redirectUrl = Url.Action("GoogleResponse", "Account",new { ReturnUrl = returnUrl });
+                //Url.Action("ExternalLoginCallback", "Account",
+                           //new { ReturnUrl = returnUrl });
+            var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+            return new ChallengeResult(provider, properties);
+        }
+
+        public async Task<IActionResult> GoogleResponse(string returnUrl = null, string remoteError = null)
+        {
+            returnUrl = returnUrl ?? Url.Content("~/");
+
+            LogOnModel logOnModel = new LogOnModel()
+            {
+                ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
+            };
+
+
+            var userInfo = await _signInManager.GetExternalLoginInfoAsync();
+
+
+            UserModel userModel = new UserModel();
+            userModel.FirstName =  userInfo.Principal.FindFirstValue(ClaimTypes.GivenName);
+            userModel.LastName = userInfo.Principal.FindFirstValue(ClaimTypes.Surname);
+            userModel.UserName = userInfo.Principal.FindFirstValue(ClaimTypes.Email);
+                     
+               
+            return View("~/Views/Account/ExternalUserDetails.cshtml", userModel);
+        }
+        #endregion
 
     }
 }

@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace StoreShop.DataAccess
 {
-    public class StoreShopDataContext : DbContext
+    public class StoreShopDataContext :  IdentityDbContext //DbContext//, IdentityDbContext<IdentityUser>
     {
         public IConfiguration _configuration { get; set; }
         public StoreShopDataContext(IConfiguration configuration)

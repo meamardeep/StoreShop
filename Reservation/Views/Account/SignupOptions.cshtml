@@ -1,0 +1,26 @@
+﻿@model StoreShop.Data.LogOnModel
+
+@{
+    Layout = "_LogonLayout";
+}
+
+<div class=" container  my-auto">
+
+    <div class="form-group pl-5 pr-5">
+        @{
+            foreach (var item in Model.ExternalLogins)
+            {
+                <a type="" id="btnGoogleLogIn" class="btn btn-info form-control form-group" style="width:100%;"
+                   name="provider" value="@item.DisplayName" asp-action="ShowGoogleLoginPage" asp-controller="account">
+                    Sign up with @item.DisplayName
+                </a>
+
+            }
+        }
+        <button type="button" id="btnFcaebookLogIn" class="btn btn-primary form-control form-group" style="width:100%;">Sign up with facebook</button>
+
+        <a type="button" asp-action="showSignUpPage" asp-controller="account" id="btnLogIn" class="btn btn-primary form-control form-group" style="width:100%;">Sign up</a>
+
+    </div>
+
+</div>
