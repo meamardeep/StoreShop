@@ -49,7 +49,7 @@ namespace StoreShop.Presentation
 
             services.AddSession(options =>
             {
-                options.Cookie.Name = "Reservation Session Cookie";
+                options.Cookie.Name = "storeshop Session Cookie";
                 options.IdleTimeout = TimeSpan.FromMinutes(5);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
