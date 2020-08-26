@@ -1,22 +1,26 @@
 ﻿@model List<StoreShop.Data.ProductTypeModel>
 
-    <div class="overflow-auto " style="max-height:200px;">
+<div class="overflow-auto " style="max-height:200px;">
 
-        <table class="table table-bordered table-striped" style="max-height: 200px;">
-            <tr>
-                <th>Product Type name</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-            @{
-                foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@item.ProductTypeName</td>
-                        <td><i class="fa fa-edit"></i>Edit</td>
-                        <td><i class="fa fa-trash-alt"></i>Delete</td>
-                    </tr>
-                }
+    <table class="table table-bordered table-striped" style="max-height: 200px;">
+        <tr>
+            <th>Product Type name</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        @{
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ProductTypeName</td>
+                    <td>
+                        <a href="javascript:void(0)" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                    </td>
+                    <td>
+                        <a href="javascript:void(0)" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
             }
-        </table>
-        </div>
+        }
+    </table>
+</div>

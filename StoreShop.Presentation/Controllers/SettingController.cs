@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StoreShop.Data;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using StoreShop.Data;
-using Microsoft.EntityFrameworkCore.Storage;
 
 namespace StoreShop.Presentation.Controllers
 {

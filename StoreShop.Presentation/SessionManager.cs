@@ -105,11 +105,17 @@ namespace StoreShop.Presentation
             }
             base.OnActionExecuting(filterContext);
         }
+
+       
     }
 
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Field)]
+    [AttributeUsage(AttributeTargets.Method /*| AttributeTargets.Field*/)]
     public class ReesultfilterAttribute: ActionFilterAttribute
     {
+        public override void OnResultExecuting(ResultExecutingContext context)
+        {
+            base.OnResultExecuting(context);
+        }
 
     }
 

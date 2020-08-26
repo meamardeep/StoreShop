@@ -10,14 +10,16 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.js"></script>
 
-    <environment include="Development">
+    @*<environment include="Development">
 
-        <link rel="stylesheet" href="~/lib/font-awesome/css/fontawesome.css" />
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="~/lib/font-awesome/css/fontawesome.min.css" />
-
+            <link rel="stylesheet" href="~/lib/font-awesome/css/fontawesome.css" />
         </environment>
+        <environment exclude="Development">
+            <link rel="stylesheet" href="~/lib/font-awesome/css/fontawesome.min.css" />
+
+            </environment>*@
+    @*<link rel="stylesheet" href="~/lib/css/fontawesome.css"/>*@
+    <script src="https://use.fontawesome.com/a00f9830a5.js"></script>
 
 </head>
 <body>
@@ -31,17 +33,22 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
+                        
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Setting" asp-action="Index">Admin Setting</a>
+                        </li>
                         @{
                             if (SessionManager.UserName != null && SessionManager.UserName != "")
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-white float-xl-right" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+                                    <a class="nav-link text-white float-right" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
                                 </li>
                             }
 
@@ -52,11 +59,14 @@
             </div>
         </nav>
     </header>
-    <div class="container">                    
+    <aside>
+
+    </aside>
+    <section class="container">                    
          <main role="main" class="">
                @RenderBody()
          </main>      
-    </div>
+    </section>
 
     <footer class="border-top footer text-muted">
         <div class="container">

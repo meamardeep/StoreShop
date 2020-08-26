@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using StoreShop.BusinessLogic;
 using StoreShop.Data;
@@ -26,6 +27,7 @@ namespace StoreShop.Presentation.Controllers
             _signInManager = signInManager;
         }
 
+        #region Email authentication
         public IActionResult Index()
         {
             return View("~/Views/Account/Login.cshtml");
@@ -50,14 +52,9 @@ namespace StoreShop.Presentation.Controllers
             }
         }
 
-        public void InitSession(UserModel userModel)
-        {
-            SessionManager.UserName = userModel.UserName;
-            SessionManager.FirstName = userModel.FirstName;
-            SessionManager.LastName = userModel.LastName;
-            SessionManager.UserId = userModel.UserId;
-        }
+        #endregion        
 
+        #region OTP Login Implementation
         public IActionResult OTPLoginPage()
         {
             return View("~/Views/Account/OTPLogin.cshtml");
@@ -136,26 +133,7 @@ namespace StoreShop.Presentation.Controllers
 
         }
 
-        public ActionResult ShowSignUpPage()
-        {
-            UserModel model = new UserModel();
-            model.CountryCodes = new List<int>() { }; 
-            return View("~/Views/Account/SignUp.cshtml",model);
-            
-        }        
-
-        public ActionResult Signup(UserModel model)
-        {
-            return Json(true);
-        }
-
-        public IActionResult Logout()
-        {
-            HttpContext.Session.Clear(); //clear all the value from session object but does nor delete object from server.
-            //HttpContext.Session.Abondon();
-
-            return View("~/Views/Account/Login.cshtml");
-        }
+        #endregion
 
         #region Google authentication
         public async Task<ActionResult> ShowSignUpOptions()
@@ -168,9 +146,8 @@ namespace StoreShop.Presentation.Controllers
         public IActionResult ShowGoogleLoginPage(string provider = "Google")
         {
             string returnUrl = Url.Content("https://localhost:44302/Home");
-            var redirectUrl = Url.Action("GoogleResponse", "Account",new { ReturnUrl = returnUrl });
-                //Url.Action("ExternalLoginCallback", "Account",
-                           //new { ReturnUrl = returnUrl });
+            var redirectUrl = Url.Action("GoogleResponse", "Account", new { ReturnUrl = returnUrl });
+            
             var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
             return new ChallengeResult(provider, properties);
         }
@@ -184,19 +161,53 @@ namespace StoreShop.Presentation.Controllers
                 ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
             };
 
-
             var userInfo = await _signInManager.GetExternalLoginInfoAsync();
 
-
             UserModel userModel = new UserModel();
-            userModel.FirstName =  userInfo.Principal.FindFirstValue(ClaimTypes.GivenName);
+            userModel.FirstName = userInfo.Principal.FindFirstValue(ClaimTypes.GivenName);
             userModel.LastName = userInfo.Principal.FindFirstValue(ClaimTypes.Surname);
             userModel.UserName = userInfo.Principal.FindFirstValue(ClaimTypes.Email);
-                     
-               
+
+
             return View("~/Views/Account/ExternalUserDetails.cshtml", userModel);
         }
         #endregion
+
+        #region Register New user
+        public ActionResult ShowSignUpPage()
+        {
+            UserModel model = new UserModel();
+            model.CountryCodes = new List<int>() { }; 
+            return View("~/Views/Account/SignUp.cshtml",model);
+            
+        }        
+
+        public ActionResult Signup(UserModel model)
+        {
+            return Json(true);
+        }
+
+        #endregion
+
+
+
+        public void InitSession(UserModel userModel)
+        {
+            SessionManager.UserName = userModel.UserName;
+            SessionManager.FirstName = userModel.FirstName;
+            SessionManager.LastName = userModel.LastName;
+            SessionManager.UserId = userModel.UserId;
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear(); //clear all the value from session object but does nor delete object from server.
+            //HttpContext.Session.Abondon();
+
+            return View("~/Views/Account/Login.cshtml");
+        }
+
+        
 
     }
 }
