@@ -35,6 +35,7 @@ namespace StoreShop.Presentation.Controllers
 
         public IActionResult LogOn(LogOnModel logOnModel)
         {
+             
             if (!ModelState.IsValid)
             {
                 return View("~/Views/Account/Login.cshtml");
@@ -54,7 +55,7 @@ namespace StoreShop.Presentation.Controllers
 
         #endregion        
 
-        #region OTP Login Implementation
+        #region OTP Login authentication
         public IActionResult OTPLoginPage()
         {
             return View("~/Views/Account/OTPLogin.cshtml");
@@ -197,6 +198,8 @@ namespace StoreShop.Presentation.Controllers
             SessionManager.FirstName = userModel.FirstName;
             SessionManager.LastName = userModel.LastName;
             SessionManager.UserId = userModel.UserId;
+            SessionManager.RoleId = userModel.RoleId;
+            SessionManager.CustomerId = userModel.CustomerId;
         }
 
         public IActionResult Logout()

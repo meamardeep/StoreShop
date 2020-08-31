@@ -26,6 +26,12 @@ namespace StoreShop.DataAccess
         //}
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Store> Stores { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<State> States { get; set; }
+        public DbSet<City> Cities { get; set; }
 
         //public DbSet<IdentityUser> IdentityUsers { get; set; }
     }

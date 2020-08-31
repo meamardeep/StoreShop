@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace StoreShop.Repository
 {
-    public class UserRepo : IUser
+    public class UserRepo : IUserRepo
     {
         private readonly StoreShopDataContext _database;
         public UserRepo(StoreShopDataContext storeshopDataContext )
@@ -21,8 +21,10 @@ namespace StoreShop.Repository
         public User GetUser(string userName, string password)
         {
             var sql = from u in _database.Users
+                      .Include(c=> c.Customer)
                       where u.UserName == userName && u.Password == password && u.IsActive == true
                       select u;
+
             return sql.FirstOrDefault();
         }
 

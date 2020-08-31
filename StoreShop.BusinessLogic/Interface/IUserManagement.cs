@@ -15,11 +15,11 @@ namespace StoreShop.BusinessLogic
         void UpdateUserDetail(long cellNo, int oTP);
 
         //default inteface method new featire in c#8.0
-        UserModel GetUsers(int customerId)
+        virtual int Show(int customerId)
         {
-            Console.WriteLine();
+           
 
-            return new UserModel();
+            return 100;
         }
 
         string SendSMS(long cellNo, int oTP);

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace StoreShop.Repository
 {
-    public interface IUser
+    public interface IUserRepo
     {
         IEnumerable<User> GetUsers();
         User GetUser(string userName, string password);

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using StoreShop.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,16 @@ namespace StoreShop.Presentation.Controllers
         public ControllerBase(IWebHostEnvironment hostingEnvironment)
         {
             _hostingEnvironment = hostingEnvironment;
+        }
+
+        public UserSessionModel GetUserSession()
+        {
+            return new UserSessionModel()
+            {
+                SessionUserId = SessionManager.UserId,
+                SessionCustomerId = SessionManager.CustomerId
+                //SessionStoreId = SessionManager.
+            };
         }
     }
 }

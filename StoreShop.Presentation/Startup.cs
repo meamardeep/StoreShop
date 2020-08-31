@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using StoreShop.BusinessLogic;
 using StoreShop.Data;
 using StoreShop.DataAccess;
 using StoreShop.Repository;
@@ -43,15 +44,22 @@ namespace StoreShop.Presentation
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             #region Dependancy Injection
-            services.AddScoped<StoreShop.BusinessLogic.IUserManagement, StoreShop.BusinessLogic.UserManagement>();
-            services.AddScoped<IUser, UserRepo>();
+            services.AddScoped<IUserManagement,UserManagement>();
+            services.AddScoped<IUserRepo, UserRepo>();
+
+            services.AddScoped<ICustomerManagement, CustomerManagement>();
+            services.AddScoped<ICustomerRepo, CustomerRepo>();
+
+            services.AddScoped<ISettingManagement, SettingManagement>();
+            services.AddScoped<ISettingRepo, SettingRepo>();
+            //services.AddScoped<UserSessionModel, GetUserSession>();
             #endregion
             
             services.AddSession(options =>
             {
                 options.Cookie.Name = "StoreShop";
 
-                options.IdleTimeout = TimeSpan.FromMinutes(1);
+                options.IdleTimeout = TimeSpan.FromMinutes(60);
                 //options.Cookie.MaxAge = TimeSpan.FromMinutes(5);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
@@ -66,8 +74,8 @@ namespace StoreShop.Presentation
                     Options.ClientId = Configuration.GetSection("GoogleAuthetication").GetSection("ClientId").Value;
                     Options.ClientSecret = Configuration.GetSection("GoogleAuthetication:ClientSecret").Value;
                 });
-                /*.AddCookie()*/
-            
+            /*.AddCookie()*/
+
             //Bult-in identity service     
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<StoreShopDataContext>();
 
@@ -115,8 +123,9 @@ namespace StoreShop.Presentation
     {
         public MappingProfile()
         {
+            CreateMap<Customer, CustomerModel>().ReverseMap();
             CreateMap<User, UserModel>().ReverseMap();
-
+            CreateMap<Store, StoreModel>().ReverseMap();
         }
     }
 }

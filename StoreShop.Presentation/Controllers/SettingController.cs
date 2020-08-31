@@ -1,19 +1,30 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StoreShop.BusinessLogic;
 using StoreShop.Data;
 using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace StoreShop.Presentation.Controllers
 {
-    public class SettingController : Controller
+    public class SettingController : ControllerBase
     {
-        public SettingController()
-        {
+        private readonly ISettingManagement _settingManagement;
+        private readonly ICustomerManagement _customerManagement;
 
+        public SettingController(ISettingManagement settingManagement, ICustomerManagement customerManagement)
+        {
+            _settingManagement = settingManagement;
+            _customerManagement = customerManagement;
+            
         }
         public ActionResult Index()
         {
+           
             SettingModel settingModel = new SettingModel();
+            
+            settingModel.StoreModels = _settingManagement.GetStores(SessionManager.CustomerId);
+
             settingModel.BrandModels = new List<BrandModel>()
             {
                 new BrandModel(){BrandName = "Xiaomi", BrandId = 1, IsActive = true, StoreId = 1},
@@ -36,36 +47,88 @@ namespace StoreShop.Presentation.Controllers
              new ProductTypeModel(){ProductTypeId = 1, ProductTypeName ="TV", IsActive = true},
              new ProductTypeModel(){ProductTypeId = 1, ProductTypeName ="TV", IsActive = true}
             };
-            settingModel.StoreModels = new List<StoreModel>()
-            {
-             new StoreModel(){StoreId = 1, StoreName = "BTM, Bangalore", CustomerId = 1, IsActive = true, AddressId = 1 },
-
-             new StoreModel(){StoreId = 1, StoreName = "BTM, Bangalore", CustomerId = 1, IsActive = true, AddressId = 1 },
-             new StoreModel(){StoreId = 1, StoreName = "BTM, Bangalore", CustomerId = 1, IsActive = true, AddressId = 1 },
-             new StoreModel(){StoreId = 1, StoreName = "BTM, Bangalore", CustomerId = 1, IsActive = true, AddressId = 1 },
-             new StoreModel(){StoreId = 1, StoreName = "BTM, Bangalore", CustomerId = 1, IsActive = true, AddressId = 1 },
-             new StoreModel(){StoreId = 1, StoreName = "BTM, Bangalore", CustomerId = 1, IsActive = true, AddressId = 1 },
-             new StoreModel(){StoreId = 1, StoreName = "BTM, Bangalore", CustomerId = 1, IsActive = true, AddressId = 1 },
-             new StoreModel(){StoreId = 1, StoreName = "BTM, Bangalore", CustomerId = 1, IsActive = true, AddressId = 1 }
-
-            };
             settingModel.UserModels = new List<UserModel>()
             {
                new UserModel(){ UserId = 1, UserName = "meamardeep", CellNo = 8088506025, FirstName = "Amardeep",
-                    LastName = "Kumar", StoreId = 1, CountryCode = 91   },
-
+                    LastName = "Kumar", CountryCode = 91   },
                  new UserModel(){ UserId = 1, UserName = "meamardeep", CellNo = 8088506025, FirstName = "Amardeep",
-                    LastName = "Kumar", StoreId = 1, CountryCode = 91   },
+                    LastName = "Kumar", CountryCode = 91   },
                  new UserModel(){ UserId = 1, UserName = "meamardeep", CellNo = 8088506025, FirstName = "Amardeep",
-                    LastName = "Kumar", StoreId = 1, CountryCode = 91   },
+                    LastName = "Kumar", CountryCode = 91   },
                  new UserModel(){ UserId = 1, UserName = "meamardeep", CellNo = 8088506025, FirstName = "Amardeep",
-                    LastName = "Kumar", StoreId = 1, CountryCode = 91   },
+                    LastName = "Kumar",  CountryCode = 91   },
                  new UserModel(){ UserId = 1, UserName = "meamardeep", CellNo = 8088506025, FirstName = "Amardeep",
-                    LastName = "Kumar", StoreId = 1, CountryCode = 91   },
+                    LastName = "Kumar",  CountryCode = 91   },
                  new UserModel(){ UserId = 1, UserName = "meamardeep", CellNo = 8088506025, FirstName = "Amardeep",
-                    LastName = "Kumar", StoreId = 1, CountryCode = 91   }
+                    LastName = "Kumar",  CountryCode = 91   }
             };
             return View(settingModel);
+            //return Json( settingModel);
         }
+
+        public List<UserModel> DatatableView()
+        {
+            List<UserModel> userModels= new List<UserModel>()
+            {
+               new UserModel(){ UserId = 1, UserName = "meamardeep", CellNo = 8088506025, FirstName = "Amardeep",
+                    LastName = "Kumar",  CountryCode = 91   },
+
+                 new UserModel(){ UserId = 1, UserName = "meamardeep", CellNo = 8088506025, FirstName = "Amardeep",
+                    LastName = "Kumar",  CountryCode = 91   },
+                 new UserModel(){ UserId = 1, UserName = "meamardeep", CellNo = 8088506025, FirstName = "Amardeep",
+                    LastName = "Kumar",  CountryCode = 91   },
+                 new UserModel(){ UserId = 1, UserName = "meamardeep", CellNo = 8088506025, FirstName = "Amardeep",
+                    LastName = "Kumar",  CountryCode = 91   },
+                 new UserModel(){ UserId = 1, UserName = "meamardeep", CellNo = 8088506025, FirstName = "Amardeep",
+                    LastName = "Kumar",  CountryCode = 91   },
+                 new UserModel(){ UserId = 1, UserName = "meamardeep", CellNo = 8088506025, FirstName = "Amardeep",
+                    LastName = "Kumar", CountryCode = 91   }
+            };
+
+            //new Claim();
+
+            return userModels;
+        }
+
+        public List<DropDownItem> GetStates(int countryId)
+        {
+             List<DropDownItem> states = _customerManagement.GetStates(countryId);
+            return states;
+        }
+        public List<DropDownItem> GetCities(int stateId)
+        {
+            List<DropDownItem> states = _customerManagement.GetCities(stateId);
+            return states;
+        }
+        #region Store CRUD
+        public ActionResult ShowStoreWindow(int storeId)
+        {
+            StoreModel model = new StoreModel();
+            model.Countries = _customerManagement.GetCountries(); //new List<DropDownItem>();
+            model.States = new List<DropDownItem>();
+            model.Cities = new List<DropDownItem>();
+
+            if (storeId > 0)
+                model =  _settingManagement.GetStore(storeId);
+
+            return PartialView("~/Views/Setting/Stores/_NewStoreWindow.cshtml", model);
+        }
+
+        public IActionResult SaveStore(StoreModel storeModel)
+        {
+            if (storeModel.StoreId > 0)
+                _settingManagement.UpdateStore(storeModel);
+            else
+                _settingManagement.CreateStore(storeModel);
+            return Json(true);
+        }
+
+        public IActionResult DeleteStore(int storeId)
+        {
+            _settingManagement.DeleteStore(storeId);
+
+            return Json(true);
+        }
+        #endregion
     }
 }

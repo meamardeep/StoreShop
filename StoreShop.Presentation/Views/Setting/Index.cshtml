@@ -1,53 +1,61 @@
 ﻿@model StoreShop.Data.SettingModel
 
-<div class="col-lg-12 ">
-    <section class="">
+    <script src="~/js/Settings.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.21/datatables.min.css" />
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.21/datatables.min.js"></script>
 
-        <div class="row form-group">
-            <div class="col-lg-6 container shadow border">
-                <div class="form-group" style="display: flex; flex-direction: row; justify-content: space-between;">
-                    <span class="font-weight-bold">Store Details</span>
-                    <button class="btn-primary btn float-right"><i class="fa fa-plus"></i>Create New Store</button>
+
+    <div id="divStoreWindow"></div>
+
+    <div class="col-lg-12 ">
+        <section class="">
+
+            <div class="row form-group">
+                <div class="col-lg-6 container shadow border">
+                    <div class="form-group" style="display: flex; flex-direction: row; justify-content: space-between;">
+                        <span class="font-weight-bold">Store Details</span>
+                        <button class="btn-primary btn float-right" type="button" onclick="showStoreWindow()" 
+                                dat-toggle="modal" data-target="#exampleModal" id="btnCreate"><i class="fa fa-plus"></i>Create New Store</button>
+                    </div>
+                    @await Html.PartialAsync("~/Views/Setting/Stores/_StoreList.cshtml", Model.StoreModels)
+
                 </div>
-                @await Html.PartialAsync("~/Views/Setting/_Stores.cshtml", Model.StoreModels)
+
+
+                <div class="col-lg-6  container shadow border">
+                    <div class="form-group" style="display: flex; flex-direction: row; justify-content: space-between;">
+                        <span class="font-weight-bold">Brands</span>
+                        <button class="btn btn-primary float-right"><i class="fa fa-plus"></i>Create New Brand</button>
+                    </div>
+                    @await Html.PartialAsync("~/Views/Setting/_Brands.cshtml", Model.BrandModels)
+
+                </div>
+
+            </div>
+            <!----------------------------------------------------------------------------------------->
+            <div class="row form-group">
+
+                <div class="col-lg-6 container shadow border form-group">
+                    <div class="form-group" style="display: flex; flex-direction: row; justify-content: space-between;">
+                        <span class="font-weight-bold">Product Types</span>
+                        <button class="btn btn-primary float-right"><i class="fa fa-plus"></i>Create New Product type</button>
+                    </div>
+                    @await Html.PartialAsync("~/Views/Setting/_ProductTypes.cshtml", Model.ProductTypeModels)
+                </div>
+
+                <div class="col-lg-6 container shadow border form-group">
+
+                    <div class="form-group" style="display: flex; flex-direction: row; justify-content: space-between;">
+                        <span class="font-weight-bold">Users</span>
+                        <button class="btn btn-primary"><i class="fa fa-plus"></i>Create new user</button>
+                    </div>
+
+                    @await Html.PartialAsync("~/Views/Setting/_UserDetails.cshtml", Model.UserModels)
+
+                </div>
 
             </div>
 
 
-            <div class="col-lg-6  container shadow border">
-                <div class="form-group" style="display: flex; flex-direction: row; justify-content: space-between;">
-                    <span class="font-weight-bold">Brands</span>
-                    <button class="btn btn-primary float-right"><i class="fa fa-plus"></i>Create New Brand</button>
-                </div>
-                @await Html.PartialAsync("~/Views/Setting/_Brands.cshtml", Model.BrandModels)
-
-            </div>
-
-        </div>
-        <!----------------------------------------------------------------------------------------->
-        <div class="row form-group">
-
-            <div class="col-lg-6 container shadow border form-group">
-                <div class="form-group" style="display: flex; flex-direction: row; justify-content: space-between;">
-                    <span class="font-weight-bold">Product Types</span>
-                    <button class="btn btn-primary float-right"><i class="fa fa-plus"></i>Create New Product type</button>
-                </div>
-                @await Html.PartialAsync("~/Views/Setting/_ProductTypes.cshtml", Model.ProductTypeModels)
-            </div>
-
-            <div class="col-lg-6 container shadow border form-group">
-
-                <div class="form-group" style="display: flex; flex-direction: row; justify-content: space-between;">
-                    <span class="font-weight-bold">Users</span>
-                    <button class="btn btn-primary"><i class="fa fa-plus"></i>Create new user</button>
-                </div>
-
-                @await Html.PartialAsync("~/Views/Setting/_UserDetails.cshtml", Model.UserModels)
-
-            </div>
-
-        </div>
-
-
-    </section>
-</div>
+        </section>
+    </div>

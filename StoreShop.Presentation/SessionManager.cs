@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using StoreShop.Data;
 using System;
 using System.Text.Json;
 //using Newtonsoft.Json;
@@ -15,6 +16,10 @@ namespace StoreShop.Presentation
         public const string SESSION_USER_ID_KEY = "User_Id";
         public const string SESSION_FIRST_NAME_KEY = "First_Name";
         public const string SESSION_LAST_NAME_KEY = "Last_Name";
+        public const string SESSION_USER_ROLE_ID_KEY = "User_Role_Id";
+        public const string SESSION_STORE_ID_KEY = "Store_Id";
+        public const string SESSION_CUSTOMER_ID_KEY = "Customer_Id";
+
 
         static IServiceProvider services = null;
 
@@ -44,7 +49,7 @@ namespace StoreShop.Presentation
             }
         }
 
-
+        #region User Attribute
         public static string UserName
         {
             get => Current.Session.GetFromSession<string>(SESSION_USER_NAME_Key);
@@ -52,7 +57,8 @@ namespace StoreShop.Presentation
         }
 
         public static string FirstName
-        { get => Current.Session.GetFromSession<string>(SESSION_FIRST_NAME_KEY);
+        {
+            get => Current.Session.GetFromSession<string>(SESSION_FIRST_NAME_KEY);
             set => Current.Session.SetInSession<string>(SESSION_FIRST_NAME_KEY, value);
         }
         public static string LastName
@@ -65,6 +71,27 @@ namespace StoreShop.Presentation
             get => Current.Session.GetFromSession<int>(SESSION_USER_ID_KEY);
             set => Current.Session.SetInSession<int>(SESSION_USER_ID_KEY, value);
         }
+        public static int RoleId
+        {
+            get => Current.Session.GetFromSession<int>(SESSION_USER_ROLE_ID_KEY);
+            set => Current.Session.SetInSession<int>(SESSION_USER_ROLE_ID_KEY, value);
+        }
+        #endregion
+
+        #region Customer Attribute
+        public static int CustomerId 
+        {
+            get => Current.Session.GetFromSession<int>(SESSION_CUSTOMER_ID_KEY);
+            set => Current.Session.SetInSession<int>(SESSION_CUSTOMER_ID_KEY, value);
+        }
+        public static int? StoreId 
+        {
+            get => Current.Session.GetFromSession<int>(SESSION_STORE_ID_KEY);
+            set => Current.Session.SetInSession<int>(SESSION_STORE_ID_KEY, (int)value);
+        }
+        #endregion
+
+        
         public static bool IsSessionAlive
         {
             get
@@ -74,6 +101,7 @@ namespace StoreShop.Presentation
                 return sessionAlive;
             }
         }
+
     }
 
     public static class SessionExtensions

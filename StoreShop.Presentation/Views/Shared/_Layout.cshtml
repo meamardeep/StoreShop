@@ -10,6 +10,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.js"></script>
 
+    <script src="~/js/Framework.utils.js"></script>
     @*<environment include="Development">
 
             <link rel="stylesheet" href="~/lib/font-awesome/css/fontawesome.css" />
@@ -33,7 +34,7 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
-                        
+
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
@@ -50,6 +51,14 @@
                                 <li class="nav-item">
                                     <a class="nav-link text-white float-right" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
                                 </li>
+                            }
+
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-white float-xl-right" asp-area="" asp-controller="Account" asp-action="index">Login</a>
+                                </li>
+
                             }
 
                         }

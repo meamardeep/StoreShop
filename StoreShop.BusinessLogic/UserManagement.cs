@@ -13,10 +13,10 @@ namespace StoreShop.BusinessLogic
 {
     public class UserManagement : IUserManagement
     {
-        private IUser _userRepo;
+        private IUserRepo _userRepo;
         private IMapper _mapper;
 
-        public UserManagement(IUser user, IMapper mapper)
+        public UserManagement(IUserRepo user, IMapper mapper)
         {
             _userRepo = user;
             _mapper = mapper;
@@ -83,5 +83,11 @@ namespace StoreShop.BusinessLogic
                 return result;
             }
         }
+
+
+        //public  int Show(int customerId)
+        //{
+        //    return 10;
+        //}
     }
 }
