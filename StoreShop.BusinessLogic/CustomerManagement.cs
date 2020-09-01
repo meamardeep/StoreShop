@@ -12,12 +12,19 @@ namespace StoreShop.BusinessLogic
     {
         private readonly ICustomerRepo _customerRepo;
         private readonly IMapper _mapper;
-        private readonly UserSessionModel _userSession;
-        public CustomerManagement(ICustomerRepo customerRepo, IMapper mapper, UserSessionModel userSession)
+        //private readonly UserSessionModel _userSession;
+        private UserSessionModel userSessionModel;
+
+        public CustomerManagement(ICustomerRepo customerRepo, IMapper mapper/*, UserSessionModel userSession*/)
         {
             _customerRepo = customerRepo;
             _mapper = mapper;
-            _userSession = userSession;
+           // _userSession = userSession;
+        }
+
+        public CustomerManagement(UserSessionModel userSessionModel)
+        {
+            this.userSessionModel = userSessionModel;
         }
 
         public List<DropDownItem> GetCountries()

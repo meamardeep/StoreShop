@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using StoreShop.BusinessLogic;
 using StoreShop.Data;
 using StoreShop.DataAccess;
+using StoreShop.Presentation.Controllers;
 using StoreShop.Repository;
 using System;
 
@@ -36,10 +37,10 @@ namespace StoreShop.Presentation
                   options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddMvc().AddRazorRuntimeCompilation();
-                        
+
             //The Distributed Memory Cache (AddDistributedMemoryCache) is a framework-provided implementation 
-            //of IDistributedCache that stores items in memory. Cached items are stored by the app instance on the server 
-            //where the app is running.
+            //of IDistributedCache that stores items in memory. Cached items are stored by the app instance on the server where the app is running.
+
             services.AddDistributedMemoryCache();           
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -48,17 +49,18 @@ namespace StoreShop.Presentation
             services.AddScoped<IUserRepo, UserRepo>();
 
             services.AddScoped<ICustomerManagement, CustomerManagement>();
+            
+            services.AddScoped<ICustomerManagement>(s => new CustomerManagement(ControllerBase.GetUserSession()));
             services.AddScoped<ICustomerRepo, CustomerRepo>();
 
             services.AddScoped<ISettingManagement, SettingManagement>();
+            //services.AddScoped<ISettingManagement>(s => new SettingManagement(ControllerBase.GetUserSession()));
             services.AddScoped<ISettingRepo, SettingRepo>();
-            //services.AddScoped<UserSessionModel, GetUserSession>();
             #endregion
             
             services.AddSession(options =>
             {
                 options.Cookie.Name = "StoreShop";
-
                 options.IdleTimeout = TimeSpan.FromMinutes(60);
                 //options.Cookie.MaxAge = TimeSpan.FromMinutes(5);
                 options.Cookie.HttpOnly = true;
@@ -74,7 +76,6 @@ namespace StoreShop.Presentation
                     Options.ClientId = Configuration.GetSection("GoogleAuthetication").GetSection("ClientId").Value;
                     Options.ClientSecret = Configuration.GetSection("GoogleAuthetication:ClientSecret").Value;
                 });
-            /*.AddCookie()*/
 
             //Bult-in identity service     
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<StoreShopDataContext>();

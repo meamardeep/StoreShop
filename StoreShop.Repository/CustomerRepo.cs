@@ -35,7 +35,15 @@ namespace StoreShop.Repository
         public long CreateAddress(Address address)
         {
              _database.Addresses.Add(address);
-            _database.SaveChanges();
+            try
+            {
+                _database.SaveChanges();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
             return address.AddressId;
         }
 

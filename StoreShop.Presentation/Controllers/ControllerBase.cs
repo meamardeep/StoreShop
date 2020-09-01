@@ -23,7 +23,7 @@ namespace StoreShop.Presentation.Controllers
             _hostingEnvironment = hostingEnvironment;
         }
 
-        public UserSessionModel GetUserSession()
+        public static UserSessionModel GetUserSession()
         {
             return new UserSessionModel()
             {

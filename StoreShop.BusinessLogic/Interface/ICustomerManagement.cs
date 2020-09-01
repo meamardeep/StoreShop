@@ -12,5 +12,8 @@ namespace StoreShop.BusinessLogic
         List<DropDownItem> GetCountries();
         long CreateAddress(AddressModel addressModel);
 
+        //int getval { get; set; }
+        
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using StoreShop.BusinessLogic;
 using StoreShop.Data;
 using System;
@@ -11,16 +12,16 @@ namespace StoreShop.Presentation.Controllers
     {
         private readonly ISettingManagement _settingManagement;
         private readonly ICustomerManagement _customerManagement;
-
-        public SettingController(ISettingManagement settingManagement, ICustomerManagement customerManagement)
+        public SettingController(ISettingManagement settingManagement, ICustomerManagement customerManagement,
+            IWebHostEnvironment webHostEnvironment)
         {
             _settingManagement = settingManagement;
             _customerManagement = customerManagement;
-            
+            //base.GetUserSession();
         }
         public ActionResult Index()
-        {
-           
+        {           
+
             SettingModel settingModel = new SettingModel();
             
             settingModel.StoreModels = _settingManagement.GetStores(SessionManager.CustomerId);
@@ -63,7 +64,6 @@ namespace StoreShop.Presentation.Controllers
                     LastName = "Kumar",  CountryCode = 91   }
             };
             return View(settingModel);
-            //return Json( settingModel);
         }
 
         public List<UserModel> DatatableView()

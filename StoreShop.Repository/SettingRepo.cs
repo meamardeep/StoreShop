@@ -31,19 +31,40 @@ namespace StoreShop.Repository
 
         public void CreateStore(Store store)
         {
-            _database.Stores.Add(store);
-            _database.SaveChanges();
-        }
+            var detail = _database.Stores.Add(store);
+            try {
 
+                _database.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public void DeleteStore(Store store)
         {
             _database.Stores.Remove(store);
+            try
+            {
+                _database.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void UpdateStore(Store store)
         {
             _database.Stores.Add(store).State = EntityState.Modified;
-            _database.SaveChanges();
+            try {
+                _database.SaveChanges();
+            }
+
+            catch( Exception)
+            {
+                throw;
+            }
         }
     }
 }
