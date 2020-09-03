@@ -14,10 +14,8 @@ function showSettingData() {
 }
 
 //------------------------------------------store setting-------------------------------------------------------
-function showStoreWindow(storeId) {
-    alert("hi");
+function showStoreWindow(storeId) {   
     var url = "/setting/ShowStoreWindow?storeId=" + storeId;
-    alert("heloo after url");
     //$("#btnCreate").click(function (event) {
     $.get(url).done(function (data) {
         $("#divPopupWindow").html(data);
@@ -59,7 +57,7 @@ function saveStore() {
 function StoreModel() {
     this.StoreId = $("#StoreId").val();
     this.StoreName = $("#StoreName").val();
-    //this.AddressId = $("#AddressId").val();
+    this.AddressId = $("#AddressId").val();
     this.Address = new function () {
         this.AddressId = $("#Address_AddressId").val();
         this.AddressText = $("#Address_AddressText").val();
