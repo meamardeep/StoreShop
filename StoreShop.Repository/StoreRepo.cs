@@ -25,7 +25,9 @@ namespace StoreShop.Repository
 
         public IEnumerable<Store> GetStores(int customerId)
         {
-            var sql = from s in _database.Stores where s.CustomerId == customerId select s;
+            var sql = from s in _database.Stores 
+                      .Include(a=>a.Address).ThenInclude(c=>c.City).ThenInclude(s=>s.State).ThenInclude(c=>c.Country)
+                      where s.CustomerId == customerId select s;
             return sql;                      
         }
 
