@@ -14,14 +14,14 @@ namespace StoreShop.BusinessLogic
         bool ValidateCellNo(long cellNo);
         void UpdateUserDetail(long cellNo, int oTP);
 
-        //default inteface method new featire in c#8.0
-        UserModel GetUsers(int customerId)
-        {
-            Console.WriteLine();
+        #region User CRUD
+        List<UserModel> GetUsers(int customerId);
+        UserModel GetUser(long userId);
+        void CreateUser(UserModel model, int sessionCustomerId, long sessionUserId);
+        void UpdateUser(UserModel model);
+        void DeleteUser(int userId);
+        #endregion
 
-            return new UserModel();
-        }
-
-        string SendSMS(long cellNo, int oTP);
+        //string SendSMS(long cellNo, int oTP);
     }
 }

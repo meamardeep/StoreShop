@@ -1,13 +1,17 @@
-﻿namespace StoreShop.Data
+﻿using System;
+using System.Collections.Generic;
+
+namespace StoreShop.Data
 {
     public class CustomerModel
     {
         public int CustomerId { get; set; }
         public string CustomerName { get; set; }
+        public string Headquarters { get; set; }
         public bool IsActive { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }
 
-        public int AddressId { get; set; }
-        public AddressModel AddressModel { get; set; }
     }
 
     public class StoreModel
@@ -15,17 +19,23 @@
         public int StoreId { get; set; }
         public string StoreName { get; set; }
         public bool IsActive { get; set; }
-        public int AddressId { get; set; }
+        public long AddressId { get; set; }
         public AddressModel Address { get; set; }
         public int CustomerId { get; set; }
         public CustomerModel CustomerModel { get; set; }
+
+        public List<DropDownItem> Countries { get; set; }
+        public List<DropDownItem> States { get; set; }
+        public List<DropDownItem> Cities { get; set; }
+
+
     }
 
 
 
     public class AddressModel
     {
-        public int AddressId { get; set; }
+        public long AddressId { get; set; }
         public string AddressText { get; set; }
 
         public int CountryId { get; set; }

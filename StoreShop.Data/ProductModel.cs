@@ -28,8 +28,10 @@ namespace StoreShop.Data
         public int BrandId { get; set; }
         public string BrandName { get; set; }
         public bool IsActive { get; set; }
-        public int StoreId { get; set; }
-        public StoreModel StoreModel { get; set; }
+        public int CustomerId { get; set; }
+
+        //public int StoreId { get; set; }
+        //public StoreModel StoreModel { get; set; }
     }
 
     public class ProductTypeModel
@@ -37,6 +39,7 @@ namespace StoreShop.Data
         public int ProductTypeId { get; set; }
         public string ProductTypeName { get; set; }
         public bool IsActive { get; set; }
+        public int CustomerId { get; set; }
 
     }
 }

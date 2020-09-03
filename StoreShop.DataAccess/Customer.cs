@@ -1,31 +1,35 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StoreShop.DataAccess
 {
+    [Table("CustomerDetails")]
     public class Customer
     {
         [Key]
         public int CustomerId { get; set; }
         public string CustomerName { get; set; }
+        public string Headquarters { get; set; }
         public bool IsActive { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }
 
-        public int AddressId { get; set; }
-        public Address Address { get; set; }
     }
 
+    [Table("StoreDetails")]
     public class Store
     {
-        [Key]
+       // [Key]
         public int StoreId { get; set; }
         public string StoreName { get; set; }
         public bool IsActive { get; set; }
 
-        [ForeignKey("Address")]
-        public int AddressId { get; set; }
+        //[ForeignKey("Address")]
+        public long AddressId { get; set; }
         public Address Address { get; set; }
 
-        [ForeignKey("Customer")]
+        //[ForeignKey("Customer")]
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
 
@@ -35,12 +39,17 @@ namespace StoreShop.DataAccess
     [Table("Addresses")]
     public class Address
     {
-        [Key]
-        public int AddressId { get; set; }
+        //[Key]
+        public long AddressId { get; set; }
         public string AddressText { get; set; }
 
+        [ForeignKey("Country")]
         public int CountryId { get; set; }
+
+        [ForeignKey("State")]
         public int StateId { get; set; }
+
+        [ForeignKey("City")]
         public int CityId { get; set; }
 
         public Country Country { get; set; }
