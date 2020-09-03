@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using StoreShop.Data;
 using StoreShop.DataAccess;
 using StoreShop.Repository;
@@ -15,12 +16,12 @@ namespace StoreShop.BusinessLogic
     {
         private IUserRepo _userRepo;
         private IMapper _mapper;
-
+        private UserSessionModel userSession;
         public UserManagement(IUserRepo user, IMapper mapper)
         {
             _userRepo = user;
             _mapper = mapper;
-
+            //userSession = ControllerBase.
         }
 
         public UserModel GetUser(string userName, string password)
@@ -84,10 +85,41 @@ namespace StoreShop.BusinessLogic
             }
         }
 
+        #region User CRUD
+        public List<UserModel> GetUsers(int customerId)
+        {
+            List<User> users = _userRepo.GetUsers(customerId);
+            return _mapper.Map<List<UserModel>>(users);
+        }
 
-        //public  int Show(int customerId)
-        //{
-        //    return 10;
-        //}
+        public UserModel GetUser(long userId)
+        {
+           User user = _userRepo.GetUser(userId);
+            return _mapper.Map<UserModel>(user);
+        }
+
+        public void CreateUser(UserModel model,int sessionCustomerId, long sessionUserId)
+        {
+            User user = _mapper.Map<User>(model);
+            user.CreatedDate = DateTime.Now;
+            user.CustomerId = sessionCustomerId;
+            user.IsActive = true;
+            user.ModifiedDate = DateTime.Now;
+            user.ModifiedBy = sessionUserId;
+
+            _userRepo.CreateUser(user);
+        }
+
+        public void UpdateUser(UserModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteUser(int userId)
+        {
+            User user = _userRepo.GetUser(userId);
+            _userRepo.DeleteUser(user);
+        }
+        #endregion
     }
 }

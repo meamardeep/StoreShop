@@ -1,68 +1,78 @@
 ﻿@model StoreShop.Data.StoreModel
 
-    <script >
-        $(function () {
-            $("#btnSaveStore").click(saveStore);
-        })
-    </script>
-    <script scr="~/js/Framework.utils.js"></script>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <!----------------------------------------Modal header------------------------------------------------------->
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modaltitle">New Store</h5>
-                    <button id="btnclose" type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <!----- ------------------------------------------Modal body-------------------------------------------- ---------------------------->
-                <div class="modal-body col-lg-12">
-                    @Html.HiddenFor(m => m.StoreId)
-
-                    <div class=" form-group">
-                        <label class="col-lg-5">Store Name<span class="">*</span>:</label>
-                        <div class="col-lg-7">
-                            @Html.TextBoxFor(m => m.StoreName, new { @class = "form-control" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-lg-5">Store Address<span class="">*</span></label>
-                        <div class="col-lg-7">
-                            @Html.TextAreaFor(m => m.Address.AddressText, new { @class = "form-control" })
-                        </div>
-                    </div>
-
-                    <div class=" form-group">
-                        <label class="col-lg-5">Country<span class="">*</span>:</label>
-                        <div class="col-lg-7">
-                            @Html.DropDownListFor(m => m.Address.CountryId, new SelectList(Model.Countries, "Value", "Text"), "--Select Country--", new { @class = "form-control", @onchange = "getStates()" })
-                        </div>
-                    </div>
-
-                    <div class=" form-group">
-                        <label class="col-lg-5">State<span>*</span>:</label>
-                        <div class="col-lg-7">
-                            @Html.DropDownListFor(m => m.Address.StateId, new SelectList(Model.States, "Value", "Text"), "--Select State--", new { @class = "form-control", @onchange = "getCities()" })
-                        </div>
-                    </div>
-
-                    <div class=" form-group">
-                        <label class="col-lg-5">City<span class="">*</span>:</label>
-                        <div class="col-lg-7">
-                            @Html.DropDownListFor(m => m.Address.CityId, new SelectList(Model.Cities, "Value", "Text"), "--Select City--", new { @class = "form-control" })
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="btnSaveStore">Save changes</button>
-                </div>
-
+<script>
+    $(function () {
+        $("#btnSaveStore").click(saveStore);
+    })
+</script>
+<script scr="~/js/Framework.utils.js"></script>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!----------------------------------------Modal header------------------------------------------------------->
+            <div class="modal-header">
+                <h5 class="modal-title" id="modaltitle">New Store</h5>
+                <button id="btnclose" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
+            <!----- ------------------------------------------Modal body-------------------------------------------- ---------------------------->
+            <div class="modal-body col-lg-12">
+                @Html.HiddenFor(m => m.StoreId)
+                <div class=" form-group">
+                    <label class="col-lg-5">Store Name<span style="color:red">*</span>:</label>
+                    <div class="col-lg-7">
+                        @Html.TextBoxFor(m => m.StoreName, new { @class = "form-control", @required = "true" })
+                        <span style="color:red"> @Html.ValidationMessageFor(m => m.StoreName)</span>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-5">Store Address<span style="color:red">*</span></label>
+                    <div class="col-lg-7">
+                        @Html.TextAreaFor(m => m.Address.AddressText, new { @class = "form-control", @required = "true" })
+                        <span style="color:red"> @Html.ValidationMessageFor(m => m.Address.AddressText)</span>
+
+                    </div>
+                </div>
+
+                <div class=" form-group">
+                    <label class="col-lg-5">Country<span style="color:red">*</span>:</label>
+                    <div class="col-lg-7">
+                        @Html.DropDownListFor(m => m.Address.CountryId, new SelectList(Model.Countries, "Value", "Text"), "--Select Country--", new { @class = "form-control", @required = "true", @onchange = "getStates()" })
+                        <span style="color:red"> @Html.ValidationMessageFor(m => m.Address.CountryId)</span>
+
+                    </div>
+                </div>
+
+                <div class=" form-group">
+                    <label class="col-lg-5">State<span style="color:red">*</span>:</label>
+                    <div class="col-lg-7">
+                        @Html.DropDownListFor(m => m.Address.StateId, new SelectList(Model.States, "Value", "Text"), "--Select State--", new { @class = "form-control", @required = "true", @onchange = "getCities()" })
+                        <span style="color:red"> @Html.ValidationMessageFor(m => m.Address.StateId)</span>
+
+                    </div>
+                </div>
+
+                <div class=" form-group">
+                    <label class="col-lg-5">City<span style="color:red">*</span>:</label>
+                    <div class="col-lg-7">
+                        @Html.DropDownListFor(m => m.Address.CityId, new SelectList(Model.Cities, "Value", "Text"), "--Select City--", new { @class = "form-control", @required = "true" })
+                        <span style="color:red"> @Html.ValidationMessageFor(m => m.Address.CityId)</span>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" id="btnSaveStore">Save</button>
+            </div>
+
         </div>
     </div>
+</div>

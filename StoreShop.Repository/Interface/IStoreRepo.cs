@@ -5,7 +5,7 @@ using System.Text;
 
 namespace StoreShop.Repository
 {
-    public interface ISettingRepo
+    public interface IStoreRepo
     {
         IEnumerable<Store> GetStores(int customerId);
         Store GetStore(int storeId);

@@ -45,7 +45,8 @@ namespace StoreShop.Presentation.Controllers
             if (userModel.UserId > 0)
             {
                 InitSession(userModel);
-                return View("~/Views/DashBoard/Index.cshtml");
+                return RedirectToAction("Index", "Setting");
+                //return View("~/Views/DashBoard/Index.cshtml");
             }
             else
             {
@@ -84,7 +85,7 @@ namespace StoreShop.Presentation.Controllers
 
             try
             {
-                var response = _userManagement.SendSMS(cellNo, OTP);
+                var response = /*_userManagement.*/SendSMS(cellNo, OTP);
             }
             catch (Exception)
             {
@@ -200,6 +201,7 @@ namespace StoreShop.Presentation.Controllers
             SessionManager.UserId = userModel.UserId;
             SessionManager.RoleId = userModel.RoleId;
             SessionManager.CustomerId = userModel.CustomerId;
+            SessionManager.CustomerName = userModel.Customer.CustomerName;
         }
 
         public IActionResult Logout()

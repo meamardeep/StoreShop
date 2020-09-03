@@ -37,7 +37,7 @@ namespace StoreShop.DataAccess
         public int BrandId { get; set; }
         public string BrandName { get; set; }
         public bool IsActive { get; set; }
-              
+        public int CustomerId { get; set; }  
     }
 
 
@@ -60,11 +60,11 @@ namespace StoreShop.DataAccess
     [Table("MasProductTypes")]
     public class ProductType
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //[Key]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ProductTypeId { get; set; }
         public string ProductTypeName { get; set; }
         public bool IsActive { get; set; }
-
+        public int CustomerId { get; set; }
     }
 }

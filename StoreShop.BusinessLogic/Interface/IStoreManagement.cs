@@ -4,11 +4,11 @@ using System.Text;
 using StoreShop.Data;
 namespace StoreShop.BusinessLogic
 {
-    public interface ISettingManagement
+    public interface IStoreManagement
     {
         List<StoreModel> GetStores(int customerId);
         StoreModel GetStore(int storeId);
-        void CreateStore(StoreModel storeModel);
+        void CreateStore(StoreModel storeModel, UserSessionModel userSessionModel);
         void UpdateStore(StoreModel storeModel);
         void DeleteStore(int storeId);
     }

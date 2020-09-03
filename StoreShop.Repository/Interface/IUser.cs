@@ -11,5 +11,13 @@ namespace StoreShop.Repository
         User GetUser(long cellNo, int userOTP);
         User GetUser(long cellNo);
         void UpdateUserDetail(User user);
+
+        #region User CRUD
+        List<User> GetUsers(int customerId);
+        User GetUser(int userId);
+        void CreateUser(User user);
+        void UpdateUser(User user);
+        void DeleteUser(User user);
+        #endregion
     }
 }

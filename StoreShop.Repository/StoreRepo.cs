@@ -6,11 +6,11 @@ using System.Linq;
 
 namespace StoreShop.Repository
 {
-    public class SettingRepo : ISettingRepo
+    public class StoreRepo : IStoreRepo
     {
 
         private readonly StoreShopDataContext _database;
-        public SettingRepo(StoreShopDataContext storeshopDataContext )
+        public StoreRepo(StoreShopDataContext storeshopDataContext )
         {
             _database = storeshopDataContext;
         }
@@ -31,9 +31,9 @@ namespace StoreShop.Repository
 
         public void CreateStore(Store store)
         {
-            var detail = _database.Stores.Add(store);
-            try {
-
+            _database.Stores.Add(store).State = EntityState.Added; //_database.Stores.Add(store);
+            try
+            {
                 _database.SaveChanges();
             }
             catch (Exception)
@@ -41,6 +41,7 @@ namespace StoreShop.Repository
                 throw;
             }
         }
+        
         public void DeleteStore(Store store)
         {
             _database.Stores.Remove(store);
@@ -56,8 +57,11 @@ namespace StoreShop.Repository
 
         public void UpdateStore(Store store)
         {
-            _database.Stores.Add(store).State = EntityState.Modified;
-            try {
+            _database.Entry(store).State = EntityState.Modified;
+
+            //_database.Stores.Update(store).State = EntityState.Modified;
+            try 
+            {
                 _database.SaveChanges();
             }
 

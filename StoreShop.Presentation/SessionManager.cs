@@ -19,7 +19,7 @@ namespace StoreShop.Presentation
         public const string SESSION_USER_ROLE_ID_KEY = "User_Role_Id";
         public const string SESSION_STORE_ID_KEY = "Store_Id";
         public const string SESSION_CUSTOMER_ID_KEY = "Customer_Id";
-
+        public const string SESSION_CUSTOMER_NAME_KEY = "Customer_Name";
 
         static IServiceProvider services = null;
 
@@ -66,10 +66,10 @@ namespace StoreShop.Presentation
             get => Current.Session.GetFromSession<string>(SESSION_LAST_NAME_KEY);
             set => Current.Session.SetInSession<string>(SESSION_LAST_NAME_KEY, value);
         }
-        public static int UserId
+        public static long UserId
         {
-            get => Current.Session.GetFromSession<int>(SESSION_USER_ID_KEY);
-            set => Current.Session.SetInSession<int>(SESSION_USER_ID_KEY, value);
+            get => Current.Session.GetFromSession<long>(SESSION_USER_ID_KEY);
+            set => Current.Session.SetInSession<long>(SESSION_USER_ID_KEY, value);
         }
         public static int RoleId
         {
@@ -83,6 +83,12 @@ namespace StoreShop.Presentation
         {
             get => Current.Session.GetFromSession<int>(SESSION_CUSTOMER_ID_KEY);
             set => Current.Session.SetInSession<int>(SESSION_CUSTOMER_ID_KEY, value);
+        }
+
+        public static string CustomerName
+        {
+            get => Current.Session.GetFromSession<string>(SESSION_CUSTOMER_NAME_KEY);
+            set => Current.Session.SetInSession<string>(SESSION_CUSTOMER_NAME_KEY, value);
         }
         public static int? StoreId 
         {

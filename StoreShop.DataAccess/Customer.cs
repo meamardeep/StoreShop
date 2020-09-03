@@ -20,16 +20,16 @@ namespace StoreShop.DataAccess
     [Table("StoreDetails")]
     public class Store
     {
-        [Key]
+       // [Key]
         public int StoreId { get; set; }
         public string StoreName { get; set; }
         public bool IsActive { get; set; }
 
-        [ForeignKey("Address")]
-        public int AddressId { get; set; }
+        //[ForeignKey("Address")]
+        public long AddressId { get; set; }
         public Address Address { get; set; }
 
-        [ForeignKey("Customer")]
+        //[ForeignKey("Customer")]
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
 
@@ -39,8 +39,8 @@ namespace StoreShop.DataAccess
     [Table("Addresses")]
     public class Address
     {
-        [Key]
-        public int AddressId { get; set; }
+        //[Key]
+        public long AddressId { get; set; }
         public string AddressText { get; set; }
 
         [ForeignKey("Country")]

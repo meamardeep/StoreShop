@@ -35,7 +35,7 @@ namespace StoreShop.Data
 
     public class AddressModel
     {
-        public int AddressId { get; set; }
+        public long AddressId { get; set; }
         public string AddressText { get; set; }
 
         public int CountryId { get; set; }

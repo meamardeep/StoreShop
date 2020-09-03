@@ -1,5 +1,4 @@
-﻿///<reference/>
-
+﻿
 function showSettingData() {
     $.post("/setting/DatatableView", null, function (response) {
         alert();
@@ -16,15 +15,17 @@ function showSettingData() {
 
 //------------------------------------------store setting-------------------------------------------------------
 function showStoreWindow(storeId) {
-    if (storeId > 0)
-        $("#modaltitle").html("Edit stote");
-
+    alert("hi");
     var url = "/setting/ShowStoreWindow?storeId=" + storeId;
-
+    alert("heloo after url");
     //$("#btnCreate").click(function (event) {
     $.get(url).done(function (data) {
-        $("#divStoreWindow").html(data);
-        $("#divStoreWindow").find('.modal').modal('show');
+        $("#divPopupWindow").html(data);
+        $("#divPopupWindow").find('.modal').modal('show');
+
+        if (storeId > 0)
+            $("#modaltitle").html("Edit stote");
+
     });
     // });
 }
@@ -32,10 +33,12 @@ function showStoreWindow(storeId) {
 function saveStore() {
     debugger
     var storeModel = new StoreModel();
-
-    alert(JSON.stringify(storeModel));
+//alert(JSON.stringify(storeModel));
     var url = "/setting/SaveStore";
-    $.post(url, storeModel, function () {
+    $.post(url, storeModel, function (data) {
+        if (data) {
+            $("#btnclose").add("class","close");
+        }
     });
     
     //$.ajax({
@@ -56,14 +59,15 @@ function saveStore() {
 function StoreModel() {
     this.StoreId = $("#StoreId").val();
     this.StoreName = $("#StoreName").val();
+    //this.AddressId = $("#AddressId").val();
     this.Address = new function () {
+        this.AddressId = $("#Address_AddressId").val();
         this.AddressText = $("#Address_AddressText").val();
         this.CountryId = $("#Address_CountryId").val();
         this.StateId = $("#Address_StateId").val();
         this.CityId = $("#Address_CityId").val();
     }
 }
-
 
 function deleteStore(StoreId) {
 
@@ -83,4 +87,77 @@ function getCities() {
         //alert(JSON.stringify(dropDownData));
         setDropDownItem("#Address_CityId", dropDownData, "--Select City--");
     })
+}
+
+//-------------------------------------Product Type-------------------------
+
+function showProductTypeWindow(productTypeId) {
+    debugger
+    var url = "/setting/showProductTypeWindow?productTypeId=" + productTypeId;
+    $.get(url).done(function (data) {
+        $("#divPopupWindow").html(data);
+        $("#divPopupWindow").find('.modal').modal('show');
+       if (productTypeId > 0)
+            $("#modaltitle").html("Edit Product Type");
+
+    });
+}
+
+function saveProductType() {
+    var productTypeModel = new function () {
+        this.ProductTypeId = $("#ProductTypeId").val();
+        this.ProductTypeName = $("#ProductTypeName").val();
+    }
+    var url = "/setting/saveProductType";
+    $.post(url, productTypeModel, function (data) {
+
+    });
+}
+
+//-----------------------Brand setting script-----------------------
+function showBrandWindow(brandId) {
+    
+    var url = "/setting/showBrandWindow?brandId=" + brandId;
+    $.get(url).done(function (data) {
+        $("#divPopupWindow").html(data);
+        $("#divPopupWindow").find('.modal').modal('show');
+        if (brandId > 0)
+            $("#modaltitle").html("Edit Brand");
+
+    });
+}
+
+function saveBrand() {
+    var brandModel = new function () {
+        this.BrandId = $("#BrandId").val();
+        this.BrandName = $("#BrandName").val();
+    }
+    var url = "/setting/saveBrand";
+    $.post(url, brandModel, function (data) {
+
+    });
+}
+
+//-----------------------User setting script-----------------------
+function showUserWindow(userId) {
+    debugger
+    var url = "/setting/showUserWindow?userId=" + userId;
+    $.get(url).done(function (data) {
+        $("#divPopupWindow").html(data);
+        $("#divPopupWindow").find('.modal').modal('show');
+        if (userId > 0)
+            $("#modaltitle").html("Edit User");
+
+    });
+}
+
+function saveUser() {
+    var userModel = new function () {
+        this.UserId = $("#UserId").val();
+        this.BrandName = $("#UserName").val();
+    }
+    var url = "/setting/saveUser";
+    $.post(url, userModel, function (data) {
+
+    });
 }

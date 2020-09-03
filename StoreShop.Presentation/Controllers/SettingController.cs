@@ -10,59 +10,23 @@ namespace StoreShop.Presentation.Controllers
 {
     public class SettingController : ControllerBase
     {
-        private readonly ISettingManagement _settingManagement;
+        private readonly IStoreManagement _storeManagement;
         private readonly ICustomerManagement _customerManagement;
-        public SettingController(ISettingManagement settingManagement, ICustomerManagement customerManagement,
-            IWebHostEnvironment webHostEnvironment)
+        private readonly IUserManagement _userManagement;
+        public SettingController(IStoreManagement storeManagement, ICustomerManagement customerManagement,
+            IUserManagement userManagement)
         {
-            _settingManagement = settingManagement;
+            _storeManagement = storeManagement;
             _customerManagement = customerManagement;
-            //base.GetUserSession();
+            _userManagement = userManagement;
         }
         public ActionResult Index()
         {           
-
-            SettingModel settingModel = new SettingModel();
-            
-            settingModel.StoreModels = _settingManagement.GetStores(SessionManager.CustomerId);
-
-            settingModel.BrandModels = new List<BrandModel>()
-            {
-                new BrandModel(){BrandName = "Xiaomi", BrandId = 1, IsActive = true, StoreId = 1},
-
-                new BrandModel(){BrandName = "Xiaomi", BrandId = 1, IsActive = true, StoreId = 1},
-                new BrandModel(){BrandName = "Xiaomi", BrandId = 1, IsActive = true, StoreId = 1},
-                new BrandModel(){BrandName = "Xiaomi", BrandId = 1, IsActive = true, StoreId = 1},
-                new BrandModel(){BrandName = "Xiaomi", BrandId = 1, IsActive = true, StoreId = 1},
-                new BrandModel(){BrandName = "Xiaomi", BrandId = 1, IsActive = true, StoreId = 1},
-                new BrandModel(){BrandName = "Xiaomi", BrandId = 1, IsActive = true, StoreId = 1}
-            };
-            settingModel.ProductTypeModels = new List<ProductTypeModel>()
-            {
-             new ProductTypeModel(){ProductTypeId = 1, ProductTypeName ="TV", IsActive = true},
-
-             new ProductTypeModel(){ProductTypeId = 1, ProductTypeName ="TV", IsActive = true},
-             new ProductTypeModel(){ProductTypeId = 1, ProductTypeName ="TV", IsActive = true},
-             new ProductTypeModel(){ProductTypeId = 1, ProductTypeName ="TV", IsActive = true},
-             new ProductTypeModel(){ProductTypeId = 1, ProductTypeName ="TV", IsActive = true},
-             new ProductTypeModel(){ProductTypeId = 1, ProductTypeName ="TV", IsActive = true},
-             new ProductTypeModel(){ProductTypeId = 1, ProductTypeName ="TV", IsActive = true}
-            };
-            settingModel.UserModels = new List<UserModel>()
-            {
-               new UserModel(){ UserId = 1, UserName = "meamardeep", CellNo = 8088506025, FirstName = "Amardeep",
-                    LastName = "Kumar", CountryCode = 91   },
-                 new UserModel(){ UserId = 1, UserName = "meamardeep", CellNo = 8088506025, FirstName = "Amardeep",
-                    LastName = "Kumar", CountryCode = 91   },
-                 new UserModel(){ UserId = 1, UserName = "meamardeep", CellNo = 8088506025, FirstName = "Amardeep",
-                    LastName = "Kumar", CountryCode = 91   },
-                 new UserModel(){ UserId = 1, UserName = "meamardeep", CellNo = 8088506025, FirstName = "Amardeep",
-                    LastName = "Kumar",  CountryCode = 91   },
-                 new UserModel(){ UserId = 1, UserName = "meamardeep", CellNo = 8088506025, FirstName = "Amardeep",
-                    LastName = "Kumar",  CountryCode = 91   },
-                 new UserModel(){ UserId = 1, UserName = "meamardeep", CellNo = 8088506025, FirstName = "Amardeep",
-                    LastName = "Kumar",  CountryCode = 91   }
-            };
+            SettingModel settingModel = new SettingModel();            
+            settingModel.StoreModels = _storeManagement.GetStores(SessionManager.CustomerId);
+            settingModel.BrandModels = _customerManagement.GetBrands(SessionManager.CustomerId);            
+            settingModel.ProductTypeModels = _customerManagement.GetProductTypes(SessionManager.CustomerId);
+            settingModel.UserModels = _userManagement.GetUsers(SessionManager.CustomerId);
             return View(settingModel);
         }
 
@@ -100,16 +64,21 @@ namespace StoreShop.Presentation.Controllers
             List<DropDownItem> states = _customerManagement.GetCities(stateId);
             return states;
         }
+
         #region Store CRUD
         public ActionResult ShowStoreWindow(int storeId)
         {
             StoreModel model = new StoreModel();
-            model.Countries = _customerManagement.GetCountries(); //new List<DropDownItem>();
             model.States = new List<DropDownItem>();
             model.Cities = new List<DropDownItem>();
 
             if (storeId > 0)
-                model =  _settingManagement.GetStore(storeId);
+            {
+                model = _storeManagement.GetStore(storeId);
+                model.States = _customerManagement.GetStates(model.Address.CountryId);
+                model.Cities = _customerManagement.GetCities(model.Address.StateId);
+            }
+            model.Countries = _customerManagement.GetCountries(); //new List<DropDownItem>();
 
             return PartialView("~/Views/Setting/Stores/_NewStoreWindow.cshtml", model);
         }
@@ -117,16 +86,96 @@ namespace StoreShop.Presentation.Controllers
         public IActionResult SaveStore(StoreModel storeModel)
         {
             if (storeModel.StoreId > 0)
-                _settingManagement.UpdateStore(storeModel);
+                _storeManagement.UpdateStore(storeModel);
             else
-                _settingManagement.CreateStore(storeModel);
+                _storeManagement.CreateStore(storeModel, ControllerBase.GetUserSession());
             return Json(true);
         }
 
         public IActionResult DeleteStore(int storeId)
         {
-            _settingManagement.DeleteStore(storeId);
+            _storeManagement.DeleteStore(storeId);
 
+            return Json(true);
+        }
+        #endregion
+
+        #region ProductType CRUD Controller methods
+        public IActionResult ShowProductTypeWindow(int productTypeId)
+        {
+            ProductTypeModel model = new ProductTypeModel();
+            if (productTypeId > 0)
+            {
+                model = _customerManagement.GetProductType(productTypeId);
+            }
+
+            return PartialView("~/Views/Setting/ProductType/_NewProductTypeWindow.cshtml", model);
+        }
+
+        public ActionResult SaveProductType(ProductTypeModel productTypeModel)
+        {
+            if (productTypeModel.ProductTypeId > 0)
+                _customerManagement.UpdateProductType(productTypeModel);
+            else
+                _customerManagement.CreateProductType(productTypeModel);
+
+            return Json(true);
+        }
+        public ActionResult DeleteProductType(int productTypeId)
+        {
+            _customerManagement.DeleteProductType(productTypeId);
+            return Json(true);
+        }
+        #endregion
+
+        #region Brand CRUD Controller methods
+        public IActionResult ShowBrandWindow(int brandId)
+        {
+            BrandModel model = new BrandModel();
+            if (brandId > 0)
+            {
+                model = _customerManagement.GetBrand(brandId);
+            }
+
+            return PartialView("~/Views/Setting/Brand/_NewBrandWindow.cshtml", model);
+        }
+
+        public ActionResult SaveBrand(BrandModel brandModel)
+        {
+            if (brandModel.BrandId > 0)
+                _customerManagement.UpdateBrand(brandModel);
+            else
+                _customerManagement.CreateBrand(brandModel);
+
+            return Json(true);
+        }
+        public ActionResult DeleteBrand(int brandId)
+        {
+            _customerManagement.DeleteBrand(brandId);
+            return Json(true);
+        }
+        #endregion
+
+        #region User Setting CRUD
+        public ActionResult ShowUserWindow(long userId)
+        {
+            UserModel model = new UserModel();
+            if (userId > 0)
+                model = _userManagement.GetUser(userId);
+            return PartialView("~/Views/Setting/User/_NewUserWindow.cshtml", model);
+        }
+
+        public ActionResult SaveUser(UserModel userModel)
+        {
+            if (userModel.UserId > 0)
+                _userManagement.UpdateUser(userModel);
+            else
+                _userManagement.CreateUser(userModel, SessionManager.CustomerId, SessionManager.UserId);
+            return Json(true);
+        }
+        public ActionResult DeleteUser(int userId)
+        {
+            _userManagement.DeleteUser(userId);
             return Json(true);
         }
         #endregion

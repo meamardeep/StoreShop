@@ -1,5 +1,6 @@
 ﻿@model List<StoreShop.Data.BrandModel>
 
+    <div><a class="font-weight-bold">Records: <span class="text-info"> @Model.Count()</span></a></div>
     <div class="overflow-auto " style="max-height:200px;">
 
         <table class="table table-bordered table-striped" style="max-height:200px;">
@@ -16,10 +17,10 @@
                             <td>@item.BrandName</td>
                             <td> </td>
                             <td>
-                                <a href="javascript:void(0)" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                <a href="javascript:void(0)" title="Edit" onclick="showBrandWindow(@item.BrandId)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                             </td>
                             <td>
-                                <a href="javascript:void(0)" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                <a href="javascript:void(0)" title="Delete" onclick="showBrandWindow(@item.BrandId)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                             </td>
                         </tr>
                 }

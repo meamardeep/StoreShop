@@ -48,16 +48,18 @@ namespace StoreShop.Presentation
             services.AddScoped<IUserManagement,UserManagement>();
             services.AddScoped<IUserRepo, UserRepo>();
 
-            services.AddScoped<ICustomerManagement, CustomerManagement>();
-            
-            services.AddScoped<ICustomerManagement>(s => new CustomerManagement(ControllerBase.GetUserSession()));
+            services.AddScoped<ICustomerManagement, CustomerManagement>();           
+            //services.AddScoped<ICustomerManagement>(s => new CustomerManagement(ControllerBase.GetUserSession()));
             services.AddScoped<ICustomerRepo, CustomerRepo>();
 
-            services.AddScoped<ISettingManagement, SettingManagement>();
+            services.AddScoped<IStoreManagement, StoreManagement>();
+            services.AddScoped<IStoreRepo, StoreRepo>();
+
+
             //services.AddScoped<ISettingManagement>(s => new SettingManagement(ControllerBase.GetUserSession()));
-            services.AddScoped<ISettingRepo, SettingRepo>();
+
             #endregion
-            
+
             services.AddSession(options =>
             {
                 options.Cookie.Name = "StoreShop";
@@ -127,6 +129,10 @@ namespace StoreShop.Presentation
             CreateMap<Customer, CustomerModel>().ReverseMap();
             CreateMap<User, UserModel>().ReverseMap();
             CreateMap<Store, StoreModel>().ReverseMap();
+            CreateMap<Address, AddressModel>().ReverseMap();
+            CreateMap<ProductType, ProductTypeModel>().ReverseMap();
+            CreateMap<Product, ProductModel>().ReverseMap();
+            CreateMap<Brand, BrandModel>().ReverseMap();
         }
     }
 }
