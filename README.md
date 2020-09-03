@@ -1,4 +1,4 @@
-# StoreShop.NETCORE3.1
+# StoreShop
 Project is developed in ASP.NET CORE 3.1 MVC.
 
 Idea of this project is to provide a better product  selling, stock management experience at store.
