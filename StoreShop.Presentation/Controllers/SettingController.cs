@@ -168,7 +168,7 @@ namespace StoreShop.Presentation.Controllers
         public ActionResult SaveUser(UserModel userModel)
         {
             if (userModel.UserId > 0)
-                _userManagement.UpdateUser(userModel);
+                _userManagement.UpdateUser(userModel,SessionManager.UserId);
             else
                 _userManagement.CreateUser(userModel, SessionManager.CustomerId, SessionManager.UserId);
             return Json(true);

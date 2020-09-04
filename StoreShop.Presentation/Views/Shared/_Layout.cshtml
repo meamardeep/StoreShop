@@ -11,6 +11,7 @@
     <script src="~/lib/jquery/dist/jquery.js"></script>
 
     <script src="~/js/Framework.utils.js"></script>
+    <script src="~/js/User.js"></script>
     @*<environment include="Development">
 
             <link rel="stylesheet" href="~/lib/font-awesome/css/fontawesome.css" />
@@ -27,16 +28,15 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-primary border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand text-white " asp-area="" asp-controller="Home" asp-action="Index">
+                <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">
                 @{ 
-                    var brandName = "";
+                    
                     if (SessionManager.CustomerName != null && SessionManager.CustomerName != "")
                     {
-                                    <span>@SessionManager.CustomerName</span>
+                       <span>@SessionManager.CustomerName</span>
                     }
                     }
-                    @*else
-                    StoreShop*@
+                    
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -52,15 +52,28 @@
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Setting" asp-action="Index">Admin Setting</a>
-                        </li>
                         @{
-                            if (SessionManager.UserName != null && SessionManager.UserName != "")
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-white float-right" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
-                                </li>
+                                if (SessionManager.UserName != null && SessionManager.UserName != "")
+                                { var path = SessionManager.UserProfilePhotoPath;
+                                                <li class="nav-item ml-auto form-inline dropdown">
+                                                    @if (path == null || path == "")
+                                                    {
+                                                        <img class="nav-link text-white rounded-circle" src="~/img/AdminSettingPage.png" width="50" height="50" />
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <img class="nav-link text-white rounded-circle" src="~/img/ProfilePhoto/@path" width="50" height="50" />
+
+                                                    }
+                                                    <span class="dropdown-toggle text-white" id="dropdownMenuLink" data-toggle="dropdown"></span>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                        <a class="dropdown-item modal-header" asp-controller="User" asp-action="GetUserProfile">Signed as &nbsp;<span class="font-weight-bold">  @SessionManager.FirstName</span></a>
+                                                        <a class="dropdown-item" asp-controller="User" asp-action="GetUserProfile"><i class="fa fa-user-circle"></i> Your Profile</a>
+                                                        <a class="dropdown-item" asp-controller="Setting" asp-action="Index"><i class="fa fa-cog"></i> Setting</a>
+                                                        <a class="dropdown-item " asp-action="Logout" asp-controller="Account">Sign Out</a>
+                                                    </div>
+                                                </li>
                             }
 
                             else

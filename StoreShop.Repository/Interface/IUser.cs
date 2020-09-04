@@ -9,15 +9,16 @@ namespace StoreShop.Repository
         IEnumerable<User> GetUsers();
         User GetUser(string userName, string password);
         User GetUser(long cellNo, int userOTP);
-        User GetUser(long cellNo);
-        void UpdateUserDetail(User user);
+        User GetUserByCellNo(long cellNo);
 
         #region User CRUD
         List<User> GetUsers(int customerId);
-        User GetUser(int userId);
+        User GetUser(long userId);
         void CreateUser(User user);
         void UpdateUser(User user);
         void DeleteUser(User user);
+        long? CreateUserProfilePhoto(UserPhoto userPhoto);
+        UserPhoto GetUserProfilePhoto(long userId);
         #endregion
     }
 }

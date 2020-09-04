@@ -30,13 +30,19 @@ namespace StoreShop.DataAccess
         public DateTime? CreatedDate { get; set; }
         public DateTime? ModifiedDate { get; set; }
         public long? ModifiedBy { get; set; }
-
-
-        //[ForeignKey("Store")]
-        //public int? StoreId { get; set; }
-        //public Store Store { get; set; }
+        public int? GenderId { get; set; }
     }
 
+    public class UserPhoto
+    {
+        [Key]
+        public long ProfilePhotoId { get; set; }
+        public  byte[] Photo {get;set;}
+        public string PhotoName { get; set; }
+        public long? UserId { get; set; }
+        public string ProfilePhotoPath { get; set; }
+
+    }
     public class UserStoreMapping
     {
         public long UserStoreMappingId { get; set; }
