@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.AspNetCore.Http;
 using StoreShop.Data;
 
 namespace StoreShop.BusinessLogic
@@ -18,8 +19,9 @@ namespace StoreShop.BusinessLogic
         List<UserModel> GetUsers(int customerId);
         UserModel GetUser(long userId);
         void CreateUser(UserModel model, int sessionCustomerId, long sessionUserId);
-        void UpdateUser(UserModel model);
-        void DeleteUser(int userId);
+        void UpdateUser(UserModel model, long sessionUserId);
+        void DeleteUser(long userId);
+        string GetUserProfilePhoto(long userId);
         #endregion
 
         //string SendSMS(long cellNo, int oTP);

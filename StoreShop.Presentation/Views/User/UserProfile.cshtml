@@ -1,0 +1,79 @@
+﻿@model StoreShop.Data.UserModel
+
+<script>
+    $(function () {
+        $("#btnSaveUserProfile").on("click", SaveUserProfile);
+        $('.custom-file-input').on("change", function () {
+
+            var fileName = $(this).val().split("\\").pop();
+            if (fileName != null && fileName != "") {
+                $(this).next('.custom-file-label').html(fileName);
+            }
+        });
+    })
+</script>
+
+
+<div class="col-lg-12">
+    @Html.HiddenFor(m => m.UserId)
+    <div class=" form-group row">
+        <label class="col-lg-5">Profile Photo<span style="color:red"></span>:</label>
+        <div class="col-lg-7">
+            <div class="custom-file">
+                <input  asp-for="ProfilePhoto" name="profilePhoto" class="form-control custom-file-input" asp-action="" asp-controller="" />
+                <label class="custom-file-label">Choose File..</label>
+            </div>
+        </div>
+    </div>
+
+    <div class=" form-group row">
+        <label class="col-lg-5">User Name<span style="color:red">*</span>:</label>
+        <div class="col-lg-7">
+            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @required = "true" })
+            <span style="color:red"> @Html.ValidationMessageFor(m => m.UserName)</span>
+        </div>
+    </div>
+
+    <div class=" form-group row">
+        <label class="col-lg-5">Password<span style="color:red">*</span>:</label>
+        <div class="col-lg-7">
+            @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @required = "true", @type="password" })
+            <span style="color:red"> @Html.ValidationMessageFor(m => m.Password)</span>
+        </div>
+    </div>
+
+    <div class=" form-group row">
+        <label class="col-lg-5">First Name<span style="color:red">*</span>:</label>
+        <div class="col-lg-7">
+            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @required = "true" })
+            <span style="color:red"> @Html.ValidationMessageFor(m => m.FirstName)</span>
+        </div>
+    </div>
+
+    <div class=" form-group row">
+        <label class="col-lg-5">Last Name<span style="color:red">*</span>:</label>
+        <div class="col-lg-7">
+            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @required = "true" })
+            <span style="color:red"> @Html.ValidationMessageFor(m => m.LastName)</span>
+        </div>
+    </div>
+    <div class=" form-group row">
+        <label class="col-lg-5">Gender<span style="color:red">*</span>:</label>
+        <div class="col-lg-7">
+            @Html.DropDownListFor(m => m.GenderId, new SelectList(Model.Genders,"Value", "Text"), new { @class = "form-control", @required = "true" })
+            <span style="color:red"> @Html.ValidationMessageFor(m => m.LastName)</span>
+        </div>
+    </div>
+    <div class=" form-group row">
+        <label class="col-lg-5">Phone No.<span style="color:red">*</span>:</label>
+        <div class="col-lg-7">
+            @Html.TextBoxFor(m => m.CellNo, new { @class = "form-control", @required = "true" })
+            <span style="color:red"> @Html.ValidationMessageFor(m => m.CellNo)</span>
+        </div>
+    </div>
+    <!-----------------------------------------Modal Footer----------------------------------------------------->
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" id="btnSaveUserProfile">Save</button>
+    </div>
+
+</div>

@@ -20,6 +20,7 @@ namespace StoreShop.Presentation
         public const string SESSION_STORE_ID_KEY = "Store_Id";
         public const string SESSION_CUSTOMER_ID_KEY = "Customer_Id";
         public const string SESSION_CUSTOMER_NAME_KEY = "Customer_Name";
+        public const string SESSION_USER_PROFILE_PHOTO_PATH = "Profile_Photo_PATH";
 
         static IServiceProvider services = null;
 
@@ -75,6 +76,11 @@ namespace StoreShop.Presentation
         {
             get => Current.Session.GetFromSession<int>(SESSION_USER_ROLE_ID_KEY);
             set => Current.Session.SetInSession<int>(SESSION_USER_ROLE_ID_KEY, value);
+        }
+        public static string UserProfilePhotoPath
+        {
+            get => Current.Session.GetFromSession<string>(SESSION_USER_PROFILE_PHOTO_PATH);
+            set => Current.Session.SetInSession<string>(SESSION_USER_PROFILE_PHOTO_PATH, value);
         }
         #endregion
 

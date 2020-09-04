@@ -37,7 +37,7 @@ namespace StoreShop.Repository
             return sql.FirstOrDefault();
         }
 
-        public User GetUser(long cellNo)
+        public User GetUserByCellNo(long cellNo)
         {
             var sql = from u in _database.Users
                       where u.CellNo == cellNo && u.IsActive == true
@@ -52,22 +52,10 @@ namespace StoreShop.Repository
 
             return sql;
         }
-        
-        public void UpdateUserDetail(User user)
-        {
-            _database.Add(user).State = EntityState.Modified;
-            try
-            {
-                _database.SaveChanges();
-            }
-            catch(Exception)
-            {
-                throw;
-            }
-        }
+       
 
         #region USER CRUD
-        public User GetUser(int userId)
+        public User GetUser(long userId)
         {
            return  _database.Users.Where(u => u.UserId == userId).FirstOrDefault();
         }
@@ -91,7 +79,31 @@ namespace StoreShop.Repository
         public void UpdateUser(User user)
         {
             _database.Entry(user).State = EntityState.Modified;
-            _database.SaveChanges();
+            try
+            {
+                _database.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public long? CreateUserProfilePhoto(UserPhoto userPhoto)
+        {
+             _database.UserPhotos.Add(userPhoto);
+            try
+            {
+                _database.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return userPhoto.ProfilePhotoId;
+        }
+        public UserPhoto GetUserProfilePhoto(long userId)
+        {
+            return _database.UserPhotos.Where(p => p.UserId == userId).FirstOrDefault();
         }
 
         #endregion

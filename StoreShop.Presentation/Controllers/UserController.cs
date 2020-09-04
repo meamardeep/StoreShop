@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace StoreShop.Presentation.Controllers
 {
-    [Route("api/[controller]")]
+    
     public class UserController : ControllerBase
     {
         private readonly IUserManagement _userManagement;
@@ -14,17 +14,29 @@ namespace StoreShop.Presentation.Controllers
         {
             _userManagement = userManagement;
         }
+        
+        public IActionResult GetUserProfile()
+        {
+            UserModel userModel = _userManagement.GetUser(SessionManager.UserId);
+            return View("~/Views/User/UserProfile.cshtml", userModel);
+        }
 
-        //[ReesultfilterAttribute]
-        //[ActionName("amardeep")]
-        [Route("")]
+        public IActionResult SaveUserProfile(UserModel userModel)
+        {
+            if (userModel.UserId > 0)
+                _userManagement.UpdateUser(userModel, SessionManager.UserId);
+            //else
+            //    _userManagement.CreateUser(userModel);
+            
+            return Json(true);
+        }
         public IActionResult GetUser()
         {
             
             List<UserModel> userModel = _userManagement.GetUsers();
             
             return View("~/Views/User/Index.cshtml", userModel);
-        }
+        }       
 
         [Route("/Display")]
         public ActionResult DisplayUser()

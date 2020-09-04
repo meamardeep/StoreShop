@@ -6,9 +6,14 @@ using StoreShop.Repository;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.IO;
 using System.Net;
 using System.Text;
 using System.Web;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using static System.Net.Mime.MediaTypeNames;
+using System.Linq;
 
 namespace StoreShop.BusinessLogic
 {
@@ -17,10 +22,12 @@ namespace StoreShop.BusinessLogic
         private IUserRepo _userRepo;
         private IMapper _mapper;
         private UserSessionModel userSession;
-        public UserManagement(IUserRepo user, IMapper mapper)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public UserManagement(IUserRepo user, IMapper mapper,IWebHostEnvironment webHostEnvironment)
         {
             _userRepo = user;
             _mapper = mapper;
+            _webHostEnvironment = webHostEnvironment;
             //userSession = ControllerBase.
         }
 
@@ -55,12 +62,12 @@ namespace StoreShop.BusinessLogic
             User user = _userRepo.GetUser(cellNo);
             user.OTP = oTP;
             user.LoginAttemptCounter = false;
-            _userRepo.UpdateUserDetail(user);
+            _userRepo.UpdateUser(user);
         }
 
         public bool ValidateCellNo(long cellNo)
         {
-            User user = _userRepo.GetUser(cellNo);
+            User user = _userRepo.GetUserByCellNo(cellNo);
             return user != null ? true : false;
         }
 
@@ -110,12 +117,44 @@ namespace StoreShop.BusinessLogic
             _userRepo.CreateUser(user);
         }
 
-        public void UpdateUser(UserModel model)
+        public void UpdateUser(UserModel model,long sessionUserId)
         {
-            throw new NotImplementedException();
+            User user = _userRepo.GetUser(model.UserId);
+
+            if (model.ProfilePhoto != null)
+            {
+                var uploadDir =  Path.Combine(_webHostEnvironment.WebRootPath, "img/ProfilePhoto");
+                var  profilePhotoName = Guid.NewGuid().ToString() +"_" + model.ProfilePhoto.FileName;//image file name in "img/ProfilePhoto"
+                var userProfilePhotoPath = Path.Combine(uploadDir,profilePhotoName);
+
+                using (var fileStream = new FileStream(userProfilePhotoPath, FileMode.Create))
+                {
+                    model.ProfilePhoto.CopyTo(fileStream);
+                }
+
+                UserPhoto userPhoto = new UserPhoto();
+                userPhoto.ProfilePhotoPath = profilePhotoName;
+                userPhoto.UserId = model.UserId;
+                _userRepo.CreateUserProfilePhoto(userPhoto);
+            }
+
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+            user.GenderId = model.GenderId;
+            user.CellNo = model.CellNo;
+            user.ModifiedBy = sessionUserId;
+            user.ModifiedDate = DateTime.Now;
+            _userRepo.UpdateUser(user);
         }
 
-        public void DeleteUser(int userId)
+        public string GetUserProfilePhoto(long userId)
+        {
+            UserPhoto userPhoto = _userRepo.GetUserProfilePhoto(userId);
+
+            return userPhoto== null ? "" : userPhoto.ProfilePhotoPath ;
+        }
+
+        public void DeleteUser(long userId)
         {
             User user = _userRepo.GetUser(userId);
             _userRepo.DeleteUser(user);

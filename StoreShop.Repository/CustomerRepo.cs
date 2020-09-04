@@ -125,7 +125,7 @@ namespace StoreShop.Repository
 
         #endregion
 
-        #region
+        #region BRAND
         public List<Brand> GetBrands(int customerId)
         {
             return _database.Brands.Where(b => b.CustomerId == customerId).ToList();

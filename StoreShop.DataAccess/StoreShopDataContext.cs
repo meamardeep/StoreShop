@@ -35,6 +35,7 @@ namespace StoreShop.DataAccess
         public DbSet<ProductType> ProductTypes { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Brand> Brands { get; set; }
+        public DbSet<UserPhoto> UserPhotos { get; set; }
 
         //public DbSet<IdentityUser> IdentityUsers { get; set; }
     }

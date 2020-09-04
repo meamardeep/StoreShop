@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Reflection.Metadata.Ecma335;
 using System.Security.Cryptography;
@@ -8,6 +9,7 @@ namespace StoreShop.Data
 {
     public class UserModel
     {
+        public IFormFile ProfilePhoto { get; set; }
         public long UserId { get; set; }
         public string UserName { get; set; }       
         public string FirstName { get; set; }
@@ -29,9 +31,29 @@ namespace StoreShop.Data
         
         public int CountryCode { get; set; }                
         public List<int> CountryCodes { get; set; }
+        public int GenderId { get; set; }
+        public List<DropDownItem> Genders
+        {
+            get 
+            {
+                return new List<DropDownItem>() { 
+                new DropDownItem(){ Text="--Select Gender--",Value = 0},
+                new DropDownItem(){ Text = "Male", Value = 1},
+                new DropDownItem(){ Text = "Female", Value = 2},
+                new DropDownItem (){ Text = "Others", Value = 3}
+                };
+            }         
+        }
         
     }
+    public class UserPhotoModel
+    {        
+        public long ProfilePhotoId { get; set; }
+        public byte[] Photo { get; set; }
+        public string PhotoName { get; set; }
+        public long UserId { get; set; }
 
+    }
     public class UserStoreMapping
     {
         public long UserStoreMappingId { get; set; }
