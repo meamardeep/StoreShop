@@ -15,14 +15,18 @@ namespace StoreShop.BusinessLogic
         private readonly ICustomerManagement _customerManagement;
         private readonly IMapper _mapper;
         private readonly Microsoft.Extensions.Configuration.IConfiguration configuration;
-        private UserSessionModel userSessionModel;
+        private UserSessionModel userSession;
         public StoreManagement(IStoreRepo storeRepo, ICustomerManagement customerManagement, IMapper mapper)
         {
             _storeRepo = storeRepo;
             _customerManagement = customerManagement;
             _mapper = mapper;
         }
-        
+
+        public StoreManagement(UserSessionModel userSessionModel)
+        {
+            userSession = userSessionModel;
+        }
         #region CRUD
         public StoreModel GetStore(int storeId)
         {
