@@ -11,7 +11,7 @@ Following technology have been used while developing this project:
 <li>Google authentication</li>
 <li>Dependancy injection</li>
 <li>Entity Framework Core</li>
-<li>Session state management & not allowing anonymous user to access the resources.</li>
+<li>Session state management & restricting anonymous user to access the resources.</li>
 </ul>
 
 <img src="/StoreShop.Presentation/wwwroot/img/AdminSettingPage.png" wigth="350" height="250"/>     <img src="/StoreShop.Presentation/wwwroot/img/PopupWindow.png" wigth="350" height="250"/>
