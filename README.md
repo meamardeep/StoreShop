@@ -14,11 +14,14 @@ Following technology have been used while developing this project:
 <li>Session state management & restricting anonymous user to access the resources.</li>
 </ul>
 
+
+<img src="/StoreShop.Presentation/wwwroot/img/UserProfilePage.png" wigth="350" height="250"/> 
+
 <img src="/StoreShop.Presentation/wwwroot/img/AdminSettingPage.png" wigth="350" height="250"/>     <img src="/StoreShop.Presentation/wwwroot/img/PopupWindow.png" wigth="350" height="250"/>
 
 
 <img src="/StoreShop.Presentation/wwwroot/img/OTPLoginPage.png" wigth="350" height="250"/>         <img src="/StoreShop.Presentation/wwwroot/img/EmailLoginPage.png" wigth="350" height="250"/>   
 
 
-<img src="/StoreShop.Presentation/wwwroot/img/GoogleSignInPage.png" wigth="350" height="250"/>      <img src="/StoreShop.Presentation/wwwroot/img/SignInOptionPage.png" wigth="350" height="250"/>
+<img src="/StoreShop.Presentation/wwwroot/img/GoogleSignInPage.png" wigth="350" height="250"/>      <img src="/StoreShop.Presentation/wwwroot/img/SignUpOptionPage.png" wigth="350" height="250"/>
 
