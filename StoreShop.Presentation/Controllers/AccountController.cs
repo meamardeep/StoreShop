@@ -91,7 +91,7 @@ namespace StoreShop.Presentation.Controllers
             {
                 return false;
             }
-            _userManagement.UpdateUserDetail(cellNo, OTP);
+            _userManagement.UpdateUserOTP(cellNo, OTP);
 
             return true;
         }
@@ -103,6 +103,8 @@ namespace StoreShop.Presentation.Controllers
             sb.Append(cellNo.ToString());
 
             String message = HttpUtility.UrlEncode("Your verification code for storeshop is : " + OTP);
+            //String message = HttpUtility.UrlEncode("Dear Kotak user, ur A/cX6578 debited by Rs5000.0 on 10Sep20 RefNo 0998403210.Download https://www.kotak.com/");
+
             using (var wb = new WebClient())
             {
                 byte[] response = wb.UploadValues("https://api.textlocal.in/send/", new NameValueCollection()

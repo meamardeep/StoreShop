@@ -13,7 +13,7 @@ namespace StoreShop.BusinessLogic
         UserModel GetUser(string userName, string password);
         UserModel GetUser(long cellNo, int userOTP);
         bool ValidateCellNo(long cellNo);
-        void UpdateUserDetail(long cellNo, int oTP);
+        void UpdateUserOTP(long cellNo, int oTP);
 
         #region User CRUD
         List<UserModel> GetUsers(int customerId);
