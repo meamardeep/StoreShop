@@ -57,7 +57,7 @@ namespace StoreShop.BusinessLogic
             return models;
         }
 
-        public void UpdateUserDetail(long cellNo, int oTP)
+        public void UpdateUserOTP(long cellNo, int oTP)
         {
             User user = _userRepo.GetUser(cellNo);
             user.OTP = oTP;
