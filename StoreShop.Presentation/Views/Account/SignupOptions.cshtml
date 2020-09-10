@@ -4,22 +4,24 @@
     Layout = "_LogonLayout";
 }
 
-<div class=" container justify-content-md-center">
+<div class="d-flex justify-content-center">
 
     <div class="form-group pl-5 pr-5">
         @{
             foreach (var item in Model.ExternalLogins)
             {
-                <a type="" id="btnGoogleLogIn" class="btn btn-info form-control form-group" style="width:100%;"
+                <a type="" id="btnGoogleLogIn" class="btn btn-outline-primary form-control form-group" style="width:100%;"
                    name="provider" value="@item.DisplayName" asp-action="ShowGoogleLoginPage" asp-controller="account">
-                    Sign up with @item.DisplayName
+                   <img src="https://img.icons8.com/color/16/000000/google-logo.png"> Sign up with @item.DisplayName
                 </a>
 
             }
         }
-        <button type="button" id="btnFcaebookLogIn" class="btn btn-primary form-control form-group" style="width:100%;">Sign up with facebook</button>
+        <button type="button" id="btnFcaebookLogIn" class="btn btn-primary form-control form-group" style="width:100%;">
+            <i class="fa fa-facebook-f"></i> Sign up with facebook</button>
 
-        <a type="button" asp-action="showSignUpPage" asp-controller="account" id="btnLogIn" class="btn btn-primary form-control form-group" style="width:100%;">Sign up</a>
+        <a type="button" asp-action="showSignUpPage" asp-controller="account" id="btnLogIn" class="btn btn-primary form-control form-group" style="width:100%;">
+        Sign up</a>
 
     </div>
 

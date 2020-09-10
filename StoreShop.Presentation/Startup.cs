@@ -31,16 +31,17 @@ namespace StoreShop.Presentation
         {
             services.AddControllersWithViews();
 
-            //Register context service using dependancy injection and this context service will read 
-            //connection string using option builder in dbcontext constructor 
+            //Register context service using dependancy injection and this context service will read connection string using option builder in dbcontext constructor             
             services.AddDbContext<StoreShopDataContext>(options =>
                   options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddMvc().AddRazorRuntimeCompilation();
 
+            // To call one controller from another controller, so we are registring as service
+            services.AddMvc().AddControllersAsServices();
+
             //The Distributed Memory Cache (AddDistributedMemoryCache) is a framework-provided implementation 
             //of IDistributedCache that stores items in memory. Cached items are stored by the app instance on the server where the app is running.
-
             services.AddDistributedMemoryCache();           
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -54,10 +55,6 @@ namespace StoreShop.Presentation
 
             services.AddScoped<IStoreManagement, StoreManagement>();
             services.AddScoped<IStoreRepo, StoreRepo>();
-
-
-            //services.AddScoped<ISettingManagement>(s => new SettingManagement(ControllerBase.GetUserSession()));
-
             #endregion
 
             services.AddSession(options =>
@@ -82,6 +79,7 @@ namespace StoreShop.Presentation
             //Bult-in identity service     
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<StoreShopDataContext>();
 
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

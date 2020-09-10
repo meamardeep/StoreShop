@@ -54,11 +54,11 @@
             <span style="color:red"> @Html.ValidationMessageFor(m => m.UserName)</span>
         </div>
 
-        <div class="form-group form-inline pl-5 pr-5">
-            <span class="">
-                @Html.DropDownListFor(m => m.CountryCode, new SelectList(Model.CountryCodes, "Value", "Text"), new { tabindex = 1, @class = "form-control" })
+        <div class="form-group form-inline pl-5 pr-5 d-flex">
+            <span class="flex-grow-0">
+                @Html.DropDownListFor(m => m.CountryCode, new SelectList(Model.CountryCodes, "Value", "Text"), new {  @class = "form-control" })
             </span>
-            <span class="">
+            <span class="flex-grow-1">
                 @Html.TextBoxFor(m => m.CellNo, new { @class = "form-control", @required = "true", @placeholder = "Mobile number" })
                 <span style="color:red">@Html.ValidationMessageFor(m => m.CellNo)</span>
 
@@ -80,12 +80,14 @@
         </div>
 
     }
+
+    <div class="d-flex justify-content-center form-group">
+        <span style="align-content:center">Already have an account? <a asp-action="index" asp-controller="account" class="text-decoration-none">Log In</a> </span>
+
+    </div>
 </div>
 
-<div class="text-center">
-    <span style="align-content:center">Already have an account? <a asp-action="index" asp-controller="account" class="text-decoration-none">Log In</a> </span>
 
-</div>
 
 @section Scripts{ 
 <partial name="_ValidationScriptsPartial"/>

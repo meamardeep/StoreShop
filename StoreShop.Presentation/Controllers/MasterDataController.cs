@@ -8,6 +8,15 @@ namespace StoreShop.Presentation.Controllers
 {
     public class MasterDataController : ControllerBase
     {
+        public MasterDataController()
+        {
+
+        }
+
+        public void get()
+        {
+
+        }
         //public IActionResult returntye()
         //{
         //    return View();

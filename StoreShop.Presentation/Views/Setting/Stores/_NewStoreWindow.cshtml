@@ -25,33 +25,31 @@
                 @Html.HiddenFor(m => m.StoreId)
                 @Html.HiddenFor(m=>m.AddressId)
                 @Html.HiddenFor(m=>m.Address.AddressId)
-                <div class=" form-group">
+                <div class=" form-group row">
                     <label class="col-lg-5">Store Name<span style="color:red">*</span>:</label>
                     <div class="col-lg-7">
                         @Html.TextBoxFor(m => m.StoreName, new { @class = "form-control", @required = "true" })
                         <span style="color:red"> @Html.ValidationMessageFor(m => m.StoreName)</span>
                     </div>
-
                 </div>
-                <div class="form-group">
+
+                <div class="form-group row">
                     <label class="col-lg-5">Store Address<span style="color:red">*</span></label>
                     <div class="col-lg-7">
                         @Html.TextAreaFor(m => m.Address.AddressText, new { @class = "form-control", @required = "true" })
                         <span style="color:red"> @Html.ValidationMessageFor(m => m.Address.AddressText)</span>
-
                     </div>
                 </div>
 
-                <div class=" form-group">
+                <div class=" form-group row">
                     <label class="col-lg-5">Country<span style="color:red">*</span>:</label>
                     <div class="col-lg-7">
                         @Html.DropDownListFor(m => m.Address.CountryId, new SelectList(Model.Countries, "Value", "Text"), "--Select Country--", new { @class = "form-control", @required = "true", @onchange = "getStates()" })
                         <span style="color:red"> @Html.ValidationMessageFor(m => m.Address.CountryId)</span>
-
                     </div>
                 </div>
 
-                <div class=" form-group">
+                <div class=" form-group row">
                     <label class="col-lg-5">State<span style="color:red">*</span>:</label>
                     <div class="col-lg-7">
                         @Html.DropDownListFor(m => m.Address.StateId, new SelectList(Model.States, "Value", "Text"), "--Select State--", new { @class = "form-control", @required = "true", @onchange = "getCities()" })
@@ -60,7 +58,7 @@
                     </div>
                 </div>
 
-                <div class=" form-group">
+                <div class=" form-group row">
                     <label class="col-lg-5">City<span style="color:red">*</span>:</label>
                     <div class="col-lg-7">
                         @Html.DropDownListFor(m => m.Address.CityId, new SelectList(Model.Cities, "Value", "Text"), "--Select City--", new { @class = "form-control", @required = "true" })
@@ -69,7 +67,7 @@
                     </div>
                 </div>
             </div>
-
+<!--------------------------------------------Modal Footer----------------------------------->
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary" id="btnSaveStore">Save</button>

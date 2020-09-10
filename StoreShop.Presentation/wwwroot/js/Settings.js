@@ -31,26 +31,12 @@ function showStoreWindow(storeId) {
 function saveStore() {
     debugger
     var storeModel = new StoreModel();
-//alert(JSON.stringify(storeModel));
     var url = "/setting/SaveStore";
     $.post(url, storeModel, function (data) {
         if (data) {
             $("#btnclose").add("class","close");
         }
-    });
-    
-    //$.ajax({
-    //    type: "POST",
-    //    url: url,
-    //    contentType: false,
-    //    processData: false,
-    //    data: storeModel,
-    //    success: function (message) {
-    //    },
-    //    error: function () {
-    //        alert("There was error uploading files!");
-    //    }
-    //});
+    });  
 }
 
 
