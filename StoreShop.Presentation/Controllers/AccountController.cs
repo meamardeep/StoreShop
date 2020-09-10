@@ -45,7 +45,7 @@ namespace StoreShop.Presentation.Controllers
             if (userModel.UserId > 0)
             {
                 InitSession(userModel);
-                return RedirectToAction("Index", "Setting");
+                return RedirectToAction("Index", "Dashboard");
                 //return View("~/Views/DashBoard/Index.cshtml");
             }
             else
@@ -128,7 +128,7 @@ namespace StoreShop.Presentation.Controllers
             if (userModel.UserId > 0)
             {
                 InitSession(userModel);
-                return View("~/Views/DashBoard/Index.cshtml");
+                return View("~/Views/Dashboard/Index.cshtml");
             }
             else
                 return View("~/Views/Account/OTPLogin.cshtml");

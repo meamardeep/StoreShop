@@ -20,52 +20,38 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-primary border-bottom box-shadow mb-3">
-            <div class="container">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-primary border-bottom box-shadow">
+            <div class=" d-flex justify-content-around">
                 <a class="navbar-brand text-white " asp-area="" asp-controller="Home" asp-action="Index">
                     StoreShop
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
-                </button>
+                </button>*@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         @*<li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>*@
-                        
-                        @{
-                            if (SessionManager.UserName != null && SessionManager.UserName != "")
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-white float-xl-right" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
-                                </li>
-                            }
-                            
-
-                        }
+                         <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                         </li>*@
 
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <div class="row" style="justify-content: center">
+    
+    <div class="d-flex flex-row justify-content-center align-items-center flex-wrap" style="height:100vh">
             <div class="col border-left-0" style="max-width:30rem">
-                <main role="main" class="pb-3">
                     @RenderBody()
-                </main>
             </div>
-        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
+    <footer class="border-top footer text-muted ">
+        <div class="d-flex justify-content-center flex-wrap">
             &copy; 2020 - StoreShop - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>

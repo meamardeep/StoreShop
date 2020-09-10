@@ -20,43 +20,48 @@
             <link rel="stylesheet" href="~/lib/font-awesome/css/fontawesome.min.css" />
 
             </environment>*@
-    @*<link rel="stylesheet" href="~/lib/css/fontawesome.css"/>*@
-    <script src="https://use.fontawesome.com/a00f9830a5.js"></script>
+    <link rel="stylesheet" href="~/lib/css/fontawesome.css"/>
+
+    <!--------------Chart.js-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <link rel="stylesheet" type="text/css" href="path/to/chartjs/dist/Chart.min.css">
 
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-primary border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">
-                    @{
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-primary border-bottom box-shadow mb-3 d-flex justify-content-between">
+                <div>
+                    <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">
+                        @{
 
-                        if (SessionManager.CustomerName != null && SessionManager.CustomerName != "")
-                        {
-                            <span>@SessionManager.CustomerName</span>
+                            if (SessionManager.CustomerName != null && SessionManager.CustomerName != "")
+                            {
+                                <span>@SessionManager.CustomerName</span>
+                            }
                         }
-                    }
 
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    </a>
+                </div>
+                @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-
-                        <li class="nav-item">
+                </button>*@
+                @*<div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">*@
+                <div class="d-flex justify-content-start">
+                    @*<ul class="navbar-nav flex-grow-1">*@
+                    <ul>
+                        @*<li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        </li>*@
 
                         @{
                             if (SessionManager.UserName != null && SessionManager.UserName != "")
                             {
                                 var path = SessionManager.UserProfilePhotoPath;
-                                <li class="nav-item ml-auto form-inline dropdown">
+                                <li class="@*nav-item*@ form-inline dropdown">
                                     @if (path == null || path == "")
                                     {
                                         <img class="nav-link text-white rounded-circle" src="~/img/AdminSettingPage.png" width="50" height="50" />
@@ -64,7 +69,7 @@
                                     }
                                     else
                                     {
-                                        <img class="nav-link text-white rounded-circle" src="~/img/ProfilePhoto/@path" width="50" height="50" />
+                                        <img class="nav-link text-white rounded-circle" src="~/img/ProfilePhoto/@path" width="69" height="50" />
 
                                     }
                                     <span class="dropdown-toggle text-white" id="dropdownMenuLink" data-toggle="dropdown"></span>
@@ -89,9 +94,10 @@
 
                     </ul>
                 </div>
-            </div>
+            
         </nav>
     </header>
+
     <aside>
     </aside>
     <section class="container">

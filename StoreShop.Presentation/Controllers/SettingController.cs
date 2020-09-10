@@ -13,15 +13,17 @@ namespace StoreShop.Presentation.Controllers
         private readonly IStoreManagement _storeManagement;
         private readonly ICustomerManagement _customerManagement;
         private readonly IUserManagement _userManagement;
+        private readonly MasterDataController masterDataController;
         public SettingController(IStoreManagement storeManagement, ICustomerManagement customerManagement,
-            IUserManagement userManagement)
+            IUserManagement userManagement, MasterDataController masterDataController)
         {
             _storeManagement = storeManagement;
             _customerManagement = customerManagement;
             _userManagement = userManagement;
+            this.masterDataController = masterDataController;
         }
         public ActionResult Index()
-        {           
+        {
             SettingModel settingModel = new SettingModel();            
             settingModel.StoreModels = _storeManagement.GetStores(SessionManager.CustomerId);
             settingModel.BrandModels = _customerManagement.GetBrands(SessionManager.CustomerId);            

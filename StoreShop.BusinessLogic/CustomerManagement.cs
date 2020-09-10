@@ -13,13 +13,19 @@ namespace StoreShop.BusinessLogic
         private readonly ICustomerRepo _customerRepo;
         private readonly IMapper _mapper;
         private readonly UserSessionModel _userSession;
+        private UserSessionModel userSessionModel;
 
         public CustomerManagement(ICustomerRepo customerRepo, IMapper mapper)
         {
             _customerRepo = customerRepo;
             _mapper = mapper;
         }
-       
+
+        public CustomerManagement(UserSessionModel userSessionModel) /*: this(ICustomerRepo, IMapper)*/
+        {
+            this.userSessionModel = userSessionModel;
+        }
+
         #region Address
         public List<DropDownItem> GetCountries()
         {
