@@ -57,7 +57,7 @@ namespace StoreShop.Repository
         #region USER CRUD
         public User GetUser(long userId)
         {
-           return  _database.Users.Where(u => u.UserId == userId).FirstOrDefault();
+           return  _database.Users.Where(u => u.UserId == userId).Include(c=>c.Customer).FirstOrDefault();
         }
         public List<User> GetUsers(int customerId)
         {
@@ -104,6 +104,11 @@ namespace StoreShop.Repository
         public UserPhoto GetUserProfilePhoto(long userId)
         {
             return _database.UserPhotos.Where(p => p.UserId == userId).FirstOrDefault();
+        }
+
+        public void UpdateUserProfilePhoto(UserPhoto userPhoto)
+        {
+            _database.Entry(userPhoto).State = EntityState.Modified;
         }
 
         #endregion

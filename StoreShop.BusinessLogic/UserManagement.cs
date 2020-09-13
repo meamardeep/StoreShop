@@ -123,19 +123,27 @@ namespace StoreShop.BusinessLogic
 
             if (model.ProfilePhoto != null)
             {
-                var uploadDir =  Path.Combine(_webHostEnvironment.WebRootPath, "img/ProfilePhoto");
+                var absoluteUploadDirPath =  Path.Combine(_webHostEnvironment.WebRootPath, "img/ProfilePhoto");
                 var  profilePhotoName = Guid.NewGuid().ToString() +"_" + model.ProfilePhoto.FileName;//image file name in "img/ProfilePhoto"
-                var userProfilePhotoPath = Path.Combine(uploadDir,profilePhotoName);
+                var absoluteUserProfilePhotoPath = Path.Combine(absoluteUploadDirPath, profilePhotoName);
 
-                using (var fileStream = new FileStream(userProfilePhotoPath, FileMode.Create))
+                using (var fileStream = new FileStream(absoluteUserProfilePhotoPath, FileMode.Create))
                 {
                     model.ProfilePhoto.CopyTo(fileStream);
                 }
-
-                UserPhoto userPhoto = new UserPhoto();
-                userPhoto.ProfilePhotoPath = profilePhotoName;
-                userPhoto.UserId = model.UserId;
-                _userRepo.CreateUserProfilePhoto(userPhoto);
+                UserPhoto userPhoto = _userRepo.GetUserProfilePhoto(user.UserId);
+                if (userPhoto != null)
+                {
+                    userPhoto.ProfilePhotoPath = profilePhotoName;
+                    _userRepo.UpdateUserProfilePhoto(userPhoto);
+                }
+                //UserPhoto userPhoto = new UserPhoto();
+                else {
+                    userPhoto.ProfilePhotoPath = profilePhotoName;
+                    userPhoto.UserId = model.UserId;
+                    _userRepo.CreateUserProfilePhoto(userPhoto);
+                }
+                
             }
 
             user.FirstName = model.FirstName;

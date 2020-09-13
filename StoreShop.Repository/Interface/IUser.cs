@@ -19,6 +19,7 @@ namespace StoreShop.Repository
         void DeleteUser(User user);
         long? CreateUserProfilePhoto(UserPhoto userPhoto);
         UserPhoto GetUserProfilePhoto(long userId);
+        void UpdateUserProfilePhoto(UserPhoto userPhoto);
         #endregion
     }
 }
