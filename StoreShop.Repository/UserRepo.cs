@@ -112,5 +112,11 @@ namespace StoreShop.Repository
         }
 
         #endregion
+
+        public void CreateExceptionLog(ExceptionLog log)
+        {
+            _database.ExceptionLogs.Add(log).State = EntityState.Added;
+            _database.SaveChanges();
+        }
     }
 }

@@ -122,6 +122,9 @@ function saveBrand() {
     });
 }
 
+function deleteBrand(brandId) {
+    showConfirm("Are you sure want to delete this brand");
+}
 //-----------------------User setting script-----------------------
 function showUserWindow(userId) {
     debugger

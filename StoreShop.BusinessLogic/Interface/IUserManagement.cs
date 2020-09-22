@@ -23,6 +23,8 @@ namespace StoreShop.BusinessLogic
         void DeleteUser(long userId);
         string GetUserProfilePhoto(long userId);
         #endregion
+        void CreateExceptionLog(ExceptionLogModel model);
+
 
         //string SendSMS(long cellNo, int oTP);
     }

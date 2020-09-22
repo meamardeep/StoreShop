@@ -12,7 +12,6 @@ using System.Text;
 using System.Web;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using static System.Net.Mime.MediaTypeNames;
 using System.Linq;
 
 namespace StoreShop.BusinessLogic
@@ -35,6 +34,7 @@ namespace StoreShop.BusinessLogic
         {
             User user = _userRepo.GetUser(userName, password);
             UserModel model = _mapper.Map<UserModel>(user);
+            
             return model;
         }
 
@@ -95,13 +95,19 @@ namespace StoreShop.BusinessLogic
         #region User CRUD
         public List<UserModel> GetUsers(int customerId)
         {
+           
+                //int val = 0, sum = 0;
+                //int dividend = sum / val;
+            
+            
             List<User> users = _userRepo.GetUsers(customerId);
-            return _mapper.Map<List<UserModel>>(users);
+            return _mapper.Map<List<UserModel>>(users);            
         }
 
         public UserModel GetUser(long userId)
         {
-           User user = _userRepo.GetUser(userId);
+
+            User user = _userRepo.GetUser(userId);
             return _mapper.Map<UserModel>(user);
         }
 
@@ -167,6 +173,13 @@ namespace StoreShop.BusinessLogic
             User user = _userRepo.GetUser(userId);
             _userRepo.DeleteUser(user);
         }
+
         #endregion
+
+        public void CreateExceptionLog(ExceptionLogModel model)
+        {
+            ExceptionLog log = _mapper.Map<ExceptionLog>(model);
+            _userRepo.CreateExceptionLog(log);
+        }
     }
 }

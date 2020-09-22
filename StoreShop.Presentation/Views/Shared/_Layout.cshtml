@@ -4,27 +4,38 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - StoreShop</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.js"></script>
 
     <script src="~/js/Framework.utils.js"></script>
     <script src="~/js/User.js"></script>
-    @*<environment include="Development">
 
-            <link rel="stylesheet" href="~/lib/font-awesome/css/fontawesome.css" />
-        </environment>
-        <environment exclude="Development">
-            <link rel="stylesheet" href="~/lib/font-awesome/css/fontawesome.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
 
-            </environment>*@
-    <link rel="stylesheet" href="~/lib/css/fontawesome.css"/>
+
+    <!-----------------Fon awesome-------------------------->
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css" />
+    </environment>
+    <!----------------Font awesome end here----------------->
+   
+    
+    <!-----------------sweet alert reference start here----------------->
+    <link rel="stylesheet" href="~/lib/sweetalert/sweetalert.css"/>
+    <script src="~/lib/sweetalert/sweetalert.js"></script>
+    <!-------------------sweet alert reference ends here------------------->
+
+    
+    <script src="~/lib/toaster/jquery.toaster.js"></script>
 
     <!--------------Chart.js-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    <link rel="stylesheet" type="text/css" href="path/to/chartjs/dist/Chart.min.css">
+    @*<link rel="stylesheet" type="text/css" href="path/to/chartjs/dist/Chart.min.css">*@
 
 </head>
 <body>

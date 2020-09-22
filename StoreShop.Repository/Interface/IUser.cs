@@ -21,5 +21,7 @@ namespace StoreShop.Repository
         UserPhoto GetUserProfilePhoto(long userId);
         void UpdateUserProfilePhoto(UserPhoto userPhoto);
         #endregion
+        void CreateExceptionLog(ExceptionLog log);
+
     }
 }

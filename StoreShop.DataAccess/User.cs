@@ -55,4 +55,12 @@ namespace StoreShop.DataAccess
         public int StoreId { get; set; }
         public Store Store { get; set; }
     }
+
+    public class ExceptionLog
+    {
+        [Key]
+        public long LogId { get; set; }
+        public string Message { get; set; }
+        public DateTime ModifiedDate { get; set; }
+    }
 }
