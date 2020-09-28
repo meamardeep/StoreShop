@@ -62,6 +62,7 @@ body {
   /* Margin bottom by footer height */
   margin: 0;
   margin-bottom: 60px;
+  background-image : url("../img/TechologyBackground.jpg");
 }
 .footer {
   position: absolute;
