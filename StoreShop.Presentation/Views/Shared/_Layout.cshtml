@@ -5,17 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - StoreShop</title>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/jquery/dist/jquery.js"></script>
+    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>*@
+    @*<script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>*@
+    <script type="text/javascript" src="~/lib/jqueryUI/external/jquery/jquery.js"></script>
 
-    <script src="~/js/Framework.utils.js"></script>
-    <script src="~/js/User.js"></script>
+
+    <script type="text/javascript" src="~/js/Framework.utils.js"></script>
+    <script type="text/javascript" src="~/js/User.js"></script>
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     @*<link rel="stylesheet" href="~/css/site.css" />*@
 
 
-    <!-----------------Fon awesome-------------------------->
+    <!-----------------Jquery UI--------------------------------------------------->
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/lib/jqueryUI/jquery-ui.css" />
+
+    <!------------------------Jquery UI end here---------------------------------------->
+    <!-----------------Font awesome-------------------------->
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" />
     </environment>
@@ -23,14 +31,12 @@
         <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css" />
     </environment>
     <!----------------Font awesome end here----------------->
-   
-    
     <!-----------------sweet alert reference start here----------------->
-    <link rel="stylesheet" href="~/lib/sweetalert/sweetalert.css"/>
+    <link rel="stylesheet" href="~/lib/sweetalert/sweetalert.css" />
     <script src="~/lib/sweetalert/sweetalert.js"></script>
     <!-------------------sweet alert reference ends here------------------->
 
-    
+
     <script src="~/lib/toaster/jquery.toaster.js"></script>
 
     <!--------------Chart.js-->

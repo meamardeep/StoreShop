@@ -26,6 +26,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\img\ProfilePhoto\" />
     <Folder Include="wwwroot\lib\font-awesome\" />
+    <Folder Include="wwwroot\lib\jqueryUI\" />
     <Folder Include="wwwroot\lib\sweetalert\" />
   </ItemGroup>
 
