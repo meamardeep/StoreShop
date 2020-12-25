@@ -10,6 +10,13 @@
                 $(this).next('.custom-file-label').html(fileName);
             }
         });
+
+        $("#dob").datepicker();
+
+        //$("#dob").datepicker({
+        //    changeMonth: true,
+        //    changeYear: true
+        //});
     })
 </script>
 
@@ -19,13 +26,13 @@
     <div class=" form-group row">
         <label class="col-lg-5"><span style="color:red"></span></label>
         <div class="col-lg-7">
-                @{
-                    var profilePath = SessionManager.UserProfilePhotoPath;
-                }
-               <img src="~/img/ProfilePhoto/@profilePath" class="rounded-circle" width="90" height="90"/>                
+            @{
+                var profilePath = SessionManager.UserProfilePhotoPath;
+            }
+            <img src="~/img/ProfilePhoto/@profilePath" class="rounded-circle" width="90" height="90" />
         </div>
     </div>
-    
+
     <div class=" form-group row">
         <label class="col-lg-5">Profile Photo<span style="color:red"></span>:</label>
         <div class="col-lg-7">
@@ -75,17 +82,27 @@
         </div>
     </div>
 
+
     <div class=" form-group row">
         <label class="col-lg-5">Date Of Birth<span style="color:red">*</span>:</label>
         <div class="col-lg-7">
-            <div class='input-group date' id='datetimepicker1'>
-                <input type='text' class="form-control" />
-                <span class="input-group-addon">
-                    <span class=" glyphicon glyphicon-calendar"></span>
-                </span>
+            <div class=''>
+                <input  id='dob' class="form-control" />                
             </div>
         </div>
     </div>
+
+    @*<div class=" form-group row">
+            <label class="col-lg-5">Date Of Birth<span style="color:red">*</span>:</label>
+            <div class="col-lg-7">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class=" glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>*@
     <div class=" form-group row">
         <label class="col-lg-5">Phone No.<span style="color:red">*</span>:</label>
         <div class="col-lg-7">
