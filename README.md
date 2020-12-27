@@ -21,9 +21,5 @@ Following technology have been used while developing this project:
 
 
 <img src="/StoreShop.Presentation/wwwroot/img/OTPLoginPage.png" wigth="350" height="250"/>         <img src="/StoreShop.Presentation/wwwroot/img/EmailLoginPage.png" wigth="350" height="250"/>   
-
-
-<img src="/StoreShop.Presentation/wwwroot/img/SignUpOptionPage.png" wigth="350" height="250"/>
-
-<img src="/StoreShop.Presentation/wwwroot/img/GoogleSignInPage.png" wigth="350" height="250"/>      
+    
 
