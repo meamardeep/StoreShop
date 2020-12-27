@@ -32,6 +32,7 @@ namespace StoreShop.Repository
         public User GetUser(long cellNo, int userOTP)
         {
             var sql = from u in _database.Users
+                      .Include(c => c.Customer)
                       where u.CellNo == cellNo && u.OTP == userOTP && u.IsActive == true
                       select u;
             return sql.FirstOrDefault();
@@ -57,7 +58,7 @@ namespace StoreShop.Repository
         #region USER CRUD
         public User GetUser(long userId)
         {
-           return  _database.Users.Where(u => u.UserId == userId).FirstOrDefault();
+           return  _database.Users.Where(u => u.UserId == userId).Include(c=>c.Customer).FirstOrDefault();
         }
         public List<User> GetUsers(int customerId)
         {
@@ -106,6 +107,17 @@ namespace StoreShop.Repository
             return _database.UserPhotos.Where(p => p.UserId == userId).FirstOrDefault();
         }
 
+        public void UpdateUserProfilePhoto(UserPhoto userPhoto)
+        {
+            _database.Entry(userPhoto).State = EntityState.Modified;
+        }
+
         #endregion
+
+        public void CreateExceptionLog(ExceptionLog log)
+        {
+            _database.ExceptionLogs.Add(log).State = EntityState.Added;
+            _database.SaveChanges();
+        }
     }
 }

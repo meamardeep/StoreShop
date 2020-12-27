@@ -20,5 +20,14 @@ namespace StoreShop.Data
     }
 
     public enum Module
-    { Setting = 1}
+    { 
+        Setting = 1
+    }
+
+    public class ExceptionLogModel
+    {
+        public long LogId { get; set; }
+        public string Message { get; set; }
+        public DateTime ModifiedDate { get; set; }
+    }
 }

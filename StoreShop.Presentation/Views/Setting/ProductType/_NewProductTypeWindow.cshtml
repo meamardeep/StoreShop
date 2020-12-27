@@ -5,37 +5,23 @@
         $("#btnSaveProductType").click(saveProductType);
     })
 </script>
-<script scr="~/js/Framework.utils.js"></script>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <!----------------------------------------Modal header------------------------------------------------------->
-            <div class="modal-header">
-                <h5 class="modal-title" id="modaltitle">New Product Type</h5>
-                <button id="btnclose" type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <!----- ------------------------------------------Modal body-------------------------------------------- ---------------------------->
-            <div class="modal-body col-lg-12">
-                @Html.HiddenFor(m => m.ProductTypeId)
-                <div class=" form-group row">
-                    <label class="col-lg-5">Product Type Name<span class="">*</span>:</label>
-                    <div class="col-lg-7">
-                        @Html.TextBoxFor(m => m.ProductTypeName, new { @class = "form-control", @required = "true" })
-                        <span style="color:red"> @Html.ValidationMessageFor(m => m.ProductTypeName)</span>
-                    </div>
-                </div>
-            
-    <!-----------------------------------------Modal Footer----------------------------------------------------->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" id="btnSaveProductType">Save</button>
-            </div>
 
-        </div>
+<!----- ----------------Modal body-------------------------------->
+@Html.HiddenFor(m => m.ProductTypeId)
+<div class=" form-group row">
+    <label class="col-lg-5">Product Type Name<span class="">*</span>:</label>
+    <div class="col-lg-7">
+        @Html.TextBoxFor(m => m.ProductTypeName, new { @class = "form-control", @required = "true" })
+        <span style="color:red"> @Html.ValidationMessageFor(m => m.ProductTypeName)</span>
     </div>
 </div>
-    </div>
+
+<!--------------------------Modal Footer--------------------->
+<div class="modal-footer">
+    <button type="submit" class="btn btn-primary" id="btnSaveProductType">Save</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+</div>
+
+
+

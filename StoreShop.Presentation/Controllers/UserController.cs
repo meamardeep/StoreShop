@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Routing;
 using StoreShop.BusinessLogic;
 using StoreShop.Data;
+using System;
 using System.Collections.Generic;
 
 namespace StoreShop.Presentation.Controllers
@@ -10,9 +11,11 @@ namespace StoreShop.Presentation.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserManagement _userManagement;
-        public UserController(IUserManagement userManagement)
+        private readonly AccountController _accountController;
+        public UserController(IUserManagement userManagement, AccountController accountController)
         {
             _userManagement = userManagement;
+            _accountController = accountController;
         }
         
         public IActionResult GetUserProfile()
@@ -24,10 +27,14 @@ namespace StoreShop.Presentation.Controllers
         public IActionResult SaveUserProfile(UserModel userModel)
         {
             if (userModel.UserId > 0)
+            {
                 _userManagement.UpdateUser(userModel, SessionManager.UserId);
-            //else
-            //    _userManagement.CreateUser(userModel);
-            
+                UserModel model = _userManagement.GetUser(SessionManager.UserId);
+                _accountController.InitSession(model);
+            }
+            else
+                _userManagement.CreateUser(userModel,SessionManager.CustomerId, SessionManager.UserId);
+
             return Json(true);
         }
         public IActionResult GetUser()

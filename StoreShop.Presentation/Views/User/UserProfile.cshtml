@@ -4,12 +4,23 @@
     $(function () {
         $("#btnSaveUserProfile").on("click", SaveUserProfile);
         $('.custom-file-input').on("change", function () {
-
             var fileName = $(this).val().split("\\").pop();
             if (fileName != null && fileName != "") {
                 $(this).next('.custom-file-label').html(fileName);
             }
         });
+
+        $("#DOB").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            maxDate: new Date(),
+            yearRange: `1900:${new Date().getFullYear()}`,
+            dateFormat: 'dd-mm-yy',
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            showAnim: `slideDown`
+        });
+
     })
 </script>
 
@@ -19,13 +30,13 @@
     <div class=" form-group row">
         <label class="col-lg-5"><span style="color:red"></span></label>
         <div class="col-lg-7">
-                @{
-                    var profilePath = SessionManager.UserProfilePhotoPath;
-                }
-               <img src="~/img/ProfilePhoto/@profilePath" class="rounded-circle" width="90" height="90"/>                
+            @{
+                var profilePath = SessionManager.UserProfilePhotoPath;
+            }
+            <img src="~/img/ProfilePhoto/@profilePath" class="rounded-circle" width="90" height="90" />
         </div>
     </div>
-    
+
     <div class=" form-group row">
         <label class="col-lg-5">Profile Photo<span style="color:red"></span>:</label>
         <div class="col-lg-7">
@@ -76,16 +87,14 @@
     </div>
 
     <div class=" form-group row">
-        <label class="col-lg-5">Date Of Birth<span style="color:red">*</span>:</label>
+        <label class="col-lg-5">Date Of Birth<span style="color:red"></span>:</label>
         <div class="col-lg-7">
-            <div class='input-group date' id='datetimepicker1'>
-                <input type='text' class="form-control" />
-                <span class="input-group-addon">
-                    <span class=" glyphicon glyphicon-calendar"></span>
-                </span>
+            <div class=''>
+                @Html.TextBoxFor(m => m.DOB, new { placeholder ="dd-mm-yyyy",@class = "form-control", @required = "true" })
             </div>
         </div>
     </div>
+
     <div class=" form-group row">
         <label class="col-lg-5">Phone No.<span style="color:red">*</span>:</label>
         <div class="col-lg-7">

@@ -14,7 +14,6 @@ namespace StoreShop.BusinessLogic
         private readonly IStoreRepo _storeRepo;
         private readonly ICustomerManagement _customerManagement;
         private readonly IMapper _mapper;
-        private readonly Microsoft.Extensions.Configuration.IConfiguration configuration;
         private UserSessionModel userSession;
         public StoreManagement(IStoreRepo storeRepo, ICustomerManagement customerManagement, IMapper mapper)
         {

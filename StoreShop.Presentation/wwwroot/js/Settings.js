@@ -16,29 +16,20 @@ function showSettingData() {
 //------------------------------------------store setting-------------------------------------------------------
 function showStoreWindow(storeId) {   
     var url = "/setting/ShowStoreWindow?storeId=" + storeId;
-    //$("#btnCreate").click(function (event) {
-    $.get(url).done(function (data) {
-        $("#divPopupWindow").html(data);
-        $("#divPopupWindow").find('.modal').modal('show');
-
-        if (storeId > 0)
-            $("#modaltitle").html("Edit stote");
-
-    });
-    // });
+    let title = storeId > 0 ? "Edit store" : "New Store";
+    showAjaxPopup(url, title);
 }
 
 function saveStore() {
-    debugger
     var storeModel = new StoreModel();
     var url = "/setting/SaveStore";
     $.post(url, storeModel, function (data) {
         if (data) {
-            $("#btnclose").add("class","close");
+            closePopup();
+            showToastMessage("Store saved successfully");
         }
     });  
 }
-
 
 function StoreModel() {
     this.StoreId = $("#StoreId").val();
@@ -76,15 +67,9 @@ function getCities() {
 //-------------------------------------Product Type-------------------------
 
 function showProductTypeWindow(productTypeId) {
-    debugger
-    var url = "/setting/showProductTypeWindow?productTypeId=" + productTypeId;
-    $.get(url).done(function (data) {
-        $("#divPopupWindow").html(data);
-        $("#divPopupWindow").find('.modal').modal('show');
-       if (productTypeId > 0)
-            $("#modaltitle").html("Edit Product Type");
-
-    });
+    let url = "/setting/showProductTypeWindow?productTypeId=" + productTypeId;
+    let title = productTypeId > 0 ? "Edit Product Type" : "New Product Type"
+    showAjaxPopup(url, title);
 }
 
 function saveProductType() {
@@ -94,21 +79,17 @@ function saveProductType() {
     }
     var url = "/setting/saveProductType";
     $.post(url, productTypeModel, function (data) {
-
+        closePopup();
+        showToastMessage("Product Type saved successfully");
+        $("#divProductTypeList").html(data);
     });
 }
 
 //-----------------------Brand setting script-----------------------
-function showBrandWindow(brandId) {
-    
+function showBrandWindow(brandId) { 
     var url = "/setting/showBrandWindow?brandId=" + brandId;
-    $.get(url).done(function (data) {
-        $("#divPopupWindow").html(data);
-        $("#divPopupWindow").find('.modal').modal('show');
-        if (brandId > 0)
-            $("#modaltitle").html("Edit Brand");
-
-    });
+    let title = brandId > 0 ? "Edit Brand" : "New Brand";
+    showAjaxPopup(url, title);
 }
 
 function saveBrand() {
@@ -118,21 +99,20 @@ function saveBrand() {
     }
     var url = "/setting/saveBrand";
     $.post(url, brandModel, function (data) {
-
+        closePopup();
+        showToastMessage("Brand saved successfully");
     });
 }
 
+function deleteBrand(brandId) {
+    showConfirm("Are you sure want to delete this brand");
+}
 //-----------------------User setting script-----------------------
-function showUserWindow(userId) {
-    debugger
-    var url = "/setting/showUserWindow?userId=" + userId;
-    $.get(url).done(function (data) {
-        $("#divPopupWindow").html(data);
-        $("#divPopupWindow").find('.modal').modal('show');
-        if (userId > 0)
-            $("#modaltitle").html("Edit User");
 
-    });
+function showUserWindow(userId) {
+    let url = "/setting/showUserWindow?userId=" + userId;
+    let title = userId > 0 ? "Edit User" : "New User";
+    showAjaxPopup(url, title); 
 }
 
 function saveUser() {
@@ -142,6 +122,11 @@ function saveUser() {
     }
     var url = "/setting/saveUser";
     $.post(url, userModel, function (data) {
-
+        closePopup();
+        showToastMessage("User saved successfully");
     });
 }
+
+
+
+

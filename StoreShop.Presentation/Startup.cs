@@ -87,7 +87,7 @@ namespace StoreShop.Presentation
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
             }
             else
             {
@@ -95,6 +95,7 @@ namespace StoreShop.Presentation
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseExceptionHandler("/Home/Error");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -131,6 +132,7 @@ namespace StoreShop.Presentation
             CreateMap<ProductType, ProductTypeModel>().ReverseMap();
             CreateMap<Product, ProductModel>().ReverseMap();
             CreateMap<Brand, BrandModel>().ReverseMap();
+            CreateMap<ExceptionLog, ExceptionLogModel>().ReverseMap();
         }
     }
 }

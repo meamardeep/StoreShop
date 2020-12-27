@@ -1,49 +1,26 @@
-﻿
+﻿<script>
+    $(function () {
+        $("#btndismiss").on('click', dismissAlert);
+    })
+
+    function dismissAlert() {
+       
+        $.toaster({ priority: 'success', title: 'Title', message: 'Your message here' });
+        alert("hi");
+        //$(".alert").alert('close');    
+    }
+</script>
+<div class="alert alert-success alert-dismissible fade show">
+    <h5>Saved alert!</h5>
+    <hr />
+    This is toast message
+    <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+</div>
+
+<button class="btn btn-primary" id="btndismiss">Dismiss alert</button>
+
 <div>
     <canvas id="myBarChart" width="400" height="400"></canvas>
 </div>
 <script src="https://use.fontawesome.com/a00f9830a5.js"></script>
-<script>
-    var ctx = document.getElementById('myBarChart');
-    var myBarChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            datasets: [{
-                barPercentage: 0.5,
-                barThickness: 6,
-                maxBarThickness: 8,
-                minBarLength: 2,
-                data: [10, 20, 30, 40, 50, 60, 70]
-            }]
-        },
-        options: {
-            scales: {
-                xAxes: [{
-                    gridLines: {
-                        offsetGridLines: true
-                    }
-                }]
-            }
-        }
-    });
 
-    // data: {
-    //    datasets: [{
-    //        barPercentage: 0.5,
-    //        barThickness: 6,
-    //        maxBarThickness: 8,
-    //        minBarLength: 2,
-    //        data: [10, 20, 30, 40, 50, 60, 70]
-    //    }]
-    //};
-
-    //options = {
-    //    scales: {
-    //        xAxes: [{
-    //            gridLines: {
-    //                offsetGridLines: true
-    //            }
-    //        }]
-    //    }
-    //};
-</script>

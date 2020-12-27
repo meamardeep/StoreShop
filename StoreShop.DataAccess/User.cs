@@ -20,6 +20,7 @@ namespace StoreShop.DataAccess
         public long CellNo { get; set; }
         public int? OTP { get; set; }
         public bool? LoginAttemptCounter { get; set; }
+        public DateTime? DOB { get; set; }
 
         public int RoleId { get; set; }
 
@@ -54,5 +55,13 @@ namespace StoreShop.DataAccess
         [ForeignKey("Store")]
         public int StoreId { get; set; }
         public Store Store { get; set; }
+    }
+
+    public class ExceptionLog
+    {
+        [Key]
+        public long LogId { get; set; }
+        public string Message { get; set; }
+        public DateTime ModifiedDate { get; set; }
     }
 }

@@ -1,6 +1,12 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+.overflow{
+    overflow-y: auto;
+    height : 200px;
+}
+
+
 a.navbar-brand {
   white-space: normal;
   text-align: center;
@@ -62,6 +68,7 @@ body {
   /* Margin bottom by footer height */
   margin: 0;
   margin-bottom: 60px;
+  background-image : url("../img/TechologyBackground.jpg");
 }
 .footer {
   position: absolute;

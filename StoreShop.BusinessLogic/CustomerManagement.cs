@@ -12,8 +12,7 @@ namespace StoreShop.BusinessLogic
     {
         private readonly ICustomerRepo _customerRepo;
         private readonly IMapper _mapper;
-        private readonly UserSessionModel _userSession;
-        private UserSessionModel userSessionModel;
+        private readonly UserSessionModel userSessionModel;
 
         public CustomerManagement(ICustomerRepo customerRepo, IMapper mapper)
         {
@@ -133,7 +132,7 @@ namespace StoreShop.BusinessLogic
 
         public void CreateBrand(BrandModel model)
         {
-
+            model.IsActive = true;
             Brand brand = _mapper.Map<Brand>(model);
             _customerRepo.CreateBrand(brand);
         }

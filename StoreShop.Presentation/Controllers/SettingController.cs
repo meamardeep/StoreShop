@@ -14,6 +14,7 @@ namespace StoreShop.Presentation.Controllers
         private readonly ICustomerManagement _customerManagement;
         private readonly IUserManagement _userManagement;
         private readonly MasterDataController masterDataController;
+        UserSessionModel userSessionModel;
         public SettingController(IStoreManagement storeManagement, ICustomerManagement customerManagement,
             IUserManagement userManagement, MasterDataController masterDataController)
         {
@@ -21,6 +22,7 @@ namespace StoreShop.Presentation.Controllers
             _customerManagement = customerManagement;
             _userManagement = userManagement;
             this.masterDataController = masterDataController;
+            userSessionModel = GetUserSession();
         }
         public ActionResult Index()
         {
@@ -121,7 +123,9 @@ namespace StoreShop.Presentation.Controllers
             else
                 _customerManagement.CreateProductType(productTypeModel);
 
-            return Json(true);
+            List<ProductTypeModel> productTypeModels = _customerManagement.GetProductTypes(SessionManager.CustomerId);
+
+            return PartialView("~/Views/Setting/ProductType/_ProductTypeList.cshtml", productTypeModels);
         }
         public ActionResult DeleteProductType(int productTypeId)
         {
@@ -147,7 +151,10 @@ namespace StoreShop.Presentation.Controllers
             if (brandModel.BrandId > 0)
                 _customerManagement.UpdateBrand(brandModel);
             else
+            {
+                brandModel.CustomerId = userSessionModel.SessionCustomerId;
                 _customerManagement.CreateBrand(brandModel);
+            }
 
             return Json(true);
         }

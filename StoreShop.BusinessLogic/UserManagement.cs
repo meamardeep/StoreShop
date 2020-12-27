@@ -12,7 +12,6 @@ using System.Text;
 using System.Web;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using static System.Net.Mime.MediaTypeNames;
 using System.Linq;
 
 namespace StoreShop.BusinessLogic
@@ -35,6 +34,7 @@ namespace StoreShop.BusinessLogic
         {
             User user = _userRepo.GetUser(userName, password);
             UserModel model = _mapper.Map<UserModel>(user);
+            
             return model;
         }
 
@@ -59,7 +59,7 @@ namespace StoreShop.BusinessLogic
 
         public void UpdateUserOTP(long cellNo, int oTP)
         {
-            User user = _userRepo.GetUser(cellNo);
+            User user = _userRepo.GetUserByCellNo(cellNo);
             user.OTP = oTP;
             user.LoginAttemptCounter = false;
             _userRepo.UpdateUser(user);
@@ -95,13 +95,19 @@ namespace StoreShop.BusinessLogic
         #region User CRUD
         public List<UserModel> GetUsers(int customerId)
         {
+           
+                //int val = 0, sum = 0;
+                //int dividend = sum / val;
+            
+            
             List<User> users = _userRepo.GetUsers(customerId);
-            return _mapper.Map<List<UserModel>>(users);
+            return _mapper.Map<List<UserModel>>(users);            
         }
 
         public UserModel GetUser(long userId)
         {
-           User user = _userRepo.GetUser(userId);
+
+            User user = _userRepo.GetUser(userId);
             return _mapper.Map<UserModel>(user);
         }
 
@@ -123,25 +129,34 @@ namespace StoreShop.BusinessLogic
 
             if (model.ProfilePhoto != null)
             {
-                var uploadDir =  Path.Combine(_webHostEnvironment.WebRootPath, "img/ProfilePhoto");
+                var absoluteUploadDirPath =  Path.Combine(_webHostEnvironment.WebRootPath, "img/ProfilePhoto");
                 var  profilePhotoName = Guid.NewGuid().ToString() +"_" + model.ProfilePhoto.FileName;//image file name in "img/ProfilePhoto"
-                var userProfilePhotoPath = Path.Combine(uploadDir,profilePhotoName);
+                var absoluteUserProfilePhotoPath = Path.Combine(absoluteUploadDirPath, profilePhotoName);
 
-                using (var fileStream = new FileStream(userProfilePhotoPath, FileMode.Create))
+                using (var fileStream = new FileStream(absoluteUserProfilePhotoPath, FileMode.Create))
                 {
                     model.ProfilePhoto.CopyTo(fileStream);
                 }
-
-                UserPhoto userPhoto = new UserPhoto();
-                userPhoto.ProfilePhotoPath = profilePhotoName;
-                userPhoto.UserId = model.UserId;
-                _userRepo.CreateUserProfilePhoto(userPhoto);
+                UserPhoto userPhoto = _userRepo.GetUserProfilePhoto(user.UserId);
+                if (userPhoto != null)
+                {
+                    userPhoto.ProfilePhotoPath = profilePhotoName;
+                    _userRepo.UpdateUserProfilePhoto(userPhoto);
+                }
+                //UserPhoto userPhoto = new UserPhoto();
+                else {
+                    userPhoto.ProfilePhotoPath = profilePhotoName;
+                    userPhoto.UserId = model.UserId;
+                    _userRepo.CreateUserProfilePhoto(userPhoto);
+                }
+                
             }
 
             user.FirstName = model.FirstName;
             user.LastName = model.LastName;
             user.GenderId = model.GenderId;
             user.CellNo = model.CellNo;
+            user.DOB = model.DOB;
             user.ModifiedBy = sessionUserId;
             user.ModifiedDate = DateTime.Now;
             _userRepo.UpdateUser(user);
@@ -159,6 +174,13 @@ namespace StoreShop.BusinessLogic
             User user = _userRepo.GetUser(userId);
             _userRepo.DeleteUser(user);
         }
+
         #endregion
+
+        public void CreateExceptionLog(ExceptionLogModel model)
+        {
+            ExceptionLog log = _mapper.Map<ExceptionLog>(model);
+            _userRepo.CreateExceptionLog(log);
+        }
     }
 }

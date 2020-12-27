@@ -11,11 +11,11 @@
 
     @*<div class="d-flex flex-row justify-content-center align-items-center">*@
 
-        <div class="border shadow rounded-lg ">
+        <div class="border shadow rounded-lg" style="background-color: #b3ccff;">
 
             @using (Html.BeginForm("LogOn", "Account", FormMethod.Post))
             {
-                <div class="form-group pl-5">
+                <div class="d-flex justify-content-center form-group" style=" background-color: aliceblue;">
                     <h4>Login</h4>
                 </div>
 
@@ -48,7 +48,7 @@
             }
 
 
-            <div class="d-flex justify-content-center form-group">
+            <div class="d-flex justify-content-center" style=" background-color: aliceblue;">
                 <span>Do not have an account? <a asp-action="showSignUpOptions" asp-controller="account" style="text-decoration:none">Sign Up</a> </span>
 
             </div>

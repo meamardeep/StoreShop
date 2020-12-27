@@ -2,6 +2,10 @@
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost/StoreShop.Presentation",
+      "sslPort": 0
+    },
     "iisExpress": {
       "applicationUrl": "http://localhost:50356",
       "sslPort": 44302
@@ -13,7 +17,9 @@
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "sqlDebugging": true,
+      "nativeDebugging": true
     },
     "Reservation": {
       "commandName": "Project",
