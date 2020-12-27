@@ -32,6 +32,7 @@ namespace StoreShop.Repository
         public User GetUser(long cellNo, int userOTP)
         {
             var sql = from u in _database.Users
+                      .Include(c => c.Customer)
                       where u.CellNo == cellNo && u.OTP == userOTP && u.IsActive == true
                       select u;
             return sql.FirstOrDefault();

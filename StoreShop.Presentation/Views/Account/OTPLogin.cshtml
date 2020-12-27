@@ -1,8 +1,7 @@
 ﻿@model StoreShop.Data.OTPLogOnModel
 @{
         Layout = "_LogonLayout";
-
-    }
+ }
 <script>
     $(function () {
         $("#requestOTPId").on("click", getVerificationCode);
@@ -15,7 +14,7 @@
         var cellNo = $("#CellNo").val();
 
         if (cellNo == 0 || cellNo.length < 10) {
-            $("#spanCellNo").html("Please enter valid Mobile number");
+            $("#spanCellNo").html("Please enter valid phone number");
             return false;
         }
         else {
@@ -42,7 +41,7 @@
 
         <div class="form-group pl-5 pr-5">
             <div>
-                @Html.TextBoxFor(m => m.CellNo, new { @class = "form-control", @required = "true", @placeholder = "Mobile number" })
+                @Html.TextBoxFor(m => m.CellNo, new { @class = "form-control", @required = "true", @placeholder = "Phone number" })
                 <span id="spanCellNo" style="color:red"> @Html.ValidationMessageFor(m => m.CellNo)</span>
                 <span class="text-danger" id="OTPSuccessMessage"></span>
 

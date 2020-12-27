@@ -18,7 +18,8 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "nativeDebugging": false
+      "sqlDebugging": true,
+      "nativeDebugging": true
     },
     "Reservation": {
       "commandName": "Project",

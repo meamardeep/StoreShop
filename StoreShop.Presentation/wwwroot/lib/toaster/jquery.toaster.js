@@ -52,8 +52,9 @@
 
 		notify : function (title, message, priority)
 		{
-			var $toaster = this.gettoaster();
-			var $toast  = $(settings.toast.template.replace('%priority%', priority)).hide().css(settings.toast.css).addClass(settings.toast['class']);
+			var $toaster  = this.gettoaster();
+			var delimiter = (title && message) ? settings.toast.defaults.delimiter : '';
+			var $toast    = $(settings.toast.template.replace('%priority%', priority).replace('%delimiter%', delimiter)).hide().css(settings.toast.css).addClass(settings.toast['class']);
 
 			$('.title', $toast).css(settings.toast.csst).html(title);
 			$('.message', $toast).css(settings.toast.cssm).html(message);
@@ -85,16 +86,15 @@
 		{
 			'id'        : 'toaster',
 			'container' : 'body',
-                'template': '<div></div>',
+			'template'  : '<div></div>',
 			'class'     : 'toaster',
 			'css'       :
 			{
 				'position' : 'fixed',
-				'top'      : '60px',
-				'right'    : '0px',
+				'top'      : '10px',
+				'right'    : '10px',
 				'width'    : '300px',
-                'zIndex': 50000,
-
+				'zIndex'   : 50000
 			}
 		},
 
@@ -106,13 +106,14 @@
 					'<span aria-hidden="true">&times;</span>' +
 					'<span class="sr-only">Close</span>' +
 				'</button>' +
-				'<span class="title" id=\"divToastTitle\"></span> <span class="message"></span>' +
+				'<span class="title"></span>%delimiter% <span class="message"></span>' +
 			'</div>',
 
 			'defaults' :
 			{
-				'title'    : 'Notice',
-				'priority' : 'success'
+				'title'     : 'Notice',
+				'priority'  : 'success',
+				'delimiter' : ':'
 			},
 
 			'css'      : {},
@@ -137,17 +138,16 @@
 					},
 					{
 						duration : settings.toast.fade,
-                        //duration:3000,
+						complete : callback
 					}
 				);
 			}
 		},
 
 		'debug'        : false,
-		'timeout'      : 2000,
+		'timeout'      : 4000,
 		'stylesheet'   : null,
-            'donotdismiss': [],
-        'delay':1000000
+		'donotdismiss' : []
 	};
 
 	var settings = {};
@@ -174,7 +174,7 @@
 			}
 		}
 
-        var title = "<i class=\"fa fa-check-circle\" style=\"color:green;\"></i> ";  //(('title' in options) && (typeof options.title === 'string')) ? options.title : settings.toast.defaults.title;
+		var title    = (('title' in options) && (typeof options.title === 'string')) ? options.title : settings.toast.defaults.title;
 		var message  = ('message' in options) ? options.message : null;
 		var priority = (('priority' in options) && (typeof options.priority === 'string')) ? options.priority : settings.toast.defaults.priority;
 

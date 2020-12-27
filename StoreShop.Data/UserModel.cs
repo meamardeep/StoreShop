@@ -17,6 +17,7 @@ namespace StoreShop.Data
         public string Password { get; set; }
         public bool IsActive { get; set; }
 
+        public DateTime? DOB { get; set; }
         public long CellNo { get; set; }
         public int? OTP { get; set; }
         public bool? LoginAttemptCounter { get; set; }

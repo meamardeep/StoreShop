@@ -59,7 +59,7 @@ namespace StoreShop.BusinessLogic
 
         public void UpdateUserOTP(long cellNo, int oTP)
         {
-            User user = _userRepo.GetUser(cellNo);
+            User user = _userRepo.GetUserByCellNo(cellNo);
             user.OTP = oTP;
             user.LoginAttemptCounter = false;
             _userRepo.UpdateUser(user);
@@ -156,6 +156,7 @@ namespace StoreShop.BusinessLogic
             user.LastName = model.LastName;
             user.GenderId = model.GenderId;
             user.CellNo = model.CellNo;
+            user.DOB = model.DOB;
             user.ModifiedBy = sessionUserId;
             user.ModifiedDate = DateTime.Now;
             _userRepo.UpdateUser(user);

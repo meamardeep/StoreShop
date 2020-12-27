@@ -132,7 +132,7 @@ namespace StoreShop.BusinessLogic
 
         public void CreateBrand(BrandModel model)
         {
-
+            model.IsActive = true;
             Brand brand = _mapper.Map<Brand>(model);
             _customerRepo.CreateBrand(brand);
         }
