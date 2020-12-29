@@ -1,60 +1,83 @@
 ﻿@model StoreShop.Data.SettingModel
 
 <script src="~/js/Settings.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.21/datatables.min.css" />
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.21/datatables.min.js"></script>
 <script scr="~/js/Framework.utils.js"></script>
 
-
 <div id="divPopupWindow"></div>
-<div id="divProductTypeWindow"></div>
-<div class="col-lg-12 ">
+<div class="col-lg-12">
     <section class="">
 
-        <div class="row form-group">
+        <div class="row">
             <div class="col-lg-6 container shadow border form-group">
-                <div class="form-group pt-2" style="display: flex; flex-direction: row; justify-content: space-between;">
-                    <h4 class="font-weight-bold">Stores</h4>
-                    <button class="btn-primary btn float-right" type="button" onclick="showStoreWindow()"
-                            dat-toggle="modal" data-target="#exampleModal" id="btnNewStore">
+                <div class="form-group pt-1" style="display: flex; flex-direction: row; justify-content: space-between;">
+                    <h5 class="font-weight-bold">Stores</h5>
+                    <button class="btn-primary btn float-right" type="button" onclick="showStoreWindow()" id="btnNewStore">
                         <i class="fa fa-plus"></i> New Store
                     </button>
                 </div>
-                @await Html.PartialAsync("~/Views/Setting/Stores/_StoreList.cshtml", Model.StoreModels)
+                <div id="divStoreList">
+                    @await Html.PartialAsync("~/Views/Setting/Stores/_StoreList.cshtml", Model.StoreModels)
+                </div>
             </div>
 
             <div class="col-lg-6  container shadow border form-group">
-                <div class="form-group pt-2" style="display: flex; flex-direction: row; justify-content: space-between;">
-                    <span class="font-weight-bold ">Brands</span>
-                    <button type="button" onclick="showBrandWindow()" class="btn btn-primary float-right"><i class="fa fa-plus"></i> New Brand</button>
+                <div class="form-group pt-1" style="display: flex; flex-direction: row; justify-content: space-between;">
+                    <h5 class="font-weight-bold ">Brands</h5>
+                    <button type="button" onclick="showBrandWindow()" class="btn btn-primary float-right">
+                        <i class="fa fa-plus"></i> New Brand
+                    </button>
                 </div>
-                @await Html.PartialAsync("~/Views/Setting/Brand/_BrandList.cshtml", Model.BrandModels)
+                <div id="divBrandList">
+                    @await Html.PartialAsync("~/Views/Setting/Brand/_BrandList.cshtml", Model.BrandModels)
+                </div>
             </div>
         </div>
         <!----------------------------------------------------------------------------------------->
-        <div class="row form-group">
+        <div class="row">
 
             <div class="col-lg-6 container shadow border form-group">
-                <div class="form-group pt-2" style="display: flex; flex-direction: row; justify-content: space-between;">
-                    <span class="font-weight-bold">Product Types</span>
-                    <button type="button" id="btnNewProductType" onclick="showProductTypeWindow()" class="btn btn-primary float-right"><i class="fa fa-plus"></i> New Product Type</button>
+                <div class="form-group pt-1" style="display: flex; flex-direction: row; justify-content: space-between;">
+                    <h5 class="font-weight-bold">Product Types</h5>
+                    <button type="button" id="btnNewProductType" onclick="showProductTypeWindow()" class="btn btn-primary float-right">
+                        <i class="fa fa-plus"></i> New Product Type
+                    </button>
                 </div>
                 <div id="divProductTypeList">
                     @await Html.PartialAsync("~/Views/Setting/ProductType/_ProductTypeList.cshtml", Model.ProductTypeModels)
-
                 </div>
             </div>
 
             <div class="col-lg-6 container shadow border form-group">
-                <div class="form-group pt-2" style="display: flex; flex-direction: row; justify-content: space-between;">
-                    <span class="font-weight-bold">Users</span>
-                    <button type="button" onclick="showUserWindow()" class="btn btn-primary"><i class="fa fa-plus"></i> New User</button>
+                <div class="form-group pt-1" style="display: flex; flex-direction: row; justify-content: space-between;">
+                    <h5 class="font-weight-bold">Users</h5>
+                    <button type="button" onclick="showUserWindow()" class="btn btn-primary">
+                        <i class="fa fa-plus">
+                        </i> New User
+                    </button>
                 </div>
-                @await Html.PartialAsync("~/Views/Setting/User/_UserList.cshtml", Model.UserModels)
+                <div id="divUserList">
+                    @await Html.PartialAsync("~/Views/Setting/User/_UserList.cshtml", Model.UserModels)
+                </div>
             </div>
 
         </div>
 
+        <!---------------------------------------------------------------->
+        <div class="row">
+            <div class="col-lg-6 container shadow border form-group">
+                <div class="form-group pt-1" style="display: flex; flex-direction: row; justify-content: space-between;">
+                    <h5 class="font-weight-bold">Product</h5>
+                    <button type="button" id="btnNewProductType" onclick="showAddNewProductWindow()" class="btn btn-primary float-right">
+                        <i class="fa fa-plus"></i> New Product
+                    </button>
+                </div>
+                <div id="divProductTypeList">
+                </div>
+            </div>
 
-    </section>
+            <div class="col-lg-6 container shadow border form-group">
+
+            </div>
+         </div>
+</section>
 </div>

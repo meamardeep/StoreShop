@@ -1,26 +1,26 @@
-﻿<script>
-    $(function () {
-        $("#btndismiss").on('click', dismissAlert);
-    })
-
-    function dismissAlert() {
-       
-        $.toaster({ priority: 'success', title: 'Title', message: 'Your message here' });
-        alert("hi");
-        //$(".alert").alert('close');    
-    }
-</script>
-<div class="alert alert-success alert-dismissible fade show">
-    <h5>Saved alert!</h5>
-    <hr />
-    This is toast message
-    <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+﻿<div class="card-deck">
+    <div class="card shadow">
+        <img src="~/img/ProductImg/Luggage.jpg" class="card-img-top" alt="..." style=" height: 276px; width: 299px;">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+    </div>
+    <div class="card shadow">
+        <img src="~/img/ProductImg/Luggage.jpg" class="card-img-top" alt="..." style=" height: 276px; width: 299px;">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+    </div>
+    <div class="card shadow">
+        <img src="~/img/ProductImg/Luggage.jpg" class="card-img-top" alt="..." style=" height: 276px; width: 299px;">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+    </div>
 </div>
-
-<button class="btn btn-primary" id="btndismiss">Dismiss alert</button>
-
-<div>
-    <canvas id="myBarChart" width="400" height="400"></canvas>
-</div>
-<script src="https://use.fontawesome.com/a00f9830a5.js"></script>
-

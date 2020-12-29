@@ -14,11 +14,11 @@ namespace StoreShop.Data
       public string Text { get; set; }
     }
 
-     public enum Role
+     public enum UserRole
     {
-        SuperAdmin = 1,StoreAdmin,EndUser
+        SuperAdmin = 1, StoreAdmin, EndUser
     }
-
+    
     public enum Module
     { 
         Setting = 1

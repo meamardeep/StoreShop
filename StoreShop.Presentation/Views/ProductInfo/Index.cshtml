@@ -1,0 +1,29 @@
+﻿<div class="container">
+    <!--------1st row starts here---------->
+    <div class="row">
+        <!--Image view-->
+        <div class="col-4">
+            @await Html.PartialAsync("~/Views/ProductInfo/_ProductImage.cshtml")
+        </div>
+        <!--Image view end------>
+        <!-----ProductInfo view----->
+        <div class="col-8">
+            @await Html.PartialAsync("~/Views/ProductInfo/_ProductInfo.cshtml")
+        </div>
+        <!------Product infi view end here ------>
+    </div>
+    <!------1st row ends   here-->
+
+
+
+    <!--------2nd row starts here---------->
+    <!---need to write logic for different product description view-->
+    <div class="container">
+        <div class="row">
+            @await Html.PartialAsync("~/Views/Referigerator/_LaptopDescription.cshtml")
+        </div>
+
+    </div>
+    <!------2nd row ends   here-->
+
+</div>

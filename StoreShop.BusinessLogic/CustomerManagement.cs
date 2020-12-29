@@ -99,6 +99,7 @@ namespace StoreShop.BusinessLogic
         }
         public void CreateProductType(ProductTypeModel model)
         {
+            model.IsActive = true;
             ProductType productType = _mapper.Map<ProductType>(model);
             _customerRepo.CreateProductType(productType);
         }

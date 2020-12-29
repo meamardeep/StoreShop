@@ -19,7 +19,7 @@ function SaveUserProfile() {
         processData: false,
         data: data,
         success: function (message) {
-            toastr.success("User saved successfully.", 'Success', {timeOut :3000});
+            showToastMessage("Profile saved successfully");
         },
         error: function () {
             alert("There was an error uploading the file!");

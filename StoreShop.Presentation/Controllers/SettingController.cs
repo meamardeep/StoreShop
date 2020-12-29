@@ -93,14 +93,16 @@ namespace StoreShop.Presentation.Controllers
                 _storeManagement.UpdateStore(storeModel);
             else
                 _storeManagement.CreateStore(storeModel, ControllerBase.GetUserSession());
-            return Json(true);
+
+            List<StoreModel> storeModels = _storeManagement.GetStores(SessionManager.CustomerId);
+            return PartialView("~/Views/Setting/Stores/_StoreList.cshtml", storeModels);
         }
 
         public IActionResult DeleteStore(int storeId)
         {
             _storeManagement.DeleteStore(storeId);
-
-            return Json(true);
+            List<StoreModel> storeModels = _storeManagement.GetStores(SessionManager.CustomerId);
+            return PartialView("~/Views/Setting/Stores/_StoreList.cshtml", storeModels);
         }
         #endregion
 
@@ -121,16 +123,18 @@ namespace StoreShop.Presentation.Controllers
             if (productTypeModel.ProductTypeId > 0)
                 _customerManagement.UpdateProductType(productTypeModel);
             else
+            {
+                productTypeModel.CustomerId = SessionManager.CustomerId;
                 _customerManagement.CreateProductType(productTypeModel);
-
+            }
             List<ProductTypeModel> productTypeModels = _customerManagement.GetProductTypes(SessionManager.CustomerId);
-
             return PartialView("~/Views/Setting/ProductType/_ProductTypeList.cshtml", productTypeModels);
         }
         public ActionResult DeleteProductType(int productTypeId)
         {
             _customerManagement.DeleteProductType(productTypeId);
-            return Json(true);
+            List<ProductTypeModel> productTypeModels = _customerManagement.GetProductTypes(SessionManager.CustomerId);
+            return PartialView("~/Views/Setting/ProductType/_ProductTypeList.cshtml", productTypeModels);
         }
         #endregion
 
@@ -155,13 +159,15 @@ namespace StoreShop.Presentation.Controllers
                 brandModel.CustomerId = userSessionModel.SessionCustomerId;
                 _customerManagement.CreateBrand(brandModel);
             }
-
-            return Json(true);
+            List<BrandModel> brandModels = _customerManagement.GetBrands(SessionManager.CustomerId);
+            return PartialView("~/Views/Setting/Brand/_BrandList.cshtml", brandModels);
         }
         public ActionResult DeleteBrand(int brandId)
         {
             _customerManagement.DeleteBrand(brandId);
-            return Json(true);
+
+            List<BrandModel> brandModels = _customerManagement.GetBrands(SessionManager.CustomerId);
+            return PartialView("~/Views/Setting/Brand/_BrandList.cshtml", brandModels);
         }
         #endregion
 
@@ -180,12 +186,24 @@ namespace StoreShop.Presentation.Controllers
                 _userManagement.UpdateUser(userModel,SessionManager.UserId);
             else
                 _userManagement.CreateUser(userModel, SessionManager.CustomerId, SessionManager.UserId);
-            return Json(true);
+
+            List<UserModel> userModels = _userManagement.GetUsers(SessionManager.CustomerId);
+            return PartialView("~/Views/Setting/User/_UserList.cshtml", userModels);
         }
         public ActionResult DeleteUser(int userId)
         {
             _userManagement.DeleteUser(userId);
-            return Json(true);
+            List<UserModel> userModels = _userManagement.GetUsers(SessionManager.CustomerId);
+            return PartialView("~/Views/Setting/User/_UserList.cshtml", userModels);
+        }
+        #endregion
+
+        #region New product
+        public IActionResult ShowNewProductWindow(long productId)
+        {
+            ProductModel model = new ProductModel();
+            
+            return PartialView("~/Views/Setting/Product/_NewProductWindow.cshtml", model);
         }
         #endregion
     }
