@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     @*<link rel="stylesheet" href="~/css/site.css" />*@
 
+    <!----------PopOver------------------------>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
     <!-----------------Jquery UI--------------------------------------------------->
     <script src="~/lib/jqueryUI/jquery-ui.js"></script>
     <link rel="stylesheet" href="/lib/jqueryUI/jquery-ui.css" />
@@ -47,19 +50,18 @@
                     }
                 </a>
             </div>
+            <div><a class="text-white text-decoration-none" asp-action="ShowClothingCards" asp-controller="product">Clothing</a></div>
+            <div><a class="text-white text-decoration-none" asp-action="ShowLaptopCards" asp-controller="product">Laptop</a></div>
+            <div><a class="text-white text-decoration-none" asp-action="ShowMobileCards" asp-controller="product">Mobile</a></div>
+            <div><a class="text-white text-decoration-none" asp-action="ShowTelevisionCards" asp-controller="product">Television</a></div>
 
             @*<div class="input-group">
-                <input class="" id="inpSearchItem" type="text" placeholder="Search for products, brands and more" />
-                <span class="input-group-text"><i class="fa fa-search"></i></span>
-            </div>*@
+            <input class="" id="inpSearchItem" type="text" placeholder="Search for products, brands and more" />
+            <span class="input-group-text"><i class="fa fa-search"></i></span>
+        </div>*@
 
-            @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>*@
-            @*<div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">*@
-        <div class="d-flex">
-            
+            <div class="d-flex">
+
                 <ul>
                     @{
                         if (SessionManager.UserName != null && SessionManager.UserName != "")
@@ -74,6 +76,7 @@
                                     <a class="dropdown-item modal-header" asp-controller="User" asp-action="GetUserProfile">Signed as<span class="font-weight-bold">@SessionManager.FirstName</span></a>
                                     <a class="dropdown-item" asp-controller="User" asp-action="GetUserProfile"><i class="fa fa-user-circle text-primary"></i> My Profile</a>
                                     <a class="dropdown-item " asp-action="" asp-controller="Account"><i class="fa fa-shopping-bag text-primary"></i> My Orders</a>
+                                    <a class="dropdown-item " asp-action="ShowClothingCards" asp-controller="Product"><i class="fa fa-shopping-bag text-primary"></i> Clothing</a>
 
                                     @{
                                         if (SessionManager.RoleId == 1 || SessionManager.RoleId == 2)
@@ -95,11 +98,11 @@
                         }
                     }
                 </ul>
-           
-            <div>       
-                   <h4 class=" text-white"><i class="fa fa-shopping-cart"></i> Item(<span class="text-danger small">2</span>)</h4>
+
+                <div>
+                    <h4 class=" text-white"><i class="fa fa-shopping-cart"></i> Item(<span class="text-danger small">2</span>)</h4>
+                </div>
             </div>
-        </div>
 
         </nav>
     </header>
@@ -107,7 +110,7 @@
     <aside>
     </aside>
     <section class="">
-        <main role="main" class="">
+        <main role="main" class="m-3">
             @RenderBody()
         </main>
     </section>
