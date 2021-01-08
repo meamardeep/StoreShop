@@ -3,9 +3,11 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - StoreShop</title>
+    <title>@ViewData["Title"]  StoreShop</title>
 
     <script src="~/lib/jquery/jquery.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="~/css/customeCSS.css" />
 
     <script type="text/javascript" src="~/js/Framework.utils.js"></script>
     <script type="text/javascript" src="~/js/framework.PopupHelper.js"></script>
@@ -14,6 +16,10 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     @*<link rel="stylesheet" href="~/css/site.css" />*@
 
+    <!------MultiSlider------------->
+    <link href="~/lib/multiSlider/custom.css" />
+    @*<link href="~/lib/multiSlider/custom.less" />*@
+    <script src="~/lib/multiSlider/multislider.js"></script>
     <!----------PopOver------------------------>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -37,11 +43,11 @@
     <script src="~/lib/sweetalert/sweetalert.js"></script>
 
 </head>
-<body>
+<body class="" style=" background-color: #c1c7cafa;">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-primary border-bottom box-shadow mb-3 d-flex justify-content-between" style="height:60px;">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-primary border-bottom box-shadow d-flex justify-content-between" style="height:60px;">
             <div>
-                <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">
+                <a class="navbar-brand text-white" asp-area="" asp-controller="dashboard" asp-action="Index">
                     @{
                         if (SessionManager.CustomerName != null && SessionManager.CustomerName != "")
                         {
@@ -50,18 +56,19 @@
                     }
                 </a>
             </div>
+
             <div><a class="text-white text-decoration-none" asp-action="ShowClothingCards" asp-controller="product">Clothing</a></div>
-            <div><a class="text-white text-decoration-none" asp-action="ShowLaptopCards" asp-controller="product">Laptop</a></div>
-            <div><a class="text-white text-decoration-none" asp-action="ShowMobileCards" asp-controller="product">Mobile</a></div>
+            <div><a class="text-white text-decoration-none" asp-action="ShowLaptopCards" asp-controller="product">Laptops</a></div>
+            <div><a class="text-white text-decoration-none" asp-action="ShowMobileCards" asp-controller="product">Mobiles</a></div>
             <div><a class="text-white text-decoration-none" asp-action="ShowTelevisionCards" asp-controller="product">Television</a></div>
+            <div><a class="text-white text-decoration-none" asp-action="ShowTelevisionCards" asp-controller="product">Audio</a></div>
 
             @*<div class="input-group">
-            <input class="" id="inpSearchItem" type="text" placeholder="Search for products, brands and more" />
-            <span class="input-group-text"><i class="fa fa-search"></i></span>
-        </div>*@
+                    <input class="" id="inpSearchItem" type="text" placeholder="Search for products, brands and more" />
+                    <span class="input-group-text"><i class="fa fa-search"></i></span>
+                </div>*@
 
             <div class="d-flex">
-
                 <ul>
                     @{
                         if (SessionManager.UserName != null && SessionManager.UserName != "")
@@ -69,10 +76,12 @@
                             var path = SessionManager.UserProfilePhotoPath;
                             <li class="@*nav-item*@ form-inline dropdown">
                                 @*<img class="nav-link text-white rounded-circle" src="~/img/AdminSettingPage.png" width="50" height="50" />*@
-                                <h5 class="text-white">@SessionManager.FirstName.ToUpper()</h5>
+                                <h5 class="text-white" data-toggle="popover" data-placement="bottom" data-content="Vivamus">@SessionManager.FirstName.ToUpper()</h5>
                                 @*<img class="nav-link text-white rounded-circle" src="~/img/ProfilePhoto/@path" width="75" height="50" />*@
                                 <span class="dropdown-toggle text-white" id="dropdownMenuLink" data-toggle="dropdown"></span>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
+                                    @*<div class="notify-arrow notify-arrow-blue" style="right:7px!important; left:auto;"></div>*@
+
                                     <a class="dropdown-item modal-header" asp-controller="User" asp-action="GetUserProfile">Signed as<span class="font-weight-bold">@SessionManager.FirstName</span></a>
                                     <a class="dropdown-item" asp-controller="User" asp-action="GetUserProfile"><i class="fa fa-user-circle text-primary"></i> My Profile</a>
                                     <a class="dropdown-item " asp-action="" asp-controller="Account"><i class="fa fa-shopping-bag text-primary"></i> My Orders</a>
@@ -98,30 +107,40 @@
                         }
                     }
                 </ul>
-
-                <div>
-                    <h4 class=" text-white"><i class="fa fa-shopping-cart"></i> Item(<span class="text-danger small">2</span>)</h4>
-                </div>
             </div>
+
+            <div>
+                <a asp-action="index" asp-controller="cart"><h4 class=" text-white"><i class="fa fa-shopping-cart"></i> Item(<span class="text-danger small">2</span>)</h4></a>
+            </div>
+        </nav>
+
+        <nav class=" navbar border d-flex justify-content-sm-around justify-content-lg-around bg-white">
+            <div><a class="text-dark text-decoration-none font-weight-bold" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="Vivamus" href="#">Electronics <i class="fa fa-angle-down"></i></a></div>
+            <div><a class="text-dark text-decoration-none" data-toggle="popover" data-placement="bottom" data-content="Vivamus" href="#">Clothing <i class="fa fa-angle-down"></i></a></div>
+            <div><a class="text-dark text-decoration-none" data-toggle="popover" data-placement="bottom" data-content="Vivamus" href="#">Laptops & Accessories <i class="fa fa-angle-down"></i></a></div>
+            <div><a class="text-dark text-decoration-none" data-toggle="popover" data-placement="bottom" data-content="Vivamus" href="#">Mobiles & Accessories <i class="fa fa-angle-down"></i></a></div>
+            <div><a class="text-dark text-decoration-none" data-toggle="popover" data-placement="bottom" data-content="Vivamus" href="#">Television <i class="fa fa-angle-down"></i></a></div>
+            <div><a class="text-dark text-decoration-none" data-toggle="popover" data-placement="bottom" data-content="Vivamus" href="#">Audio <i class="fa fa-angle-down"></i></a></div>
 
         </nav>
     </header>
 
     <aside>
     </aside>
-    <section class="">
-        <main role="main" class="m-3">
+    <section class="m-1">
+        <main role="main">
             @RenderBody()
         </main>
     </section>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - StoreShop - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
+    <footer class="text-decoration-none text-white">
+        
+        @RenderSection("Footer", required: false)
+
     </footer>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
+
 </body>
 </html>

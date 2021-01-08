@@ -1,15 +1,6 @@
 ﻿@model List<MobileCardModel>
 <script>
     $(function () {
-        $(".card").hover(
-            function () {
-                $(this).addClass('shadow').css('cursor', 'pointer');
-            }, function(){
-                $(this).removeClass('shadow');
-            }
-        );
-
-        $('[data-toggle="popover"]').popover();
 
     })
 </script>
@@ -30,9 +21,10 @@
 
 
 <div class="d-flex">
-    <div style="width:610px;">
-        <div class="card">
-            <div class="card-header">Filters</div>
+
+    <div class="col-md-2">
+        <div class="card prodCard">
+            <div class="card-header font-weight-bold">Filters</div>
         </div>
         @await Html.PartialAsync("~/Views/Filters/_PriceFilter.cshtml")
         @await Html.PartialAsync("~/Views/Filters/_SizeFilter.cshtml")
@@ -40,54 +32,18 @@
 
     </div>
 
-
-    <div>
+    <div class="col-md-10">
         @*these are product cars*@
-        <div class="row">
-
-            <div class=" col-lg-3 col-md-4 col-sm-6">
-                <div class="card form-group">
-                    @await Html.PartialAsync("~/Views/Product/Mobile/_SingleMobileCard.cshtml")
-                </div>
-            </div>
-
-            <div class=" col-lg-3 col-md-4 col-sm-6">
-                <div class="card form-group">
-                    @await Html.PartialAsync("~/Views/Product/Mobile/_SingleMobileCard.cshtml")
-                </div>
-            </div>
-
-            <div class=" col-lg-3 col-md-4 col-sm-6">
-                <div class="card form-group">
-                    @await Html.PartialAsync("~/Views/Product/Mobile/_SingleMobileCard.cshtml")
-                </div>
-            </div>
-
-            <div class=" col-lg-3 col-md-4 col-sm-6">
-                <div class="card form-group">
-                    @await Html.PartialAsync("~/Views/Product/Mobile/_SingleMobileCard.cshtml")
-                </div>
-            </div>
-
-            <div class=" col-lg-3 col-md-4 col-sm-6">
-                <div class="card form-group">
-                    @await Html.PartialAsync("~/Views/Product/Mobile/_SingleMobileCard.cshtml")
-                </div>
-            </div>
-
-            <div class=" col-lg-3 col-md-4 col-sm-6">
-                <div class="card form-group">
-                    @await Html.PartialAsync("~/Views/Product/Mobile/_SingleMobileCard.cshtml")
-                </div>
-            </div>
-
-        </div>
-
+        @await Html.PartialAsync("~/Views/Product/Mobile/_SingleMobileCard.cshtml")
+        @await Html.PartialAsync("~/Views/Product/Mobile/_SingleMobileCard.cshtml")
+        @await Html.PartialAsync("~/Views/Product/Mobile/_SingleMobileCard.cshtml")
     </div>
 
 </div>
 
 
-
+@section Footer{
+    <partial name="_FooterPartial" />
+}
 
 

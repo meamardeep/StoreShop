@@ -23,8 +23,10 @@ function showStoreWindow(storeId) {
 function saveStore() {
     var storeModel = new StoreModel();
     var url = "/setting/SaveStore";
+    let amar;
     $.post(url, storeModel, function (htmlData) {
         if (htmlData) {
+            amar = htmlData;
             closePopup();
             showToastMessage("Store saved successfully");
             $("#divStoreList").html(htmlData);
@@ -80,9 +82,13 @@ function saveProductType() {
     }
     var url = "/setting/saveProductType";
     $.post(url, productTypeModel, function (data) {
-        closePopup();
-        showToastMessage("Product Type saved successfully");
-        $("#divProductTypeList").html(data);
+            closePopup();
+            showToastMessage("Product Type saved successfully");
+            $("#divProductTypeList").html(data);
+
+    }).fail(function (failedRes) {
+        $("#spnValidationMesage").html("Failed to save product type!!");
+
     });
 }
 
@@ -105,6 +111,9 @@ function saveBrand() {
             showToastMessage("Brand saved successfully");
             $("#divBrandList").html(htmlData);
         }
+    }).fail(function (failedRes) {
+        $("#spnValidationMesage").html("Failed to save brand!!");
+
     });
 }
 
@@ -131,6 +140,9 @@ function saveUser() {
             showToastMessage("User saved successfully");
             $("#divUserList").html(htmlData);
         }
+
+    }).fail(function (failedRes) {
+        $("#spnValidationMesage").html("Failed to save user!!");
 
     });
 }

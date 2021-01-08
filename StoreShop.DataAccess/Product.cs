@@ -20,7 +20,7 @@ namespace StoreShop.DataAccess
 
         [ForeignKey("ProductType")]
         public int ProductTypeId { get; set; }
-        public ProductType ProductType { get; set; }
+        public CustomerProductType ProductType { get; set; }
 
         [ForeignKey("Brand")]
         public int BrandId { get; set; }
@@ -57,14 +57,46 @@ namespace StoreShop.DataAccess
     }
 
 
-    [Table("MasProductTypes")]
-    public class ProductType
+    [Table("CustomerProductTypes")]
+    public class CustomerProductType
     {
-        //[Key]
+        [Key]
         //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ProductTypeId { get; set; }
-        public string ProductTypeName { get; set; }
-        public bool IsActive { get; set; }
+       [Column("CustomerProductTypeId")]
+        public int CustomerProductTypeId { get; set; }
+
         public int CustomerId { get; set; }
+
+        [ForeignKey("MasProductType")]
+        public int MasProductTypeId { get; set; }
+        public bool IsActive { get; set; }
+
+        public MasProductType MasProductType { get; set; }
     }
+
+    [Table("MasProductTypes")]
+    public class MasProductType
+    {
+        [Key]
+        public int MasProductTypeId { get; set; }
+        public string MasProductTypeName { get; set; }
+
+        [ForeignKey("MasProductCategory")]
+        public int ProductCategoryId { get; set; }
+
+        public MasProductCategory MasProductCategory { get; set; }
+
+    }
+
+    [Table("MasProductCategories")]
+    public class MasProductCategory
+    {
+        [Key]
+        public int ProductCategoryId { get; set; }
+        public string ProductCategoryName { get; set; }
+        
+    }
+
+
+       
 }

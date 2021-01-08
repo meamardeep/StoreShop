@@ -4,12 +4,10 @@
         $(".card").hover(
             function () {
                 $(this).addClass('shadow').css('cursor', 'pointer');
-            }, function(){
+            }, function () {
                 $(this).removeClass('shadow');
             }
         );
-
-        $('[data-toggle="popover"]').popover();
 
     })
 </script>
@@ -30,7 +28,7 @@
 
 
 <div class="d-flex">
-    <div style="width:610px;">
+    <div class="col-md-2" style="width:610px;">
         <div class="card">
             <div class="card-header">Filters</div>
         </div>
@@ -41,7 +39,7 @@
     </div>
 
 
-    <div>
+    <div class="col-md-10">
         @*these are product cars*@
         <div class="row">
 
@@ -89,5 +87,7 @@
 
 
 
-
+@section Footer{
+    <partial name="_FooterPartial" />
+}
 

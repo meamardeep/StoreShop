@@ -1,3 +1,18 @@
 ﻿@{
     Layout = "_Layout";
 }
+
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+        $('[data-toggle="popover"]').popover({
+            trigger: "hover"
+        }, function () {
+                $("#dropdown").removeClass("fa-angle-down");
+                $("#dropdown").addClass("fa-angle-up");
+
+        })
+        
+        
+    })
+</script>

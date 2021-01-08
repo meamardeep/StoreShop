@@ -1,4 +1,4 @@
-﻿@model List<StoreShop.Data.ProductTypeModel>
+﻿@model List<StoreShop.Data.CustomerProductTypeModel>
 
 <div class="font-weight-bold">Records: <span class="text-info"> @Model.Count()</span></div>
 
@@ -14,12 +14,12 @@
             foreach (var item in Model)
             {
                 <tr>
-                    <td>@item.ProductTypeName</td>
+                    <td>@item.MasProductTypeModel.MasProductTypeName</td>
                     <td>
-                        <a href="javascript:void(0)" onclick="showProductTypeWindow(@item.ProductTypeId)" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                        <a href="javascript:void(0)" onclick="showProductTypeWindow(@item.CustomerProductTypeId)" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                     </td>
                     <td>
-                        <a href="javascript:void(0)" onclick="deleteProductType(@item.ProductTypeId)" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                        <a href="javascript:void(0)" onclick="deleteProductType(@item.CustomerProductTypeId)" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                     </td>
                 </tr>
             }

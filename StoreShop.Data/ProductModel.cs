@@ -16,7 +16,7 @@ namespace StoreShop.Data
         public int ProductCount { get; set; }
 
         public int ProductTypeId { get; set; }
-        public ProductTypeModel ProductTypeModel { get; set; }
+        public CustomerProductTypeModel ProductTypeModel { get; set; }
 
         public int BrandId { get; set; }
         public BrandModel BrandModel { get; set; }
@@ -40,8 +40,6 @@ namespace StoreShop.Data
         public string ModelName { get; set; }
         public double MRP { get; set; }
         public int MyProperty { get; set; }
-
-
     }
     public class BrandModel
     {
@@ -54,16 +52,8 @@ namespace StoreShop.Data
         //public StoreModel StoreModel { get; set; }
     }
 
-    public class ProductTypeModel
-    {
-        public int ProductTypeId { get; set; }
-        public string ProductTypeName { get; set; }
-        public bool IsActive { get; set; }
-        public int CustomerId { get; set; }
-    }
-
-
-    public class ClothingCardModel 
+    #region Product card model
+    public class ClothingCardModel
     {
         public long ClothingId { get; set; }
         public string ClothName { get; set; }
@@ -83,6 +73,40 @@ namespace StoreShop.Data
     {
 
     }
+    #endregion
 
+    public class CustomerProductTypeModel
+    {
+        public int CustomerProductTypeId { get; set; }
+
+        public int CustomerId { get; set; }
+
+        public int MasProductTypeId { get; set; }
+        public bool IsActive { get; set; }
+
+        public MasProductTypeModel MasProductTypeModel { get; set; }
+
+        public List<DropDownItem> ProductTypes { get; set; }
+    }
+
+    public class MasProductTypeModel
+    {
+        public int MasProductTypeId { get; set; }
+        public string MasProductTypeName { get; set; }
+
+        public int ProductCategoryId { get; set; }
+
+        public MasProductCategoryModel MasProductCategoryModel { get; set; }
+
+    }
+
+    public class MasProductCategoryModel
+    {
+        public int ProductCategoryId { get; set; }
+        public string ProductCategoryName { get; set; }
+    }
+
+
+    
 
 }

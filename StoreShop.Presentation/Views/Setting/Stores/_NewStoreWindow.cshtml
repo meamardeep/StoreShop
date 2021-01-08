@@ -6,13 +6,17 @@
     })
 </script>
 
+@using (Html.BeginForm("", "", FormMethod.Post))
+{
+
     @Html.HiddenFor(m => m.StoreId)
     @Html.HiddenFor(m => m.AddressId)
     @Html.HiddenFor(m => m.Address.AddressId)
     <div class=" form-group row">
         <label class="col-lg-5">Store Name<span style="color:red">*</span>:</label>
         <div class="col-lg-7">
-            @Html.TextBoxFor(m => m.StoreName, new { @class = "form-control", @required = "true" })
+            @Html.TextBoxFor(m => m.StoreName, new { @class = "form-control" })
+            @*<span asp-validation-for="StoreName"></span>*@
             <span style="color:red"> @Html.ValidationMessageFor(m => m.StoreName)</span>
         </div>
     </div>
@@ -53,6 +57,10 @@
 
     <!------------------------------Modal Footer----------------------->
     <div class="modal-footer">
+        <span id="spnValidationMesage" style="color:red"></span>
         <button type="submit" class="btn btn-primary" id="btnSaveStore">Save</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
     </div>
+}
+
+

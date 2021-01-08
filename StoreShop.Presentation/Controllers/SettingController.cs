@@ -13,14 +13,17 @@ namespace StoreShop.Presentation.Controllers
         private readonly IStoreManagement _storeManagement;
         private readonly ICustomerManagement _customerManagement;
         private readonly IUserManagement _userManagement;
+        private readonly IProductManagement _productManagement;
+
         private readonly MasterDataController masterDataController;
         UserSessionModel userSessionModel;
         public SettingController(IStoreManagement storeManagement, ICustomerManagement customerManagement,
-            IUserManagement userManagement, MasterDataController masterDataController)
+            IUserManagement userManagement,IProductManagement productManagement, MasterDataController masterDataController)
         {
             _storeManagement = storeManagement;
             _customerManagement = customerManagement;
             _userManagement = userManagement;
+            _productManagement = productManagement;
             this.masterDataController = masterDataController;
             userSessionModel = GetUserSession();
         }
@@ -29,7 +32,7 @@ namespace StoreShop.Presentation.Controllers
             SettingModel settingModel = new SettingModel();            
             settingModel.StoreModels = _storeManagement.GetStores(SessionManager.CustomerId);
             settingModel.BrandModels = _customerManagement.GetBrands(SessionManager.CustomerId);            
-            settingModel.ProductTypeModels = _customerManagement.GetProductTypes(SessionManager.CustomerId);
+            settingModel.ProductTypeModels = _productManagement.GetProductTypes(SessionManager.CustomerId);
             settingModel.UserModels = _userManagement.GetUsers(SessionManager.CustomerId);
             return View(settingModel);
         }
@@ -52,9 +55,6 @@ namespace StoreShop.Presentation.Controllers
                  new UserModel(){ UserId = 1, UserName = "meamardeep", CellNo = 8088506025, FirstName = "Amardeep",
                     LastName = "Kumar", CountryCode = 91   }
             };
-
-            //new Claim();
-
             return userModels;
         }
 
@@ -109,31 +109,32 @@ namespace StoreShop.Presentation.Controllers
         #region ProductType CRUD Controller methods
         public IActionResult ShowProductTypeWindow(int productTypeId)
         {
-            ProductTypeModel model = new ProductTypeModel();
-            if (productTypeId > 0)
-            {
-                model = _customerManagement.GetProductType(productTypeId);
-            }
+            CustomerProductTypeModel model = new CustomerProductTypeModel();
+            model.ProductTypes = _productManagement.GetMasProductTypes();
+            //if (productTypeId > 0)
+            //{
+            //    model = _customerManagement.GetProductType(productTypeId);
+            //}
 
             return PartialView("~/Views/Setting/ProductType/_NewProductTypeWindow.cshtml", model);
         }
 
-        public ActionResult SaveProductType(ProductTypeModel productTypeModel)
+        public ActionResult SaveProductType(CustomerProductTypeModel productTypeModel)
         {
-            if (productTypeModel.ProductTypeId > 0)
-                _customerManagement.UpdateProductType(productTypeModel);
+            if (productTypeModel.CustomerProductTypeId > 0)
+                _productManagement.UpdateProductType(productTypeModel);
             else
             {
                 productTypeModel.CustomerId = SessionManager.CustomerId;
-                _customerManagement.CreateProductType(productTypeModel);
+                _productManagement.CreateProductType(productTypeModel);
             }
-            List<ProductTypeModel> productTypeModels = _customerManagement.GetProductTypes(SessionManager.CustomerId);
+            List<CustomerProductTypeModel> productTypeModels = _productManagement.GetProductTypes(SessionManager.CustomerId);
             return PartialView("~/Views/Setting/ProductType/_ProductTypeList.cshtml", productTypeModels);
         }
         public ActionResult DeleteProductType(int productTypeId)
         {
-            _customerManagement.DeleteProductType(productTypeId);
-            List<ProductTypeModel> productTypeModels = _customerManagement.GetProductTypes(SessionManager.CustomerId);
+            _productManagement.DeleteProductType(productTypeId);
+            List<CustomerProductTypeModel> productTypeModels = _productManagement.GetProductTypes(SessionManager.CustomerId);
             return PartialView("~/Views/Setting/ProductType/_ProductTypeList.cshtml", productTypeModels);
         }
         #endregion

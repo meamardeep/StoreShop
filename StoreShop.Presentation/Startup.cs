@@ -55,6 +55,9 @@ namespace StoreShop.Presentation
 
             services.AddScoped<IStoreManagement, StoreManagement>();
             services.AddScoped<IStoreRepo, StoreRepo>();
+
+            services.AddScoped<IProductManagement, ProductManagement>();
+            services.AddScoped<IProductRepo, ProductRepo>();
             #endregion
 
             services.AddSession(options =>
@@ -128,7 +131,7 @@ namespace StoreShop.Presentation
             CreateMap<User, UserModel>().ReverseMap();
             CreateMap<Store, StoreModel>().ReverseMap();
             CreateMap<Address, AddressModel>().ReverseMap();
-            CreateMap<ProductType, ProductTypeModel>().ReverseMap();
+            CreateMap<CustomerProductType, CustomerProductTypeModel>().ReverseMap();
             CreateMap<Product, ProductModel>().ReverseMap();
             CreateMap<Brand, BrandModel>().ReverseMap();
             CreateMap<ExceptionLog, ExceptionLogModel>().ReverseMap();
