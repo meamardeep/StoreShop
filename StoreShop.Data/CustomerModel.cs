@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace StoreShop.Data
 {
@@ -17,6 +18,7 @@ namespace StoreShop.Data
     public class StoreModel
     {
         public int StoreId { get; set; }
+        [Required]
         public string StoreName { get; set; }
         public bool IsActive { get; set; }
         public long AddressId { get; set; }

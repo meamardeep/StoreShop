@@ -16,14 +16,6 @@ namespace StoreShop.BusinessLogic
         void UpdateAddress(AddressModel model);
         #endregion
 
-        #region Product Type interface management
-        List<ProductTypeModel> GetProductTypes(int customerId);
-        ProductTypeModel GetProductType(int productTypeId);
-        void CreateProductType(ProductTypeModel model);
-        void UpdateProductType(ProductTypeModel model);
-        void DeleteProductType(int productTypeId);
-        #endregion
-
         #region Brand interface management
         List<BrandModel> GetBrands(int customerId);
         BrandModel GetBrand(int brandId);

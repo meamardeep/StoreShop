@@ -70,61 +70,6 @@ namespace StoreShop.Repository
         }
         #endregion
 
-
-        #region Product Type
-        public List<ProductType> GetProductTypes(int customerId)
-        {
-            return _database.ProductTypes.Where(p=>p.CustomerId == customerId).ToList();
-        }
-
-        public ProductType GetProductType(int productTypeId)
-        {
-              return _database.ProductTypes.Where(p => p.ProductTypeId == productTypeId).FirstOrDefault();
-        }
-
-        public void CreateProductType(ProductType productType)
-        {
-            _database.ProductTypes.Add(productType);
-            try
-            {
-                _database.SaveChanges();
-
-            }
-            catch (Exception) {
-                throw;
-            }
-        }
-
-        public void UpdateProductType(ProductType productType)
-        {
-            _database.Entry(productType).State = EntityState.Modified;
-            try
-            {
-                _database.SaveChanges();
-
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public void DeleteProductType(ProductType productType)
-        {
-            _database.Remove(productType).State = EntityState.Deleted;
-            try
-            {
-                _database.SaveChanges();
-
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        #endregion
-
         #region BRAND
         public List<Brand> GetBrands(int customerId)
         {

@@ -1,0 +1,30 @@
+﻿    <!--------1st row starts here---------->
+<div class="row col-md-12">
+
+    <!--Image view-->
+    <div class="col-md-4 col-sm-12">
+        @await Html.PartialAsync("~/Views/Product/_ProductImage.cshtml")
+    </div>
+    <!--Image view end------>
+    <!-----ProductInfo view----->
+    <div class="col-md-8 col-sm-12">
+        @await Html.PartialAsync("~/Views/Product/_ProductDetails.cshtml")
+    </div>
+    <!------Product infi view end here ------>
+</div>
+<!------1st row ends   here-->
+<!--------2nd row starts here---------->
+<!---need to write logic for different product description view-->
+<div class="card col-12">
+    @await Html.PartialAsync("~/Views/ProductDescription/_LaptopDescription.cshtml")
+</div>
+
+<!------2nd row ends   here-->
+
+
+
+
+
+@section Footer{
+    <partial name="_FooterPartial" />
+}

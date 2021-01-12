@@ -1,4 +1,4 @@
-﻿@model StoreShop.Data.ProductTypeModel
+﻿@model StoreShop.Data.CustomerProductTypeModel
 
 <script>
     $(function () {
@@ -8,17 +8,19 @@
 
 
 <!----- ----------------Modal body-------------------------------->
-@Html.HiddenFor(m => m.ProductTypeId)
+@Html.HiddenFor(m => m.CustomerProductTypeId)
 <div class=" form-group row">
     <label class="col-lg-5">Product Type Name<span class="">*</span>:</label>
     <div class="col-lg-7">
-        @Html.TextBoxFor(m => m.ProductTypeName, new { @class = "form-control", @required = "true" })
-        <span style="color:red"> @Html.ValidationMessageFor(m => m.ProductTypeName)</span>
+        @Html.DropDownListFor(m=>m.MasProductTypeId, new SelectList(Model.ProductTypes,"Value","Text"),"--Select Product Type--", new { @class = "form-control", @required = "true" })
+        @*@Html.TextBoxFor(m => m.ProductTypeName, new { @class = "form-control", @required = "true" })*@
+        <span style="color:red"> @Html.ValidationMessageFor(m => m.MasProductTypeId)</span>
     </div>
 </div>
 
 <!--------------------------Modal Footer--------------------->
 <div class="modal-footer">
+    <span id="spnValidationMesage" style="color:red"></span>
     <button type="submit" class="btn btn-primary" id="btnSaveProductType">Save</button>
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 </div>

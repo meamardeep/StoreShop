@@ -33,7 +33,9 @@
 <div class="border shadow rounded-lg  align-items-center mt-5" style="background-color: #b3ccff;">
 
 
-    @using (Html.BeginForm("LogOnWithOTP", "Account", FormMethod.Post))
+    @*@using (Html.BeginForm("LogOnWithOTP", "Account", FormMethod.Post))*@
+    @using (Html.BeginForm("", "", FormMethod.Post))
+
     {
         <div class="form-group d-flex justify-content-center" style="background-color: aliceblue; ">
             <h4>Login</h4>
@@ -41,7 +43,7 @@
 
         <div class="form-group pl-5 pr-5">
             <div>
-                @Html.TextBoxFor(m => m.CellNo, new { @class = "form-control", @required = "true", @placeholder = "Phone number" })
+                @Html.TextBoxFor(m => m.CellNo, new { @class = "form-control", @placeholder = "Phone number" })
                 <span id="spanCellNo" style="color:red"> @Html.ValidationMessageFor(m => m.CellNo)</span>
                 <span class="text-danger" id="OTPSuccessMessage"></span>
 
@@ -77,11 +79,6 @@
         </div>
     }
 </div>
-
-
-
-
-
 
 
 @section Scripts{ 

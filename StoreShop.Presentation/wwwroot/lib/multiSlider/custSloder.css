@@ -1,0 +1,37 @@
+#exampleSlider {
+    position: relative;      /* recommended */
+}
+#exampleSlider .MS-content {
+    white-space: nowrap;     /* required */
+    overflow: hidden;        /* required */
+    margin: 0 5%;            /* makes room for L/R arrows */
+}
+#exampleSlider .MS-content .item {
+    display: inline-block;   /* required */
+    width: 20%;              /* required * Determines number of visible slides */
+    position: relative;      /* required */
+    vertical-align: top;     /* required */
+    overflow: hidden;        /* required */
+    height: 100%;            /* recommended */
+    white-space: normal;     /* recommended */
+}
+#exampleSlider .MS-controls button {
+    position: absolute;      /* recommended */
+    top: 35px;
+}
+    /*#exampleSlider .MS-controls .MS-left {
+        left: 10px;
+    }*/
+
+#exampleSlider .MS-controls .MS-right {
+    right: 10px;
+
+}
+.left-position {
+    left: -10px;
+    position: absolute;
+}
+.right-position {
+    right: 10px;
+    position: absolute;
+}

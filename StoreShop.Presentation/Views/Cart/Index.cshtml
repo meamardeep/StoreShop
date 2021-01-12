@@ -1,0 +1,32 @@
+﻿<div class="row ml-1 col-md-12 col-sm-12">
+    <div class="border col-md-9 col-sm-9 card">
+        <h4 class="card-title">My cart(2) </h4>
+        <div class="modal-footer"></div>
+
+        @await Html.PartialAsync("~/Views/Cart/_CartItem.cshtml")
+        <div class="modal-footer"></div>
+        @await Html.PartialAsync("~/Views/Cart/_CartItem.cshtml")
+
+        <div class="modal-footer">
+            <h5>Subtotal (1 item) : &#8377;47,899.00</h5>
+        </div>
+
+    </div>
+
+    <!---------Right pannel---------->
+    <div class="col-md-3 col-sm-3">
+        <div class="card form-group card-body">
+            <h6>
+                <i class="fa fa-shield text-primary"></i>
+                <span class="text-muted">Safe and Secure Payments.Easy returns.100% Authentic products.</span>
+            </h6>
+        </div>
+        <div class="card card-body">
+            <h5>Subtotal(1 Item): &#8377;47,899.00</h5>
+            <span class="form-group"><input type="checkbox" /> This order contains a gift</span>
+            <button class="btn btn-primary">Proceed to buy</button>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,49 @@
+﻿@model List<MobileCardModel>
+<script>
+    $(function () {
+
+    })
+</script>
+
+@*<div class="row">
+        <div class=" col-lg-3 col-md-4 col-sm-6">
+            <div class="card form-group">
+                @{
+                    foreach (var item in Model)
+                    {
+                        @await Html.PartialAsync("~/Views/Product/Mobile/_SingleMobileCard.cshtml", item)
+
+                    }
+                }
+            </div>
+        </div>
+    </div>*@
+
+
+<div class="d-flex">
+
+    <div class="col-md-2">
+        <div class="card prodCard">
+            <div class="card-header font-weight-bold">Filters</div>
+        </div>
+        @await Html.PartialAsync("~/Views/Filters/_PriceFilter.cshtml")
+        @await Html.PartialAsync("~/Views/Filters/_SizeFilter.cshtml")
+        @await Html.PartialAsync("~/Views/Filters/_ClothBrandFilter.cshtml")
+
+    </div>
+
+    <div class="col-md-10">
+        @*these are product cars*@
+        @await Html.PartialAsync("~/Views/Product/Mobile/_SingleMobileCard.cshtml")
+        @await Html.PartialAsync("~/Views/Product/Mobile/_SingleMobileCard.cshtml")
+        @await Html.PartialAsync("~/Views/Product/Mobile/_SingleMobileCard.cshtml")
+    </div>
+
+</div>
+
+
+@section Footer{
+    <partial name="_FooterPartial" />
+}
+
+

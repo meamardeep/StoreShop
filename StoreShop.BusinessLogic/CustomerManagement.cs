@@ -84,39 +84,6 @@ namespace StoreShop.BusinessLogic
         }
         #endregion
 
-        #region Product Type Management
-
-        public List<ProductTypeModel> GetProductTypes(int customerId)
-        {
-             List<ProductType> productTypes = _customerRepo.GetProductTypes(customerId);
-            return _mapper.Map<List<ProductTypeModel>>(productTypes);
-        }
-
-        public ProductTypeModel GetProductType(int productTypeId)
-        {
-            ProductType productType = _customerRepo.GetProductType(productTypeId);
-            return _mapper.Map<ProductTypeModel>(productType);
-        }
-        public void CreateProductType(ProductTypeModel model)
-        {
-            ProductType productType = _mapper.Map<ProductType>(model);
-            _customerRepo.CreateProductType(productType);
-        }
-
-        public void UpdateProductType(ProductTypeModel model)
-        {
-            ProductType productType = _customerRepo.GetProductType(model.ProductTypeId);
-            productType.ProductTypeName = model.ProductTypeName;
-            _customerRepo.UpdateProductType(productType);
-        }
-
-        public void DeleteProductType(int productTypeId)
-        {
-            ProductType productType = _customerRepo.GetProductType(productTypeId);
-            _customerRepo.DeleteProductType(productType);
-        }
-        #endregion
-
         #region Brand CRUD Management
         public List<BrandModel> GetBrands(int customerId)
         {

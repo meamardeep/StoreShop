@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\Product\Accessories\" />
     <Folder Include="wwwroot\img\ProfilePhoto\" />
     <Folder Include="wwwroot\lib\font-awesome\" />
     <Folder Include="wwwroot\lib\jqueryUI\" />

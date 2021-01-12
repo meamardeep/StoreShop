@@ -55,6 +55,9 @@ namespace StoreShop.Presentation
 
             services.AddScoped<IStoreManagement, StoreManagement>();
             services.AddScoped<IStoreRepo, StoreRepo>();
+
+            services.AddScoped<IProductManagement, ProductManagement>();
+            services.AddScoped<IProductRepo, ProductRepo>();
             #endregion
 
             services.AddSession(options =>
@@ -87,7 +90,7 @@ namespace StoreShop.Presentation
         {
             if (env.IsDevelopment())
             {
-                //app.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage();
             }
             else
             {
@@ -95,7 +98,6 @@ namespace StoreShop.Presentation
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseExceptionHandler("/Home/Error");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -129,7 +131,7 @@ namespace StoreShop.Presentation
             CreateMap<User, UserModel>().ReverseMap();
             CreateMap<Store, StoreModel>().ReverseMap();
             CreateMap<Address, AddressModel>().ReverseMap();
-            CreateMap<ProductType, ProductTypeModel>().ReverseMap();
+            CreateMap<CustomerProductType, CustomerProductTypeModel>().ReverseMap();
             CreateMap<Product, ProductModel>().ReverseMap();
             CreateMap<Brand, BrandModel>().ReverseMap();
             CreateMap<ExceptionLog, ExceptionLogModel>().ReverseMap();

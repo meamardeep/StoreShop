@@ -23,10 +23,13 @@ function showStoreWindow(storeId) {
 function saveStore() {
     var storeModel = new StoreModel();
     var url = "/setting/SaveStore";
-    $.post(url, storeModel, function (data) {
-        if (data) {
+    let amar;
+    $.post(url, storeModel, function (htmlData) {
+        if (htmlData) {
+            amar = htmlData;
             closePopup();
             showToastMessage("Store saved successfully");
+            $("#divStoreList").html(htmlData);
         }
     });  
 }
@@ -79,9 +82,13 @@ function saveProductType() {
     }
     var url = "/setting/saveProductType";
     $.post(url, productTypeModel, function (data) {
-        closePopup();
-        showToastMessage("Product Type saved successfully");
-        $("#divProductTypeList").html(data);
+            closePopup();
+            showToastMessage("Product Type saved successfully");
+            $("#divProductTypeList").html(data);
+
+    }).fail(function (failedRes) {
+        $("#spnValidationMesage").html("Failed to save product type!!");
+
     });
 }
 
@@ -98,9 +105,15 @@ function saveBrand() {
         this.BrandName = $("#BrandName").val();
     }
     var url = "/setting/saveBrand";
-    $.post(url, brandModel, function (data) {
-        closePopup();
-        showToastMessage("Brand saved successfully");
+    $.post(url, brandModel, function (htmlData) {
+        if (htmlData) {
+            closePopup();
+            showToastMessage("Brand saved successfully");
+            $("#divBrandList").html(htmlData);
+        }
+    }).fail(function (failedRes) {
+        $("#spnValidationMesage").html("Failed to save brand!!");
+
     });
 }
 
@@ -121,12 +134,25 @@ function saveUser() {
         this.BrandName = $("#UserName").val();
     }
     var url = "/setting/saveUser";
-    $.post(url, userModel, function (data) {
-        closePopup();
-        showToastMessage("User saved successfully");
+    $.post(url, userModel, function (htmlData) {
+        if (htmlData) {
+            closePopup();
+            showToastMessage("User saved successfully");
+            $("#divUserList").html(htmlData);
+        }
+
+    }).fail(function (failedRes) {
+        $("#spnValidationMesage").html("Failed to save user!!");
+
     });
 }
+//--------------Add new product ---------------
+function showAddNewProductWindow(productId) {
+    let url = "/setting/showNewProductWindow?productId=" + productId;
+    let title = productId > 0 ? "Edit Product" : "New Product";
+    showAjaxPopup(url, title); 
 
+}
 
 
 
