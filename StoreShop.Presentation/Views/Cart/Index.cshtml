@@ -1,11 +1,17 @@
-﻿<div class="row ml-1 col-md-12 col-sm-12">
-    <div class="border col-md-9 col-sm-9 card">
-        <h4 class="card-title">My cart(2) </h4>
-        <div class="modal-footer"></div>
+﻿@model List<CartItemModel>
 
-        @await Html.PartialAsync("~/Views/Cart/_CartItem.cshtml")
-        <div class="modal-footer"></div>
-        @await Html.PartialAsync("~/Views/Cart/_CartItem.cshtml")
+<div class="row ml-1 col-md-12 col-sm-12">
+    <div class="border col-md-9 col-sm-9 card">
+        <h4 class="card-title">My cart(@Model.Count) </h4>
+        @{
+            foreach (var item in Model)
+            {
+                <div class="modal-footer"></div>
+                @await Html.PartialAsync("~/Views/Cart/_CartItem.cshtml", item)
+            }
+        }
+        @*<div class="modal-footer"></div>
+        @await Html.PartialAsync("~/Views/Cart/_CartItem.cshtml")*@
 
         <div class="modal-footer">
             <h5>Subtotal (1 item) : &#8377;47,899.00</h5>

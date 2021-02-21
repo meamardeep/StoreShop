@@ -107,6 +107,13 @@ namespace StoreShop.Data
     }
 
 
-    
+    public class CartItemModel
+    {
+        public int CartItemId { get; set; }
+        public long ProductId { get; set; }
+        public long UserId { get; set; }
+        public ProductModel Product { get; set; }
+        public UserModel User { get; set; }
+    }
 
 }

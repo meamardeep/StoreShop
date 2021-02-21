@@ -97,6 +97,17 @@ namespace StoreShop.DataAccess
         
     }
 
-
+    [Table("CartItems")]
+    public class CartItem
+    {
+        [Column("Id")]
+        public int CartItemId { get; set; }
+        [ForeignKey("Product")]
+        public long ProductId { get; set; }
+        [ForeignKey("User")]
+        public long UserId { get; set; }
+        public Product Product { get; set; }
+        public User User { get; set; }
+    }
        
 }

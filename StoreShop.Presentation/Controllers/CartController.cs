@@ -3,14 +3,24 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using StoreShop.BusinessLogic;
+using StoreShop.Data;
 
 namespace StoreShop.Presentation.Controllers
 {
-    public class CartController : Controller
+    public class CartController : ControllerBase
     {
+        private readonly CartManagement _cartManagement;
+        UserSessionModel UserSession;
+        public CartController(CartManagement cartManagement)
+        {
+            _cartManagement = cartManagement;
+            UserSession = GetUserSession();
+        }
         public IActionResult Index()
         {
-            return View();
+            List<CartItemModel> models = _cartManagement.GetCartItems(UserSession.SessionUserId);
+            return View(models) ;
         }
     }
 }

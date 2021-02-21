@@ -58,6 +58,9 @@ namespace StoreShop.Presentation
 
             services.AddScoped<IProductManagement, ProductManagement>();
             services.AddScoped<IProductRepo, ProductRepo>();
+
+            services.AddScoped<ICartManagement, CartManagement>();
+            services.AddScoped<ICartRepo, CartRepo>();
             #endregion
 
             services.AddSession(options =>

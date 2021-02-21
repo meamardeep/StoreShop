@@ -43,5 +43,6 @@ namespace StoreShop.DataAccess
         public DbSet<ExceptionLog> ExceptionLogs { get; set; }
 
         //public DbSet<IdentityUser> IdentityUsers { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
     }
 }
