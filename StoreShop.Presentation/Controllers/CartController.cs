@@ -10,9 +10,9 @@ namespace StoreShop.Presentation.Controllers
 {
     public class CartController : ControllerBase
     {
-        private readonly CartManagement _cartManagement;
+        private readonly ICartManagement _cartManagement;
         UserSessionModel UserSession;
-        public CartController(CartManagement cartManagement)
+        public CartController(ICartManagement cartManagement)
         {
             _cartManagement = cartManagement;
             UserSession = GetUserSession();

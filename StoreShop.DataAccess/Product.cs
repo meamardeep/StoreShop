@@ -9,7 +9,7 @@ namespace StoreShop.DataAccess
     public class Product
     {
         [Key]
-        public int ProductId { get; set; }
+        public long ProductId { get; set; }
         public string ProductName { get; set; }
         public string ModelName { get; set; }
         public string ProductQRCode{ get; set; }

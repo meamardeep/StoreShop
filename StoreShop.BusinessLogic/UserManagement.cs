@@ -156,7 +156,7 @@ namespace StoreShop.BusinessLogic
             user.LastName = model.LastName;
             user.GenderId = model.GenderId;
             user.CellNo = model.CellNo;
-            user.DOB = model.DOB;
+            //user.DOB = model.DOB;
             user.ModifiedBy = sessionUserId;
             user.ModifiedDate = DateTime.Now;
             _userRepo.UpdateUser(user);

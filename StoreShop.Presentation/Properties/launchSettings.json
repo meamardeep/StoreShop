@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iis": {
-      "applicationUrl": "http://localhost/StoreShop.Presentation",
+      "applicationUrl": "http://local.storeshop.com/Account/Index",
       "sslPort": 0
     },
     "iisExpress": {
@@ -21,13 +21,12 @@
       "sqlDebugging": true,
       "nativeDebugging": false
     },
-    "Reservation": {
-      "commandName": "Project",
+    "IIS": {
+      "commandName": "IIS",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "https://localhost:5001;http://localhost:5000"
+      }
     }
   }
 }

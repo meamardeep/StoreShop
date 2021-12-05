@@ -20,7 +20,7 @@ namespace StoreShop.DataAccess
         public long CellNo { get; set; }
         public int? OTP { get; set; }
         public bool? LoginAttemptCounter { get; set; }
-        public DateTime? DOB { get; set; }
+        //public DateTime? DOB { get; set; }
 
         public int RoleId { get; set; }
 

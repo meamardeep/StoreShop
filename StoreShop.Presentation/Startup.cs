@@ -14,6 +14,7 @@ using StoreShop.DataAccess;
 using StoreShop.Presentation.Controllers;
 using StoreShop.Repository;
 using System;
+using StoreShop.Presentation.Support;
 
 namespace StoreShop.Presentation
 {
@@ -45,23 +46,9 @@ namespace StoreShop.Presentation
             services.AddDistributedMemoryCache();           
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            #region Dependancy Injection
-            services.AddScoped<IUserManagement,UserManagement>();
-            services.AddScoped<IUserRepo, UserRepo>();
-
-            services.AddScoped<ICustomerManagement, CustomerManagement>();           
-            //services.AddScoped<ICustomerManagement>(s => new CustomerManagement(ControllerBase.GetUserSession()));
-            services.AddScoped<ICustomerRepo, CustomerRepo>();
-
-            services.AddScoped<IStoreManagement, StoreManagement>();
-            services.AddScoped<IStoreRepo, StoreRepo>();
-
-            services.AddScoped<IProductManagement, ProductManagement>();
-            services.AddScoped<IProductRepo, ProductRepo>();
-
-            services.AddScoped<ICartManagement, CartManagement>();
-            services.AddScoped<ICartRepo, CartRepo>();
-            #endregion
+            // Dependancy Injection           
+            services.RegisterDI();            
+            
 
             services.AddSession(options =>
             {
@@ -110,7 +97,6 @@ namespace StoreShop.Presentation
             app.UseAuthentication();
             app.UseAuthorization();// for identity service
 
-
             //The order of middleware is important. Call UseSession() after UseRouting and before UseEndpoints.
             app.UseSession();
             SessionManager.Services = app.ApplicationServices;
@@ -126,18 +112,5 @@ namespace StoreShop.Presentation
         }
     }
 
-    public class MappingProfile : Profile
-    {
-        public MappingProfile()
-        {
-            CreateMap<Customer, CustomerModel>().ReverseMap();
-            CreateMap<User, UserModel>().ReverseMap();
-            CreateMap<Store, StoreModel>().ReverseMap();
-            CreateMap<Address, AddressModel>().ReverseMap();
-            CreateMap<CustomerProductType, CustomerProductTypeModel>().ReverseMap();
-            CreateMap<Product, ProductModel>().ReverseMap();
-            CreateMap<Brand, BrandModel>().ReverseMap();
-            CreateMap<ExceptionLog, ExceptionLogModel>().ReverseMap();
-        }
-    }
+    
 }
