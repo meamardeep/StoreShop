@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iis": {
-      "applicationUrl": "http://local.storeshop.com/Account/Index",
+      "applicationUrl": "http://storeshop.localhost.com/Account/Index",
       "sslPort": 0
     },
     "iisExpress": {
