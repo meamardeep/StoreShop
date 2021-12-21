@@ -46,7 +46,7 @@ namespace StoreShop.Repository
             return sql.FirstOrDefault();
         }
         
-        public IEnumerable<User> GetUsers()
+        public IQueryable<User> GetUsers()
         {
             var sql = from u in _database.Users
                       select u;
