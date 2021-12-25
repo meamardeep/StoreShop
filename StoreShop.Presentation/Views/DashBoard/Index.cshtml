@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = "Layout/_LayoutWithLeftNavigation";
+    Layout = "Layout/_Layout";
 }
 <script>
     $(function () {
@@ -39,6 +39,68 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
+
+
+
+
+    <!-----------FOR DEMO--------------->
+    
+<div class="d-flex">
+    <!-------left side filters-------------->
+    <div class="col-md-2 w-100" style="width:610px;margin-left:-13px;">
+        <div class="card ">
+            <div class="card-header bg-white font-weight-bold "><h5>Filters</h5></div>
+        </div>
+        @await Html.PartialAsync("~/Views/Filters/_PriceFilter.cshtml")
+        @await Html.PartialAsync("~/Views/Filters/_SizeFilter.cshtml")
+        @await Html.PartialAsync("~/Views/Filters/_ClothBrandFilter.cshtml")
+    </div>
+
+    <!-----------these are product cars----------->
+    <div class="col-md-10 w-100">
+        <div class="row">
+
+            <div class=" col-lg-3 col-md-3 col-sm-6">
+                <div class="card form-group prodCard">
+                    @await Html.PartialAsync("~/Views/Product/Clothing/_SingleClothCard.cshtml")
+                </div>
+            </div>
+
+            <div class=" col-lg-3 col-md-3 col-sm-6">
+                <div class="card form-group prodCard">
+                    @await Html.PartialAsync("~/Views/Product/Clothing/_SingleClothCard.cshtml")
+                </div>
+            </div>
+
+            <div class=" col-lg-3 col-md-3 col-sm-6">
+                <div class="card form-group prodCard">
+                    @await Html.PartialAsync("~/Views/Product/Clothing/_SingleClothCard.cshtml")
+                </div>
+            </div>
+
+            <div class=" col-lg-3 col-md-3 col-sm-6">
+                <div class="card form-group prodCard">
+                    @await Html.PartialAsync("~/Views/Product/Clothing/_SingleClothCard.cshtml")
+                </div>
+            </div>
+
+            <div class=" col-lg-3 col-md-3 col-sm-6">
+                <div class="card form-group prodCard">
+                    @await Html.PartialAsync("~/Views/Product/Clothing/_SingleClothCard.cshtml")
+                </div>
+            </div>
+
+            <div class=" col-lg-3 col-md-3 col-sm-6">
+                <div class="card form-group prodCard">
+                    @await Html.PartialAsync("~/Views/Product/Clothing/_SingleClothCard.cshtml")
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 </div>
 
 

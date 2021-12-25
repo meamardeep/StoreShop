@@ -4,10 +4,11 @@ using System.Text;
 
 namespace StoreShop.Data
 {
-    public class UtilityModel
+    public static class UtilityModel
     {
-    }
+        public const string PROFILE_CONTAINER = "profile-pics";
 
+    }
     public class DropDownItem
     {
         public int Value { get; set; }

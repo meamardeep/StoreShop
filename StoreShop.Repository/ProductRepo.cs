@@ -27,6 +27,8 @@ namespace StoreShop.Repository
             return _database.CustomerProductTypes
                 .Include(m => m.MasProductType)
                 .Where(p => p.CustomerId == customerId).ToList();
+            //return _database.MasProductTypes
+            //    .Where(p => p.CustomerId == customerId).ToList();
         }
 
         public CustomerProductType GetProductType(int productTypeId)

@@ -2,27 +2,6 @@
     Layout = "Layout/_Layout";
 }
 
-<div class=" d-flex">
-    <div class="sticky-top col-md-2 flex-column leftNav form-group shadow" style="height : calc(100vh - 116px); top:104px;">
-        <button class="leftNavItem  form-control-plaintext m-1 dropdown-item text-primary"><i class="fa fa-tachometer"></i> Dashboard</button>
-        <div class="leftNavItem  form-control-plaintext m-1 dropdown-item text-primary"><i class="fa fa-cab"></i> Charging Stations</div>
-        <div class="leftNavItem  form-control-plaintext m-1 dropdown-item text-primary" data-toggle="collapse" data-target="#newProductOptions"><i class="fa fa-product-hunt"></i> New Product <i class="fa fa-angle-down float-right"></i></div>
-        <div class="collapse shadow bg-light" id="newProductOptions" style="z-index:1;" data-toggle="popover">
-            <ul>
-                <li>hi </li>
-                <li>hello</li>
-            </ul>
-        </div>
-        <div class="leftNavItem  form-control-plaintext m-1 dropdown-item text-primary"><i class="fa fa-briefcase"></i> HRM</div>
-        <div class="leftNavItem  form-control-plaintext m-1 dropdown-item text-primary"><i class="fa fa-rupee"></i> Payment</div>
-        <a class="leftNavItem  form-control-plaintext m-1 dropdown-item text-primary" asp-action="index" asp-controller="setting"><i class="fa fa-cog"></i> Settings</a>
-
-    </div>
-
-    <div class="col-md-10">
-        @RenderBody()
-    </div>
-</div>
 
 
 @{ 

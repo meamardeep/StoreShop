@@ -16,6 +16,7 @@
     <ProjectReference Include="..\StoreShop.DataAccess\StoreShop.DataAccess.csproj" />
     <ProjectReference Include="..\StoreShop.Data\StoreShop.Data.csproj" />
     <ProjectReference Include="..\StoreShop.Repository\StoreShop.Repository.csproj" />
+    <ProjectReference Include="..\StoreShop.Storage\StoreShop.Storage.csproj" />
   </ItemGroup>
 
 </Project>

@@ -66,8 +66,8 @@
             <div><a class="text-white text-decoration-none font-weight-bold" asp-action="ShowTelevisionCards" asp-controller="product">Audio</a></div>
 
             @*<div class="input-group">
-                    <input class="" id="inpSearchItem" type="text" placeholder="Search for products, brands and more" />
-                    <span class="input-group-text"><i class="fa fa-search"></i></span>
+                <input class="" id="inpSearchItem" type="text" placeholder="Search for products, brands and more" />
+                <span class="input-group-text"><i class="fa fa-search"></i></span>
                 </div>*@
 
             <div class="d-flex">
@@ -127,19 +127,22 @@
         </nav>
     </header>
 
-    <aside>
-    </aside>
-    <section class="">
-        <main role="main">
-            @RenderBody()
-        </main>
-    </section>
+    <main role="main">
+        <div class=" d-flex">
+            @await Html.PartialAsync("~/Views/Shared/_LeftNavigation.cshtml")
+
+            <div class="col stop-scrolling">
+                @RenderBody()
+            </div>
+        </div>
+    </main>
+
+
 
     <footer class="text-decoration-none text-white">
-        
         @RenderSection("Footer", required: false)
-
     </footer>
+
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)

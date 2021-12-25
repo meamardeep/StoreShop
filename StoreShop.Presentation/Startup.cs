@@ -15,6 +15,10 @@ using StoreShop.Presentation.Controllers;
 using StoreShop.Repository;
 using System;
 using StoreShop.Presentation.Support;
+using Microsoft.Extensions.Azure;
+using Azure.Storage.Queues;
+using Azure.Storage.Blobs;
+using Azure.Core.Extensions;
 
 namespace StoreShop.Presentation
 {
@@ -71,8 +75,15 @@ namespace StoreShop.Presentation
 
             //Bult-in identity service     
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<StoreShopDataContext>();
+            services.AddAzureClients(builder =>
+            {
+                builder.AddBlobServiceClient(Configuration["AzuriteConnectionString:blob"], preferMsi: true);
+                builder.AddQueueServiceClient(Configuration["AzuriteConnectionString:queue"], preferMsi: true);
+            });
 
-           
+            //services.AddSingleton(_=> 
+            //return new BlobServiceClient(Configuration.Get
+            //)
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -111,6 +122,31 @@ namespace StoreShop.Presentation
             
         }
     }
+    internal static class StartupExtensions
+    {
+        public static IAzureClientBuilder<BlobServiceClient, BlobClientOptions> AddBlobServiceClient(this AzureClientFactoryBuilder builder, string serviceUriOrConnectionString, bool preferMsi)
+        {
+            if (preferMsi && Uri.TryCreate(serviceUriOrConnectionString, UriKind.Absolute, out Uri serviceUri))
+            {
+                return builder.AddBlobServiceClient(serviceUri);
+            }
+            else
+            {
+                return builder.AddBlobServiceClient(serviceUriOrConnectionString);
+            }
+        }
+        public static IAzureClientBuilder<QueueServiceClient, QueueClientOptions> AddQueueServiceClient(this AzureClientFactoryBuilder builder, string serviceUriOrConnectionString, bool preferMsi)
+        {
+            if (preferMsi && Uri.TryCreate(serviceUriOrConnectionString, UriKind.Absolute, out Uri serviceUri))
+            {
+                return builder.AddQueueServiceClient(serviceUri);
+            }
+            else
+            {
+                return builder.AddQueueServiceClient(serviceUriOrConnectionString);
+            }
+        }
+    }
 
-    
+
 }

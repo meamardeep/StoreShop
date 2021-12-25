@@ -13,6 +13,7 @@ using System.Web;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using System.Linq;
+using StoreShop.Storage;
 
 namespace StoreShop.BusinessLogic
 {
@@ -22,12 +23,14 @@ namespace StoreShop.BusinessLogic
         private IMapper _mapper;
         private UserSessionModel userSession;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly AzureStorageHelper _azureStorageHelper;
         public UserManagement(IUserRepo user, IMapper mapper,IWebHostEnvironment webHostEnvironment)
         {
             _userRepo = user;
             _mapper = mapper;
             _webHostEnvironment = webHostEnvironment;
             //userSession = ControllerBase.
+            _azureStorageHelper = new AzureStorageHelper();
         }
 
         public UserModel GetUser(string userName, string password)
@@ -129,6 +132,16 @@ namespace StoreShop.BusinessLogic
 
             if (model.ProfilePhoto != null)
             {
+                //upload profile pic to azure
+                //using (var ms = new MemoryStream())
+                //{
+                //    model.ProfilePhoto.CopyTo(ms);
+                //    _azureStorageHelper.CreateBlob(UtilityModel.PROFILE_CONTAINER, model.ProfilePhoto.FileName, ms);
+                //}
+                _azureStorageHelper.CreateBlob(UtilityModel.PROFILE_CONTAINER, model.ProfilePhoto.FileName, model.ProfilePhoto.OpenReadStream());
+
+
+
                 var absoluteUploadDirPath =  Path.Combine(_webHostEnvironment.WebRootPath, "img/ProfilePhoto");
                 var  profilePhotoName = Guid.NewGuid().ToString() +"_" + model.ProfilePhoto.FileName;//image file name in "img/ProfilePhoto"
                 var absoluteUserProfilePhotoPath = Path.Combine(absoluteUploadDirPath, profilePhotoName);
