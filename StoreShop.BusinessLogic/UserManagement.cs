@@ -132,37 +132,22 @@ namespace StoreShop.BusinessLogic
 
             if (model.ProfilePhoto != null)
             {
-                //upload profile pic to azure
-                //using (var ms = new MemoryStream())
-                //{
-                //    model.ProfilePhoto.CopyTo(ms);
-                //    _azureStorageHelper.CreateBlob(UtilityModel.PROFILE_CONTAINER, model.ProfilePhoto.FileName, ms);
-                //}
-                _azureStorageHelper.CreateBlob(UtilityModel.PROFILE_CONTAINER, model.ProfilePhoto.FileName, model.ProfilePhoto.OpenReadStream());
+                string guid = _azureStorageHelper.CreateBlob(UtilityModel.PROFILE_CONTAINER, model.ProfilePhoto.FileName, model.ProfilePhoto.OpenReadStream());
 
-
-
-                var absoluteUploadDirPath =  Path.Combine(_webHostEnvironment.WebRootPath, "img/ProfilePhoto");
-                var  profilePhotoName = Guid.NewGuid().ToString() +"_" + model.ProfilePhoto.FileName;//image file name in "img/ProfilePhoto"
-                var absoluteUserProfilePhotoPath = Path.Combine(absoluteUploadDirPath, profilePhotoName);
-
-                using (var fileStream = new FileStream(absoluteUserProfilePhotoPath, FileMode.Create))
-                {
-                    model.ProfilePhoto.CopyTo(fileStream);
-                }
                 UserPhoto userPhoto = _userRepo.GetUserProfilePhoto(user.UserId);
                 if (userPhoto != null)
                 {
-                    userPhoto.ProfilePhotoPath = profilePhotoName;
+                    userPhoto.FileName = model.ProfilePhoto.FileName;
+                    userPhoto.Guid = guid;
                     _userRepo.UpdateUserProfilePhoto(userPhoto);
                 }
-                //UserPhoto userPhoto = new UserPhoto();
                 else {
-                    userPhoto.ProfilePhotoPath = profilePhotoName;
+                    userPhoto = new UserPhoto();
+                    userPhoto.FileName = model.ProfilePhoto.FileName;
+                    userPhoto.Guid = guid;
                     userPhoto.UserId = model.UserId;
-                    _userRepo.CreateUserProfilePhoto(userPhoto);
-                }
-                
+                    user.ProfilePhotoId =  _userRepo.CreateUserProfilePhoto(userPhoto);
+                }               
             }
 
             user.FirstName = model.FirstName;
@@ -179,7 +164,7 @@ namespace StoreShop.BusinessLogic
         {
             UserPhoto userPhoto = _userRepo.GetUserProfilePhoto(userId);
 
-            return userPhoto== null ? "" : userPhoto.ProfilePhotoPath ;
+            return userPhoto == null ? "" : "";//userPhoto.ProfilePhotoPath ;
         }
 
         public void DeleteUser(long userId)

@@ -21,14 +21,17 @@ namespace StoreShop.Storage
       }
 
         //upload blob to a container
-        public BlobContentInfo CreateBlob(string containerName, string fileName, Stream stream)
+        public string CreateBlob(string containerName, string fileName, Stream stream)
         {
             try
             {
-                //_containerClient = new BlobContainerClient(connectionString, containerName);
                 _containerClient = _blobServiceClient.GetBlobContainerClient(containerName);
-                BlobContentInfo blobContentInfo = _containerClient.UploadBlob(fileName, stream);
-                return blobContentInfo;
+
+                Guid guid = Guid.NewGuid();
+                var guidWithExtension = guid.ToString() + Path.GetExtension(fileName);
+                
+                BlobContentInfo blobContentInfo = _containerClient.UploadBlob(guidWithExtension, stream);
+                return guid.ToString();//blobContentInfo;
             }
             catch (Exception ex)
             {

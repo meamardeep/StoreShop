@@ -58,7 +58,8 @@ namespace StoreShop.Repository
         #region USER CRUD
         public User GetUser(long userId)
         {
-           return  _database.Users.Where(u => u.UserId == userId).Include(c=>c.Customer).FirstOrDefault();
+           return  _database.Users.Where(u => u.UserId == userId).Include(c=>c.Customer)
+                .Include(up=>up.UserPhoto).FirstOrDefault();
         }
         public List<User> GetUsers(int customerId)
         {

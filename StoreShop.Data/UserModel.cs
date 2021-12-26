@@ -28,10 +28,12 @@ namespace StoreShop.Data
 
         public DateTime? CreatedDate { get; set; }
         public DateTime? ModifiedDate { get; set; }
-        public long? ModifiedBy { get; set; }
-        
+        public long? ModifiedBy { get; set; }       
         public int CountryCode { get; set; }                
         public List<int> CountryCodes { get; set; }
+
+        public long? ProfilePhotoId { get; set; }   
+        public UserPhotoModel UserPhotoModel { get; set; }  
         public int GenderId { get; set; }
         public List<DropDownItem> Genders
         {
@@ -50,9 +52,11 @@ namespace StoreShop.Data
     public class UserPhotoModel
     {        
         public long ProfilePhotoId { get; set; }
-        public byte[] Photo { get; set; }
-        public string PhotoName { get; set; }
+        //public byte[] Photo { get; set; }
+        //public string PhotoName { get; set; }
         public long UserId { get; set; }
+        public string Guid { get; set; }
+        public string FileName { get; set; }
 
     }
     public class UserStoreMapping

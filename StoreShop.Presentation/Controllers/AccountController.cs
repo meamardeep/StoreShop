@@ -204,7 +204,7 @@ namespace StoreShop.Presentation.Controllers
             SessionManager.RoleId = userModel.RoleId;
             SessionManager.CustomerId = userModel.CustomerId;
             SessionManager.CustomerName = userModel.Customer.CustomerName;
-            SessionManager.UserProfilePhotoPath = _userManagement.GetUserProfilePhoto(userModel.UserId);
+            //SessionManager.UserProfilePhotoPath = _userManagement.GetUserProfilePhoto(userModel.UserId);
         }
 
         public IActionResult Logout()
