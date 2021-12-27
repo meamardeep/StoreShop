@@ -9,7 +9,7 @@ namespace StoreShop.DataAccess
     public class Product
     {
         [Key]
-        public int ProductId { get; set; }
+        public long ProductId { get; set; }
         public string ProductName { get; set; }
         public string ModelName { get; set; }
         public string ProductQRCode{ get; set; }
@@ -97,6 +97,17 @@ namespace StoreShop.DataAccess
         
     }
 
-
+    [Table("CartItems")]
+    public class CartItem
+    {
+        [Column("Id")]
+        public int CartItemId { get; set; }
+        [ForeignKey("Product")]
+        public long ProductId { get; set; }
+        [ForeignKey("User")]
+        public long UserId { get; set; }
+        public Product Product { get; set; }
+        public User User { get; set; }
+    }
        
 }

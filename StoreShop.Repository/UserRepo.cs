@@ -46,7 +46,7 @@ namespace StoreShop.Repository
             return sql.FirstOrDefault();
         }
         
-        public IEnumerable<User> GetUsers()
+        public IQueryable<User> GetUsers()
         {
             var sql = from u in _database.Users
                       select u;
@@ -58,7 +58,8 @@ namespace StoreShop.Repository
         #region USER CRUD
         public User GetUser(long userId)
         {
-           return  _database.Users.Where(u => u.UserId == userId).Include(c=>c.Customer).FirstOrDefault();
+           return  _database.Users.Where(u => u.UserId == userId).Include(c=>c.Customer)
+                .Include(up=>up.UserPhoto).FirstOrDefault();
         }
         public List<User> GetUsers(int customerId)
         {
@@ -107,9 +108,10 @@ namespace StoreShop.Repository
             return _database.UserPhotos.Where(p => p.UserId == userId).FirstOrDefault();
         }
 
-        public void UpdateUserProfilePhoto(UserPhoto userPhoto)
+        public long? UpdateUserProfilePhoto(UserPhoto userPhoto)
         {
             _database.Entry(userPhoto).State = EntityState.Modified;
+            return userPhoto.ProfilePhotoId;
         }
 
         #endregion

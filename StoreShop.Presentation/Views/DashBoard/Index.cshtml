@@ -1,26 +1,110 @@
-﻿<script>
+﻿@{
+    Layout = "Layout/_Layout";
+}
+<script>
     $(function () {
-        //$('#exampleSlider').multislider({
-        //    interval: 2000
-        //    //slideAll: true
-        //});
+        $('#exampleSlider').multislider({
+            interval: 2000,
+            slideAll: true
+        });
     })
 </script>
 
-<div id="exampleSlider" class="d-flex">
-    <!-- Give wrapper ID to target with jQuery & CSS -->
-    <div class="MS-content d-flex" style="">
-        <div class="item "> <img src="~/img//SliderImg/womensDress.jpg" /> </div>
-        <div class="item "><img src="~/img/SliderImg/bigSale.jpg" /> </div>
-        <div class="item "> <img src="~/img/SliderImg/offer.jpg" /> </div>
+<div>
+    <!---bootstrap carosuole-->
+    <div id="carouselExampleIndicators" class="carousel slide col-lg-10 col-md-10" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active d-flex justify-content-center">
+                <img class="d-block w-100" src="~/img//SliderImg/womensDress.jpg" alt="First slide"/>
+            </div>
+            <div class="carousel-item d-flex justify-content-center">
+                <img class="d-block w-100" src="~/img/SliderImg/bigSale.jpg" alt="Second slide" />
+            </div>
+            <div class="carousel-item d-flex justify-content-center">
+                <img class="d-block w-100" src="~/img/SliderImg/offer.jpg" alt="Third slide" />
+            </div>
+        </div>
 
-        @*<div class="item "> item 1 </div>
-        <div class="item ">item 2</div>
-        <div class="item "> item 3 </div>*@
+        <a class="carousel-control-prev " href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span title="Previous" class=" carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span title="Next" class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+
+
+
+    <!-----------FOR DEMO--------------->
+    
+<div class="d-flex">
+    <!-------left side filters-------------->
+    <div class="col-md-2 w-100" style="width:610px;margin-left:-13px;">
+        <div class="card ">
+            <div class="card-header bg-white font-weight-bold "><h5>Filters</h5></div>
+        </div>
+        @await Html.PartialAsync("~/Views/Filters/_PriceFilter.cshtml")
+        @await Html.PartialAsync("~/Views/Filters/_SizeFilter.cshtml")
+        @await Html.PartialAsync("~/Views/Filters/_ClothBrandFilter.cshtml")
+    </div>
+
+    <!-----------these are product cars----------->
+    <div class="col-md-10 w-100">
+        <div class="row">
+
+            <div class=" col-lg-3 col-md-3 col-sm-6">
+                <div class="card form-group prodCard">
+                    @await Html.PartialAsync("~/Views/Product/Clothing/_SingleClothCard.cshtml")
+                </div>
+            </div>
+
+            <div class=" col-lg-3 col-md-3 col-sm-6">
+                <div class="card form-group prodCard">
+                    @await Html.PartialAsync("~/Views/Product/Clothing/_SingleClothCard.cshtml")
+                </div>
+            </div>
+
+            <div class=" col-lg-3 col-md-3 col-sm-6">
+                <div class="card form-group prodCard">
+                    @await Html.PartialAsync("~/Views/Product/Clothing/_SingleClothCard.cshtml")
+                </div>
+            </div>
+
+            <div class=" col-lg-3 col-md-3 col-sm-6">
+                <div class="card form-group prodCard">
+                    @await Html.PartialAsync("~/Views/Product/Clothing/_SingleClothCard.cshtml")
+                </div>
+            </div>
+
+            <div class=" col-lg-3 col-md-3 col-sm-6">
+                <div class="card form-group prodCard">
+                    @await Html.PartialAsync("~/Views/Product/Clothing/_SingleClothCard.cshtml")
+                </div>
+            </div>
+
+            <div class=" col-lg-3 col-md-3 col-sm-6">
+                <div class="card form-group prodCard">
+                    @await Html.PartialAsync("~/Views/Product/Clothing/_SingleClothCard.cshtml")
+                </div>
+            </div>
+
+        </div>
 
     </div>
-    <div class="MS-controls">
-        <button class="MS-left left-position" style=""><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
-        <button class="MS-right right-postition"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
-    </div>
+
 </div>
+</div>
+
+
+@section Scripts{
+
+    <partial name="_ValidationScriptsPartial" />
+}

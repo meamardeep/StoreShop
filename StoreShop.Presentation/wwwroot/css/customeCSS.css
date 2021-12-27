@@ -1,3 +1,47 @@
-﻿.amar:hover{
-    border-color: blue;
+﻿.active {
+   z-index: 1;
 }
+
+.leftNav {
+    /*    position: absolute;*/
+    /*position: fixed;*/ /* Make it stick, even on scroll */
+/*    border-right: 1px solid black;
+*/    background-color: white;
+    width:100%;
+    /*    top: 0;
+*/ /* bottom: 0;*/
+}
+
+    .leftNav:hover .leftNavItem:hover {
+        background-color: #007bff8a !important;
+        color: white;
+        
+        cursor: pointer;
+    }
+
+/*.amar {
+*//*    background-color: blue;
+*/    /*border-left: 4px solid green;*/
+    
+    /*background: linear-gradient(to right, red 50%, blue 50%);
+    background-size: 200% 100%;
+    background-position: left bottom;*/
+/*}*/
+.leftNavItem:focus {
+    background-color: #007bff8a !important;
+    color: white;
+}
+/*body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}*/
+
+/*.navbar-fixed-top {
+    top: 0;
+    border-width: 0 0 1px;
+}*/
+
+.card{
+/*    margin:1px;
+*/}

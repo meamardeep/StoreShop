@@ -13,6 +13,7 @@ using System.Web;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using System.Linq;
+using StoreShop.Storage;
 
 namespace StoreShop.BusinessLogic
 {
@@ -22,12 +23,14 @@ namespace StoreShop.BusinessLogic
         private IMapper _mapper;
         private UserSessionModel userSession;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly AzureStorageHelper _azureStorageHelper;
         public UserManagement(IUserRepo user, IMapper mapper,IWebHostEnvironment webHostEnvironment)
         {
             _userRepo = user;
             _mapper = mapper;
             _webHostEnvironment = webHostEnvironment;
             //userSession = ControllerBase.
+            _azureStorageHelper = new AzureStorageHelper();
         }
 
         public UserModel GetUser(string userName, string password)
@@ -126,37 +129,32 @@ namespace StoreShop.BusinessLogic
         public void UpdateUser(UserModel model,long sessionUserId)
         {
             User user = _userRepo.GetUser(model.UserId);
-
+            string guid ="";
             if (model.ProfilePhoto != null)
             {
-                var absoluteUploadDirPath =  Path.Combine(_webHostEnvironment.WebRootPath, "img/ProfilePhoto");
-                var  profilePhotoName = Guid.NewGuid().ToString() +"_" + model.ProfilePhoto.FileName;//image file name in "img/ProfilePhoto"
-                var absoluteUserProfilePhotoPath = Path.Combine(absoluteUploadDirPath, profilePhotoName);
-
-                using (var fileStream = new FileStream(absoluteUserProfilePhotoPath, FileMode.Create))
-                {
-                    model.ProfilePhoto.CopyTo(fileStream);
-                }
+                guid = _azureStorageHelper.CreateBlob(UtilityModel.PROFILE_CONTAINER, model.ProfilePhoto.FileName, model.ProfilePhoto.OpenReadStream());
+            }
                 UserPhoto userPhoto = _userRepo.GetUserProfilePhoto(user.UserId);
                 if (userPhoto != null)
                 {
-                    userPhoto.ProfilePhotoPath = profilePhotoName;
-                    _userRepo.UpdateUserProfilePhoto(userPhoto);
+                    userPhoto.FileName = model.ProfilePhoto.FileName;
+                    userPhoto.Guid = guid;
+                    user.ProfilePhotoId = _userRepo.UpdateUserProfilePhoto(userPhoto);
                 }
-                //UserPhoto userPhoto = new UserPhoto();
                 else {
-                    userPhoto.ProfilePhotoPath = profilePhotoName;
+                    userPhoto = new UserPhoto();
+                    userPhoto.FileName = model.ProfilePhoto.FileName;
+                    userPhoto.Guid = guid;
                     userPhoto.UserId = model.UserId;
-                    _userRepo.CreateUserProfilePhoto(userPhoto);
-                }
-                
-            }
+                    user.ProfilePhotoId =  _userRepo.CreateUserProfilePhoto(userPhoto);
+                }               
+            
 
             user.FirstName = model.FirstName;
             user.LastName = model.LastName;
             user.GenderId = model.GenderId;
             user.CellNo = model.CellNo;
-            user.DOB = model.DOB;
+            //user.DOB = model.DOB;
             user.ModifiedBy = sessionUserId;
             user.ModifiedDate = DateTime.Now;
             _userRepo.UpdateUser(user);
@@ -165,8 +163,7 @@ namespace StoreShop.BusinessLogic
         public string GetUserProfilePhoto(long userId)
         {
             UserPhoto userPhoto = _userRepo.GetUserProfilePhoto(userId);
-
-            return userPhoto== null ? "" : userPhoto.ProfilePhotoPath ;
+            return _azureStorageHelper.GetBlob(UtilityModel.PROFILE_CONTAINER, userPhoto.Guid + Path.GetExtension(userPhoto.FileName));
         }
 
         public void DeleteUser(long userId)

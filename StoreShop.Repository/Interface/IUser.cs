@@ -1,12 +1,13 @@
 ﻿using StoreShop.DataAccess;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace StoreShop.Repository
 {
     public interface IUserRepo
     {
-        IEnumerable<User> GetUsers();
+        IQueryable<User> GetUsers();
         User GetUser(string userName, string password);
         User GetUser(long cellNo, int userOTP);
         User GetUserByCellNo(long cellNo);
@@ -19,7 +20,7 @@ namespace StoreShop.Repository
         void DeleteUser(User user);
         long? CreateUserProfilePhoto(UserPhoto userPhoto);
         UserPhoto GetUserProfilePhoto(long userId);
-        void UpdateUserProfilePhoto(UserPhoto userPhoto);
+        long? UpdateUserProfilePhoto(UserPhoto userPhoto);
         #endregion
         void CreateExceptionLog(ExceptionLog log);
 

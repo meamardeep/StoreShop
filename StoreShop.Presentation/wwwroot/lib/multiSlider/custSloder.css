@@ -7,7 +7,7 @@
     margin: 0 5%;            /* makes room for L/R arrows */
 }
 #exampleSlider .MS-content .item {
-    display: inline-block;   /* required */
+    display: none;   /* required */
     width: 20%;              /* required * Determines number of visible slides */
     position: relative;      /* required */
     vertical-align: top;     /* required */
@@ -15,8 +15,12 @@
     height: 100%;            /* recommended */
     white-space: normal;     /* recommended */
 }
+.MS-content .item .active{
+    display:inline-block;
+
+}
 #exampleSlider .MS-controls button {
-    position: absolute;      /* recommended */
+    position: absolute; /* recommended */
     top: 35px;
 }
     /*#exampleSlider .MS-controls .MS-left {
@@ -30,8 +34,10 @@
 .left-position {
     left: -10px;
     position: absolute;
+    z-index:100;
 }
 .right-position {
     right: 10px;
     position: absolute;
+    z-index:100;
 }

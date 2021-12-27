@@ -1,22 +1,24 @@
-﻿<div class="d-flex">
+﻿@model CartItemModel
+
+<div class="d-flex">
     <!-----left panel---->
     <div class="col-md-3 col-sm-3">
         <img src="~/img/ProductImg/Laptop.jpg" class="w-100" />
     </div>
     <!----Middle pannel------>
     <div class="col-md-7 col-sm-7 flex-column">
-        <span>Dell Inspiron 3480 14-inch Thin & LightLaptop (8th Gen Intel Core <br />
-            i5-8265U/8GB/1TB HDD/Windows 10 + MS Office/Intel UMA Graphics/Silver)
+        <span>@Model.Product.ProductName <br />
+            (@Model.Product.ModelName)
         </span>
         <div class="d-flex">
-            <a class="" href="#">Delete </a>
+            <a class="" href="#" onclick="removeCartItem(@Model.CartItemId, @Model.ProductId)">Delete </a>
             <spn>&nbsp; | &nbsp;</spn>
-            <a class="" href="#"> Save for later</a>
+            <a class="" href="#" onclick=""> Save for later</a>
         </div>
     </div>
     <!-----Right pannel------->
     <div class="col-md-2 col-sm-2 d-flex justify-content-end">
-        &#8377;47,456.00
+        &#8377;@Model.Product.MRP
     </div>
 
 </div>

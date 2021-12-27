@@ -20,17 +20,19 @@ namespace StoreShop.DataAccess
         public long CellNo { get; set; }
         public int? OTP { get; set; }
         public bool? LoginAttemptCounter { get; set; }
-        public DateTime? DOB { get; set; }
+        //public DateTime? DOB { get; set; }
 
         public int RoleId { get; set; }
 
         [ForeignKey("Customer")]
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
-
         public DateTime? CreatedDate { get; set; }
         public DateTime? ModifiedDate { get; set; }
         public long? ModifiedBy { get; set; }
+       [ForeignKey("UserPhoto")]
+        public long? ProfilePhotoId { get; set; }
+        public UserPhoto UserPhoto { get; set; }
         public int? GenderId { get; set; }
     }
 
@@ -38,11 +40,13 @@ namespace StoreShop.DataAccess
     {
         [Key]
         public long ProfilePhotoId { get; set; }
-        public  byte[] Photo {get;set;}
-        public string PhotoName { get; set; }
+        //public  byte[] Photo {get;set;}
+        //public string PhotoName { get; set; }
         public long? UserId { get; set; }
-        public string ProfilePhotoPath { get; set; }
+        //public string ProfilePhotoPath { get; set; }
 
+        public string Guid { get; set; }
+        public string FileName { get; set; }
     }
     public class UserStoreMapping
     {
