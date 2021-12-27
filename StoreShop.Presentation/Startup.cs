@@ -52,7 +52,6 @@ namespace StoreShop.Presentation
 
             // Dependancy Injection           
             services.RegisterDI();            
-            
 
             services.AddSession(options =>
             {
@@ -81,9 +80,6 @@ namespace StoreShop.Presentation
                 builder.AddQueueServiceClient(Configuration["AzuriteConnectionString:queue"], preferMsi: true);
             });
 
-            //services.AddSingleton(_=> 
-            //return new BlobServiceClient(Configuration.Get
-            //)
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

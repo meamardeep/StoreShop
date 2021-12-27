@@ -14,11 +14,9 @@ namespace StoreShop.Storage
         string connectionString = "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://127.0.0.1:10000/devstoreaccount1;QueueEndpoint=http://127.0.0.1:10001/devstoreaccount1;";
 
         public AzureStorageHelper()
-      {
+        {
          _blobServiceClient = new BlobServiceClient(connectionString);
-            //_containerClient = new BlobContainerClient();
-            //_blobClient = new BlobClient();
-      }
+        }
 
         //upload blob to a container
         public string CreateBlob(string containerName, string fileName, Stream stream)
@@ -39,7 +37,12 @@ namespace StoreShop.Storage
             }
         
         }
-
+        public string GetBlob(string containerName, string guidWithExtension)
+        {
+            _containerClient = _blobServiceClient.GetBlobContainerClient(containerName);
+            _blobClient = _containerClient.GetBlobClient(guidWithExtension);
+            return _blobClient.Uri.ToString();  
+        }
         public BlobContentInfo UpdateBlob(string containerName, string fileName, Stream stream)
         {
             try

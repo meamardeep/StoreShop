@@ -129,17 +129,17 @@ namespace StoreShop.BusinessLogic
         public void UpdateUser(UserModel model,long sessionUserId)
         {
             User user = _userRepo.GetUser(model.UserId);
-
+            string guid ="";
             if (model.ProfilePhoto != null)
             {
-                string guid = _azureStorageHelper.CreateBlob(UtilityModel.PROFILE_CONTAINER, model.ProfilePhoto.FileName, model.ProfilePhoto.OpenReadStream());
-
+                guid = _azureStorageHelper.CreateBlob(UtilityModel.PROFILE_CONTAINER, model.ProfilePhoto.FileName, model.ProfilePhoto.OpenReadStream());
+            }
                 UserPhoto userPhoto = _userRepo.GetUserProfilePhoto(user.UserId);
                 if (userPhoto != null)
                 {
                     userPhoto.FileName = model.ProfilePhoto.FileName;
                     userPhoto.Guid = guid;
-                    _userRepo.UpdateUserProfilePhoto(userPhoto);
+                    user.ProfilePhotoId = _userRepo.UpdateUserProfilePhoto(userPhoto);
                 }
                 else {
                     userPhoto = new UserPhoto();
@@ -148,7 +148,7 @@ namespace StoreShop.BusinessLogic
                     userPhoto.UserId = model.UserId;
                     user.ProfilePhotoId =  _userRepo.CreateUserProfilePhoto(userPhoto);
                 }               
-            }
+            
 
             user.FirstName = model.FirstName;
             user.LastName = model.LastName;
@@ -163,8 +163,7 @@ namespace StoreShop.BusinessLogic
         public string GetUserProfilePhoto(long userId)
         {
             UserPhoto userPhoto = _userRepo.GetUserProfilePhoto(userId);
-
-            return userPhoto == null ? "" : "";//userPhoto.ProfilePhotoPath ;
+            return _azureStorageHelper.GetBlob(UtilityModel.PROFILE_CONTAINER, userPhoto.Guid + Path.GetExtension(userPhoto.FileName));
         }
 
         public void DeleteUser(long userId)

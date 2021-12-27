@@ -108,9 +108,10 @@ namespace StoreShop.Repository
             return _database.UserPhotos.Where(p => p.UserId == userId).FirstOrDefault();
         }
 
-        public void UpdateUserProfilePhoto(UserPhoto userPhoto)
+        public long? UpdateUserProfilePhoto(UserPhoto userPhoto)
         {
             _database.Entry(userPhoto).State = EntityState.Modified;
+            return userPhoto.ProfilePhotoId;
         }
 
         #endregion
