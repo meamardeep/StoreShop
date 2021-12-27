@@ -21,6 +21,7 @@ namespace StoreShop.Presentation.Controllers
         public IActionResult GetUserProfile()
         {
             UserModel userModel = _userManagement.GetUser(SessionManager.UserId);
+            _userManagement.SendProfileAccessNotification(SessionManager.UserName);
             return View("~/Views/User/UserProfile.cshtml", userModel);
         }
 

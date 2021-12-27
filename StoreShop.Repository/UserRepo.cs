@@ -121,5 +121,17 @@ namespace StoreShop.Repository
             _database.ExceptionLogs.Add(log).State = EntityState.Added;
             _database.SaveChanges();
         }
+        public void SendSMS(SMS sMS)
+        {
+            _database.SMS.Add(sMS);
+            try
+            {
+                _database.SaveChanges();
+            }
+            catch (Exception EX)
+            {
+                throw;
+            }
+        }
     }
 }

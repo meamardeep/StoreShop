@@ -22,6 +22,7 @@ namespace StoreShop.BusinessLogic
         void UpdateUser(UserModel model, long sessionUserId);
         void DeleteUser(long userId);
         string GetUserProfilePhoto(long userId);
+        void SendProfileAccessNotification(string userName);
         #endregion
         void CreateExceptionLog(ExceptionLogModel model);
 

@@ -9,6 +9,7 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Text.Json;
 using System.Web;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -23,14 +24,16 @@ namespace StoreShop.BusinessLogic
         private IMapper _mapper;
         private UserSessionModel userSession;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        private readonly AzureStorageHelper _azureStorageHelper;
+        private readonly AzureBlobStorageHelper _azureStorageHelper;
+        private readonly AzureQueueStorageHelper _azureQueueStorageHelper;
         public UserManagement(IUserRepo user, IMapper mapper,IWebHostEnvironment webHostEnvironment)
         {
             _userRepo = user;
             _mapper = mapper;
             _webHostEnvironment = webHostEnvironment;
             //userSession = ControllerBase.
-            _azureStorageHelper = new AzureStorageHelper();
+            _azureStorageHelper = new AzureBlobStorageHelper();
+            _azureQueueStorageHelper = new AzureQueueStorageHelper();
         }
 
         public UserModel GetUser(string userName, string password)
@@ -179,5 +182,24 @@ namespace StoreShop.BusinessLogic
             ExceptionLog log = _mapper.Map<ExceptionLog>(model);
             _userRepo.CreateExceptionLog(log);
         }
+
+        public void SendProfileAccessNotification(string userName)
+        {
+            SMS sMS = new SMS() 
+            { IsSent= false, ModifiedDate = DateTime.Now, 
+              Message = $"Dear {userName}, You have accessed your user profile.",
+              Phone = "+91-8088506025"
+            };
+            _userRepo.SendSMS(sMS);
+
+            AddSMSToQueue(sMS);
+        }
+
+        private void AddSMSToQueue(SMS sMS)
+        {
+            string message = JsonSerializer.Serialize(sMS);
+            _azureQueueStorageHelper.AddMessageToQueue("storeshopsmsqueue", message);
+        }
+
     }
 }

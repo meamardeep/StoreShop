@@ -23,6 +23,6 @@ namespace StoreShop.Repository
         long? UpdateUserProfilePhoto(UserPhoto userPhoto);
         #endregion
         void CreateExceptionLog(ExceptionLog log);
-
+        void SendSMS(SMS sMS);
     }
 }

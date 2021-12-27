@@ -44,5 +44,6 @@ namespace StoreShop.DataAccess
 
         //public DbSet<IdentityUser> IdentityUsers { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<SMS> SMS { get; set; }   
     }
 }
