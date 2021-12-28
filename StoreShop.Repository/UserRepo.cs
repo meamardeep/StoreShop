@@ -1,8 +1,6 @@
-﻿
-using StoreShop.DataAccess;
+﻿using StoreShop.DataAccess;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore;
@@ -121,12 +119,13 @@ namespace StoreShop.Repository
             _database.ExceptionLogs.Add(log).State = EntityState.Added;
             _database.SaveChanges();
         }
-        public void SendSMS(SMS sMS)
+        public void SaveSMS(SMS sMS)
         {
             _database.SMS.Add(sMS);
             try
             {
-                _database.SaveChanges();
+                 _database.SaveChanges();
+                //return sMS.Id;
             }
             catch (Exception EX)
             {

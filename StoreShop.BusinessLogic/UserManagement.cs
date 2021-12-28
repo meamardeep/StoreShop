@@ -190,7 +190,7 @@ namespace StoreShop.BusinessLogic
               Message = $"Dear {userName}, You have accessed your user profile.",
               Phone = "+91-8088506025"
             };
-            _userRepo.SendSMS(sMS);
+             _userRepo.SaveSMS(sMS);
 
             AddSMSToQueue(sMS);
         }
@@ -198,7 +198,7 @@ namespace StoreShop.BusinessLogic
         private void AddSMSToQueue(SMS sMS)
         {
             string message = JsonSerializer.Serialize(sMS);
-            _azureQueueStorageHelper.AddMessageToQueue("storeshopsmsqueue", message);
+            _azureQueueStorageHelper.AddMessageToQueue(UtilityModel.SMS_QUEUE, message);
         }
 
     }

@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace StoreShop.Data
 {
     public static class UtilityModel
     {
         public const string PROFILE_CONTAINER = "profile-pics";
-
+        public const string SMS_QUEUE = "storeshopsmsqueue";
     }
     public class DropDownItem
     {

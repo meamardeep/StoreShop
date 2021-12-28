@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Routing;
 using StoreShop.BusinessLogic;
 using StoreShop.Data;
-using System;
 using System.Collections.Generic;
 
 namespace StoreShop.Presentation.Controllers

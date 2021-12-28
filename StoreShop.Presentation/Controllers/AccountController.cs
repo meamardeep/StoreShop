@@ -42,7 +42,7 @@ namespace StoreShop.Presentation.Controllers
             }
             UserModel userModel = _userManagement.GetUser(logOnModel.UserName, logOnModel.Password);
 
-            if (userModel.UserId > 0)
+            if (userModel != null && userModel.UserId > 0)
             {
                 InitSession(userModel);
                 return RedirectToAction("Index", "Dashboard");
