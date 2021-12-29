@@ -1,20 +1,21 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using StoreShop.Data;
-using StoreShop.DataAccess;
-using StoreShop.Repository;
-using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.IO;
-using System.Net;
-using System.Text;
-using System.Text.Json;
-using System.Web;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using System.Linq;
-using StoreShop.Storage;
+﻿global using AutoMapper;
+global using Microsoft.AspNetCore.Mvc;
+global using StoreShop.Data;
+global using StoreShop.DataAccess;
+global using StoreShop.Repository;
+global using System;
+global using System.Collections.Generic;
+global using System.Collections.Specialized;
+global using System.IO;
+global using System.Net;
+global using System.Text;
+global using System.Text.Json;
+global using System.Web;
+global using Microsoft.AspNetCore.Hosting;
+global using Microsoft.AspNetCore.Http;
+global using System.Linq;
+global using StoreShop.Storage;
+using static StoreShop.Data.UtilityModel;
 
 namespace StoreShop.BusinessLogic
 {
@@ -22,7 +23,7 @@ namespace StoreShop.BusinessLogic
     {
         private IUserRepo _userRepo;
         private IMapper _mapper;
-        private UserSessionModel userSession;
+        private readonly UserSessionModel userSession;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly AzureBlobStorageHelper _azureStorageHelper;
         private readonly AzureQueueStorageHelper _azureQueueStorageHelper;
@@ -198,7 +199,7 @@ namespace StoreShop.BusinessLogic
         private void AddSMSToQueue(SMS sMS)
         {
             string message = JsonSerializer.Serialize(sMS);
-            _azureQueueStorageHelper.AddMessageToQueue(UtilityModel.SMS_QUEUE, message);
+            _azureQueueStorageHelper.AddMessageToQueue(SMS_QUEUE, message);
         }
 
     }

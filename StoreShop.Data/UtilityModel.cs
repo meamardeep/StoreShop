@@ -1,4 +1,8 @@
-﻿using System;
+﻿global using Microsoft.AspNetCore.Authentication;
+global using System;
+global using System.Collections.Generic;
+global using System.ComponentModel.DataAnnotations;
+global using Microsoft.AspNetCore.Http;
 
 namespace StoreShop.Data
 {

@@ -1,11 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Reflection.Metadata.Ecma335;
-using System.Security.Cryptography;
-using System.Text;
-
-namespace StoreShop.Data
+﻿namespace StoreShop.Data
 {
     public class UserModel
     {

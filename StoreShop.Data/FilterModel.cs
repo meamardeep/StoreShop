@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace StoreShop.Data
+﻿namespace StoreShop.Data
 {
     public class FilterModel
     {

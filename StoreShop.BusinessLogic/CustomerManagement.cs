@@ -1,12 +1,4 @@
-﻿using AutoMapper;
-using StoreShop.Data;
-using StoreShop.DataAccess;
-using StoreShop.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace StoreShop.BusinessLogic
+﻿namespace StoreShop.BusinessLogic
 {
     public class CustomerManagement : ICustomerManagement
     {

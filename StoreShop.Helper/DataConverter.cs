@@ -1,4 +1,4 @@
-﻿using System.Text;
+﻿global using System.Text;
 
 namespace StoreShop.Helper
 {

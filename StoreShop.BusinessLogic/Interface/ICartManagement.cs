@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using StoreShop.Data;
-
-namespace StoreShop.BusinessLogic
+﻿namespace StoreShop.BusinessLogic
 {
     public interface ICartManagement
     {
