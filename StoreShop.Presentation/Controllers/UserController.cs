@@ -1,9 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using StoreShop.BusinessLogic;
-using StoreShop.Data;
-using System.Collections.Generic;
-
-namespace StoreShop.Presentation.Controllers
+﻿namespace StoreShop.Presentation.Controllers
 {
     
     public class UserController : ControllerBase

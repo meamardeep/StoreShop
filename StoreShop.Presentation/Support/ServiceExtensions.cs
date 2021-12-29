@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.Extensions.DependencyInjection;
-using StoreShop.BusinessLogic;
-using StoreShop.Data;
-using StoreShop.DataAccess;
-using StoreShop.Repository;
-
-namespace StoreShop.Presentation.Support
+﻿namespace StoreShop.Presentation.Support
 {
     public class ServiceExtensions
     {

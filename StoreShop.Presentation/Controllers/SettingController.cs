@@ -1,12 +1,4 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using StoreShop.BusinessLogic;
-using StoreShop.Data;
-using System;
-using System.Collections.Generic;
-using System.Security.Claims;
-
-namespace StoreShop.Presentation.Controllers
+﻿namespace StoreShop.Presentation.Controllers
 {
     public class SettingController : ControllerBase
     {

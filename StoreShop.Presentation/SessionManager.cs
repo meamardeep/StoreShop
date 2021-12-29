@@ -1,13 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-using StoreShop.Data;
-using System;
-using System.Text.Json;
-//using Newtonsoft.Json;
-
-
-namespace StoreShop.Presentation
+﻿namespace StoreShop.Presentation
 {
     public static class SessionManager
     {
