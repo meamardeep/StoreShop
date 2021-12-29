@@ -1,9 +1,4 @@
-﻿using StoreShop.Data;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace StoreShop.BusinessLogic
+﻿namespace StoreShop.BusinessLogic
 {
     public interface ICustomerManagement
     {

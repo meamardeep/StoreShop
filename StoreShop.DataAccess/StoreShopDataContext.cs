@@ -1,7 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿global using Microsoft.AspNetCore.Identity;
+global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.Configuration;
+global using System;
+global using System.Collections.Generic;
+global using System.ComponentModel.DataAnnotations;
+global using System.ComponentModel.DataAnnotations.Schema;
+global using System.Text;
 
 namespace StoreShop.DataAccess
 {
@@ -44,5 +49,6 @@ namespace StoreShop.DataAccess
 
         //public DbSet<IdentityUser> IdentityUsers { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<SMS> SMS { get; set; }   
     }
 }

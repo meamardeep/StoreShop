@@ -1,5 +1,4 @@
 ﻿using StoreShop.DataAccess;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,6 +22,6 @@ namespace StoreShop.Repository
         long? UpdateUserProfilePhoto(UserPhoto userPhoto);
         #endregion
         void CreateExceptionLog(ExceptionLog log);
-
+        void SaveSMS(SMS sMS);
     }
 }

@@ -1,12 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using StoreShop.BusinessLogic;
-using StoreShop.Data;
-
-namespace StoreShop.Presentation.Controllers
+﻿namespace StoreShop.Presentation.Controllers
 {
     public class CartController : ControllerBase
     {

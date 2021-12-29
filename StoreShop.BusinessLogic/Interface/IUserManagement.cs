@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.AspNetCore.Http;
-using StoreShop.Data;
-
-namespace StoreShop.BusinessLogic
+﻿namespace StoreShop.BusinessLogic
 {
     public interface IUserManagement
     {
@@ -22,6 +16,7 @@ namespace StoreShop.BusinessLogic
         void UpdateUser(UserModel model, long sessionUserId);
         void DeleteUser(long userId);
         string GetUserProfilePhoto(long userId);
+        void SendProfileAccessNotification(string userName);
         #endregion
         void CreateExceptionLog(ExceptionLogModel model);
 

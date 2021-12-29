@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace StoreShop.Data
+﻿namespace StoreShop.Data
 {
     public class AccountModel
     {

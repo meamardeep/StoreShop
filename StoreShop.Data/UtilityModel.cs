@@ -1,13 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿global using Microsoft.AspNetCore.Authentication;
+global using System;
+global using System.Collections.Generic;
+global using System.ComponentModel.DataAnnotations;
+global using Microsoft.AspNetCore.Http;
 
 namespace StoreShop.Data
 {
     public static class UtilityModel
     {
         public const string PROFILE_CONTAINER = "profile-pics";
-
+        public const string SMS_QUEUE = "storeshopsmsqueue";
     }
     public class DropDownItem
     {

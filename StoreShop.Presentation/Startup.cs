@@ -1,25 +1,3 @@
-using AutoMapper;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using StoreShop.BusinessLogic;
-using StoreShop.Data;
-using StoreShop.DataAccess;
-using StoreShop.Presentation.Controllers;
-using StoreShop.Repository;
-using System;
-using StoreShop.Presentation.Support;
-using Microsoft.Extensions.Azure;
-using Azure.Storage.Queues;
-using Azure.Storage.Blobs;
-using Azure.Core.Extensions;
-
 namespace StoreShop.Presentation
 {
     public class Startup

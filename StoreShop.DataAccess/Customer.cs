@@ -1,8 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace StoreShop.DataAccess
+﻿namespace StoreShop.DataAccess
 {
     [Table("CustomerDetails")]
     public class Customer

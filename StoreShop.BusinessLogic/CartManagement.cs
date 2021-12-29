@@ -1,12 +1,4 @@
-﻿using AutoMapper;
-using StoreShop.Data;
-using StoreShop.DataAccess;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using StoreShop.Repository;
-
-namespace StoreShop.BusinessLogic
+﻿namespace StoreShop.BusinessLogic
 {
     public class CartManagement : ICartManagement
     {

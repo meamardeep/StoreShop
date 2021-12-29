@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using AutoMapper;
-using StoreShop.Data;
-using StoreShop.DataAccess;
-using StoreShop.Repository;
-namespace StoreShop.BusinessLogic
+﻿namespace StoreShop.BusinessLogic
 {
     public class ProductManagement : IProductManagement
     {

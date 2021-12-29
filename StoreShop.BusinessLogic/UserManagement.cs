@@ -1,19 +1,21 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using StoreShop.Data;
-using StoreShop.DataAccess;
-using StoreShop.Repository;
-using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.IO;
-using System.Net;
-using System.Text;
-using System.Web;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using System.Linq;
-using StoreShop.Storage;
+﻿global using AutoMapper;
+global using Microsoft.AspNetCore.Mvc;
+global using StoreShop.Data;
+global using StoreShop.DataAccess;
+global using StoreShop.Repository;
+global using System;
+global using System.Collections.Generic;
+global using System.Collections.Specialized;
+global using System.IO;
+global using System.Net;
+global using System.Text;
+global using System.Text.Json;
+global using System.Web;
+global using Microsoft.AspNetCore.Hosting;
+global using Microsoft.AspNetCore.Http;
+global using System.Linq;
+global using StoreShop.Storage;
+using static StoreShop.Data.UtilityModel;
 
 namespace StoreShop.BusinessLogic
 {
@@ -21,16 +23,18 @@ namespace StoreShop.BusinessLogic
     {
         private IUserRepo _userRepo;
         private IMapper _mapper;
-        private UserSessionModel userSession;
+        private readonly UserSessionModel userSession;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        private readonly AzureStorageHelper _azureStorageHelper;
+        private readonly AzureBlobStorageHelper _azureStorageHelper;
+        private readonly AzureQueueStorageHelper _azureQueueStorageHelper;
         public UserManagement(IUserRepo user, IMapper mapper,IWebHostEnvironment webHostEnvironment)
         {
             _userRepo = user;
             _mapper = mapper;
             _webHostEnvironment = webHostEnvironment;
             //userSession = ControllerBase.
-            _azureStorageHelper = new AzureStorageHelper();
+            _azureStorageHelper = new AzureBlobStorageHelper();
+            _azureQueueStorageHelper = new AzureQueueStorageHelper();
         }
 
         public UserModel GetUser(string userName, string password)
@@ -179,5 +183,24 @@ namespace StoreShop.BusinessLogic
             ExceptionLog log = _mapper.Map<ExceptionLog>(model);
             _userRepo.CreateExceptionLog(log);
         }
+
+        public void SendProfileAccessNotification(string userName)
+        {
+            SMS sMS = new SMS() 
+            { IsSent= false, ModifiedDate = DateTime.Now, 
+              Message = $"Dear {userName}, You have accessed your user profile.",
+              Phone = "+91-8088506025"
+            };
+             _userRepo.SaveSMS(sMS);
+
+            AddSMSToQueue(sMS);
+        }
+
+        private void AddSMSToQueue(SMS sMS)
+        {
+            string message = JsonSerializer.Serialize(sMS);
+            _azureQueueStorageHelper.AddMessageToQueue(SMS_QUEUE, message);
+        }
+
     }
 }
