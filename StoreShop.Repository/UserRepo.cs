@@ -61,7 +61,8 @@ namespace StoreShop.Repository
         }
         public List<User> GetUsers(int customerId)
         {
-            return _database.Users.Where(u => u.CustomerId == customerId).ToList();
+            IQueryable<User> users= _database.Users.Where(u => u.CustomerId == customerId);
+            return users.ToList<User>();
         }
 
         public void CreateUser(User user)

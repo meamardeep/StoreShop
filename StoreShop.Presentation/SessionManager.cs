@@ -126,7 +126,10 @@
     /// </summary>
     public class SessionTimeoutAttribute : ActionFilterAttribute
     {
-        
+        public virtual void OnActionExecuted(ActionExecutingContext context)
+        {
+
+        }
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             if (!SessionManager.IsSessionAlive)
@@ -147,6 +150,9 @@
         {
             base.OnResultExecuting(context);
         }
+
+       
+             
 
     }
 

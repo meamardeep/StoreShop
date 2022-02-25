@@ -14,6 +14,9 @@ namespace StoreShop.Presentation
         {
             services.AddControllersWithViews();
 
+            //register appsetting.json files
+           
+            
             //Register context service using dependancy injection and this context service will read connection string using option builder in dbcontext constructor             
             services.AddDbContext<StoreShopDataContext>(options =>
                   options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
